@@ -4,10 +4,10 @@ import path from 'path';
 
 export async function GET(req: NextRequest) {
     try {
-        const imagesDirectory = path.join(process.cwd(), 'public/assets/images/wgallery');
+        const imagesDirectory = path.join(process.cwd(), 'public/assets/images/wedding');
         const filenames = fs.readdirSync(imagesDirectory);
     
-        const images = filenames.map(name => encodeURI(`/assets/images/wgallery/${name}`));
+        const images = filenames.map(name => encodeURI(`/assets/images/wedding/${name}`));
     
         return NextResponse.json(images);
       } catch (error) {

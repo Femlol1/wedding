@@ -274,3 +274,31 @@ body {
 .react-datepicker__time-list-item--selected {
 	background-color: #624cf5 !important;
 }
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Apply the animation to images in the carousel */
+.carousel-image {
+	animation: fadeIn 1s ease-out;
+}
+/* Or, apply to a specific carousel container */
+.carousel-container {
+	scroll-behavior: smooth;
+}
+.wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.bg-opacity-50 {
+	background-color: rgba(0, 0, 0, 0.1);
+}

@@ -25,10 +25,10 @@ const HomePage: React.FC = () => {
       <p className="text-center mt-4">Join us on our special day!</p>
 
       <div className="carousel-container my-8 mx-auto w-4/5 max-w-lg">
-        <Carousel showThumbs={false} autoPlay infiniteLoop>
+        <Carousel showThumbs={true} autoPlay infiniteLoop>
           {galleryImages.map((src, index) => (
             <div key={index} className="carousel-image">
-              <Image src={src} alt={`Gallery image ${index + 1}`} width={500} height={300}  className="object-cover w-full h-60" />
+              <Image src={src} alt={`Gallery image ${index + 1}`} width={500} height={300}  className="object-cover w-full h-60 " />
             </div>
           ))}
         </Carousel>
