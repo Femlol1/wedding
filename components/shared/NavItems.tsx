@@ -21,7 +21,9 @@ const NavItems = () => {
                   </li>
               );
           })}
-      </ul><ModeToggle /></>
+      </ul>
+      <div className=""><ModeToggle  /></div>
+      </>
   )
 }
 

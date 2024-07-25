@@ -3,11 +3,11 @@
 export const headerLinks = [
   {
     label: 'Home',
-    route: '/home',
+    route: '/',
   },
   {
     label: 'Welcome',
-    route: '/',
+    route: '/home',
   },
   {
     label: 'RSVP',

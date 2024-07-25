@@ -1,8 +1,7 @@
-
-const rsvp = () => {
+const Rsvp: React.FC = () => {
   return (
     <div>rsvp</div>
-  )
-}
+  );
+};
 
-export default rsvp
+export default Rsvp;

@@ -56,11 +56,12 @@ const WelcomePage: React.FC = () => {
       )}
       <div className="bg-black bg-opacity-50 p-4 flex-grow flex flex-col justify-center z-10 relative">
         <h1 className="text-3xl font-bold text-center text-white mt-8">Welcome to Our Wedding</h1>
+        
         <p className="text-center text-white mt-4">Join us on our special day!</p>
 
         <div className="text-center mt-8">
           <Link href="/rsvp">
-            <Button className="inline-block px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition-colors duration-200">RSVP</Button>
+            <Button className="inline-block px-6 py-3 bg-amber-500 text-white rounded-md hover:bg-yellow-700 transition-colors duration-200">RSVP</Button>
           </Link>
         </div>
       </div>

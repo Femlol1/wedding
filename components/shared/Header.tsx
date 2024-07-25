@@ -10,7 +10,7 @@ const Header = () => {
         <Link href={"/"} className="w-36">
           <Image src={"/assets/images/logo.png"} width={70} height={38} alt="Opes wedding logo" />
         </Link>
-        <nav className="hidden md:flex md:flex-grow justify-center">
+        <nav className="hidden md:flex md:flex-grow justify-center gap-5">
           <NavItems />
         </nav>
         <div className="flex w-32 justify-end gap-3">
