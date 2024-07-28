@@ -30,7 +30,7 @@ export const headerLinks = [
     route: '/guest',
   },
   {
-    label: 'Lagos Travel & Accommodation',
+    label: 'Lagos T&A',
     route: '/travel',
   },
   {
