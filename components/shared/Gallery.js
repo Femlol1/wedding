@@ -1,10 +1,21 @@
 // components/Gallery.js
 "use client";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Gallery = () => {
 	const [images, setImages] = useState([]);
+	const [isCarouselOpen, setIsCarouselOpen] = useState(false);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
 	useEffect(() => {
 		const fetchImages = async () => {
@@ -16,19 +27,80 @@ const Gallery = () => {
 		fetchImages();
 	}, []);
 
+	const handleImageClick = (index) => {
+		setCurrentIndex(index);
+		setIsCarouselOpen(true);
+	};
+
+	const closeCarousel = () => {
+		setIsCarouselOpen(false);
+	};
+
+	const handleOverlayClick = (e) => {
+		if (e.target === e.currentTarget) {
+			closeCarousel();
+		}
+	};
+
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-			{images.map((src, index) => (
-				<div key={index} className="relative w-full h-64">
-					<Image
-						src={src}
-						alt={`Gallery image ${index + 1}`}
-						layout="fill"
-						objectFit="cover"
-						className="rounded-lg"
-					/>
+		<div>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+				{images.map((src, index) => (
+					<div
+						key={index}
+						className="relative w-full h-64"
+						onClick={() => handleImageClick(index)}
+					>
+						<Image
+							src={src}
+							alt={`Gallery image ${index + 1}`}
+							layout="fill"
+							objectFit="cover"
+							className="rounded-lg cursor-pointer"
+						/>
+					</div>
+				))}
+			</div>
+
+			{isCarouselOpen && (
+				<div
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+					onClick={handleOverlayClick}
+				>
+					<Carousel
+						opts={{
+							align: "start",
+						}}
+						plugins={[
+							Autoplay({
+								delay: 2000,
+							}),
+						]}
+						selectedItem={currentIndex}
+						showThumbs={false}
+						onClickItem={closeCarousel}
+						className="w-full max-w-sm"
+					>
+						<CarouselContent className="-ml-2 md:-ml-4">
+							{images.map((src, index) => (
+								<CarouselItem
+									key={index}
+									className="flex justify-center items-center"
+								>
+									<Image
+										src={src}
+										alt={`Gallery image ${index + 1}`}
+										width={700}
+										height={100}
+									/>
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						<CarouselPrevious />
+						<CarouselNext />
+					</Carousel>
 				</div>
-			))}
+			)}
 		</div>
 	);
 };
