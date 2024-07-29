@@ -1,28 +1,32 @@
 'use client';
+
 import { headerLinks } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FC } from 'react';
 
-const NavItems = () => {
-    const pathname = usePathname();
-  return (
-    <><ul className="md:flex-between flex w-full flex-full flex-col items-start gap-5 md:flex-row">
-          {headerLinks.map((link) => {
-              const isActive = pathname === link.route;
-
-              return (
-                  <li
-                      key={link.route}
-                      className={`${isActive && 'text-primary-500'} flex-center p-medium-16 whitespace-nowrap`}
-                  >
-                      <Link href={link.route}>{link.label}</Link>
-
-                  </li>
-              );
-          })}
-      </ul>
-      </>
-  )
+interface NavItemsProps {
+    handleClose: () => void; // Define the type for the handleClose prop
 }
 
-export default NavItems
+const NavItems: FC<NavItemsProps> = ({ handleClose }) => {
+    const pathname = usePathname();
+    return (
+        <ul className="md:flex-between flex w-full flex-full flex-col items-start gap-5 md:flex-row">
+            {headerLinks.map((link) => {
+                const isActive = pathname === link.route;
+
+                return (
+                    <li
+                        key={link.route}
+                        className={`${isActive ? 'text-primary-500' : ''} flex-center p-medium-16 whitespace-nowrap`}
+                    >
+                        <Link href={link.route} onClick={handleClose}>{link.label}</Link>
+                    </li>
+                );
+            })}
+        </ul>
+    );
+}
+
+export default NavItems;
