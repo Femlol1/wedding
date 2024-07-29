@@ -94,7 +94,7 @@ export function RSVPForm() {
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto rsvp">
             <p className="text-center mt-4">
                 We would greatly appreciate if you could RSVP before 1st November 2024
             </p>
@@ -103,8 +103,8 @@ export function RSVPForm() {
                     {alert.message}
                 </div>
             )}
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <Form  {...form} >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rsvp-form">
                     <FormField
                         control={form.control}
                         name="firstName"
@@ -181,7 +181,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select staying place" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="At home with family">At home with family</SelectItem>
                                             <SelectItem value="Hotel Island">Hotel Island</SelectItem>
                                             <SelectItem value="Hotel mainland">Hotel mainland</SelectItem>
@@ -217,7 +217,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select How you know the Bride or Groom" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="Brides family">Brides family</SelectItem>
                                             <SelectItem value="Grooms family">Grooms family</SelectItem>
                                             <SelectItem value="Brides friend">Brides friend</SelectItem>
@@ -254,7 +254,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Asoebi preference" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="Yes">Yes</SelectItem>
                                             <SelectItem value="No">No</SelectItem>
                                         </SelectContent>
@@ -275,7 +275,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Yes or no" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="Yes">Yes</SelectItem>
                                             <SelectItem value="No">No</SelectItem>
                                         </SelectContent>
@@ -296,7 +296,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Yes or no" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="Yes">Yes</SelectItem>
                                             <SelectItem value="No">No</SelectItem>
                                         </SelectContent>
@@ -317,7 +317,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Yes or no" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="Yes">Yes</SelectItem>
                                             <SelectItem value="No">No</SelectItem>
                                         </SelectContent>
@@ -339,7 +339,7 @@ export function RSVPForm() {
                                         <SelectTrigger>
                                             <SelectValue placeholder="RSVP" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent className="bg-white">
                                             <SelectItem value="Yes, I accept with pleasure.">
                                                 Yes, I accept with pleasure.
                                             </SelectItem>
@@ -353,7 +353,8 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    
+                    <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto mt-2 justify-center" type="submit">Send</Button>
                 </form>
             </Form>
         </div>

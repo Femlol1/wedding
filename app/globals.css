@@ -655,6 +655,7 @@ h5 {
 	display: inline-block;
 	text-transform: uppercase;
 	background-color: #e8ca6f;
+	justify-content: center;
 }
 .btn-fill:hover,
 .btn-fill:focus {
