@@ -1,14 +1,10 @@
 // pages/gifts.js
-import Head from 'next/head';
 
 const Gifts = () => {
   return (
     <div className="container mx-auto px-4 py-8">
-      <Head>
-        <title>Gifts</title>
-      </Head>
 
-      <h1 className="text-4xl font-semibold text-center mt-12">Gifts</h1>
+      <h1 className="text-4xl font-semibold text-center">Gifts</h1>
       <p className="mt-4 text-lg text-center">
         Your presence at our wedding is the greatest gift we could ask for. If you would like to
         contribute further, a cash gift towards our honeymoon or our new home would be greatly appreciated.

@@ -1,15 +1,10 @@
 // pages/travel.js
-import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Travel() {
     return (
         <div className="container mx-auto px-4 py-8">
-            <Head>
-                <title>Travel and Accommodation</title>
-            </Head>
-
-            <h1 className="text-3xl font-bold text-center mb-6 mt-12">Travel & Accommodation</h1>
+            <h1 className="text-3xl font-bold text-center mb-6">Travel & Accommodation</h1>
             
             <section className="mb-6">
     <h2 className="text-2xl font-semibold">Hotels</h2>

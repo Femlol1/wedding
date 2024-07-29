@@ -1,71 +1,49 @@
-"use client"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+"use client";
 
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+
 
 const HomePage: React.FC = () => {
-  
-
   return (
-    <div className="container mx-auto mt-20">
-      <h1 className="text-3xl font-bold text-center mt-8">Welcome to Our Wedding Website</h1>
-      <h5 className="text-xl font-bold text-center mt-3">{`Thank you for sharing this special moment with us!`}</h5>
-      <p className="text-center mt-4">
-        We are overjoyed to announce our wedding and delighted to share this special journey with our cherished friends and family.
-        This website is your one-stop destination for all the details you need to celebrate our big day with us.
-        <br /><br />
-        <strong>Tolu and Ope Forever #TOforever</strong>
-      </p>
-      <div className="text-center mt-8">
-      <AlertDialog>
-          <AlertDialogTrigger className="inline-block px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer">
-            Dress Code
-          </AlertDialogTrigger>
-          <AlertDialogContent className="bg-white">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="text-xl font-bold">Wedding Information</AlertDialogTitle>
-              <AlertDialogDescription className="text-left mt-4">
-                <p><strong>Wedding colours: Emerald or Chocolate</strong></p>
-                <p className="mt-4">Please kindly let us know if you are interested in participating in ASO EBI (TRADITIONAL ATTIRE). Information is as follows:</p>
-                <p className="mt-2"><strong>For Brides Family Asoebi contact - Pelumi Osibemekun</strong></p>
-                <p className="mt-2"><strong>For Grooms family Asoebi contact - Funke Oyediran</strong></p>
-                <p className="mt-4"><strong>Cost estimates:</strong></p>
-                <p className="mt-2"><strong>USA</strong></p>
-                <ul className="list-disc list-inside">
-                  <li>Women - $200 Complete set including Lace, Aso Oke, Gele & Ipele</li>
-                  <li>Men - $150 Complete set</li>
-                  <li>Gele & Ipele - $70</li>
-                  <li>Cap only - $25</li>
-                </ul>
-                <p className="mt-2"><strong>UK</strong></p>
-                <p className="mt-2"><strong>Nigeria</strong></p>
-                <p className="mt-4"><strong>Payment:</strong></p>
-                <ul className="list-disc list-inside">
-                  <li>USA - </li>
-                  <li>UK - </li>
-                  <li>
-                    Nigeria - Zelle Ibironke Smith-Adebanjo 321-228-1743
-                    <br />*Bank transfer* Ibironke Smith-Adebanjo Chase Bank Routing # 267084131 Account # 436803550
-                  </li>
-                </ul>
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700 transition-colors duration-200">Cancel</AlertDialogCancel>
-              <AlertDialogAction className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-700 transition-colors duration-200">Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col md:flex-row flex-grow">
+        {/* Image Section */}
+        <div className="relative w-full md:w-1/2 h-64 md:h-auto">
+          <Image
+            src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
+            alt="Welcome Image"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className="z-0"
+          />
+          <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-20">
+            <h1 className="text-4xl md:text-6xl font-bold">22 March 2025</h1>
+            <h3 className="text-3xl md:text-5xl font-bold mt-2">Tolu and Ope</h3>
+          </div>
+        </div>
+        {/* Text Section */}
+        <div className="flex flex-col items-center justify-center py-10 px-5 bg-white w-full md:w-1/2">
+          <h2 className="text-3xl font-semibold mb-4">Welcome</h2>
+          <p className="text-xl text-center mb-8">
+            Family + Friends,
+            <br />
+            Welcome to our wedding website – we’re so glad you’re here.
+            <br />
+            We’ve created this website as a helpful resource for all of the need-to-know details.
+            <br />
+            <br />
+            <strong>Tolu and Ope Forever <br /><a>#TOforever</a></strong>
+          </p>
+          <Link href="/rsvp">
+            <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
+              RSVP
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

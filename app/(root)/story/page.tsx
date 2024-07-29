@@ -1,14 +1,9 @@
 // pages/our-story.js
-import Head from 'next/head';
 
 export default function OurStory() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <Head>
-        <title>Our Story</title>
-      </Head>
-
-      <h1 className="text-center text-4xl font-bold text-gray-800 mb-12 mt-12">Our Story</h1>
+      <h1 className="text-center text-4xl font-bold text-gray-800 mb-12">Our Story</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="space-y-4">
