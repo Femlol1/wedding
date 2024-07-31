@@ -1403,11 +1403,11 @@ header .member-actions {
 .rsvp .rsvp-form .form-input-group input:-ms-input-placeholder {
 	color: #bcc1c3;
 }
-footer .content {
+header .content {
 	border-top: 1px solid #e6e9ea;
 	padding-bottom: 20px;
 }
-footer .to-top-wrapper {
+header .to-top-wrapper {
 	font-size: 30px;
 	display: block;
 	cursor: pointer;
@@ -1418,7 +1418,7 @@ footer .to-top-wrapper {
 	border: 1px solid #e6e9ea;
 	background: #fff;
 }
-footer .to-top-wrapper .to-top {
+header .to-top-wrapper .to-top {
 	display: block;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
@@ -1426,10 +1426,10 @@ footer .to-top-wrapper .to-top {
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-footer .to-top-wrapper .to-top:hover {
+header .to-top-wrapper .to-top:hover {
 	margin-top: -5px;
 }
-footer span.fa-heart {
+header span.fa-heart {
 	color: #ff415c;
 	font-size: 18px;
 	margin: 0 2px;
