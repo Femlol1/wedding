@@ -142,7 +142,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Last Name</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Input placeholder="Doe" {...field} />
                                 </FormControl>
                                 <FormMessage />
@@ -154,8 +154,8 @@ export function RSVPForm() {
                         name="code"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Code</FormLabel>
-                                <FormControl>
+                                <FormLabel>Invite Code</FormLabel>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Input type="password" placeholder="Enter code" {...field} />
                                 </FormControl>
                                 <FormMessage />
@@ -168,7 +168,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Email</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Input placeholder="john.doe@example.com" {...field} />
                                 </FormControl>
                                 <FormMessage />
@@ -181,7 +181,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Mobile</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Input placeholder="+1234567890" {...field} />
                                 </FormControl>
                                 <FormMessage />
@@ -194,7 +194,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Where will you be staying?</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select staying place" />
@@ -217,7 +217,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Other</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Input placeholder="Where will you be staying" {...field} />
                                 </FormControl>
                                 <FormMessage />
@@ -230,7 +230,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>How do you know the Bride or Groom?</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select How you know the Bride or Groom" />
@@ -254,7 +254,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Allergies/Dietary Requirements</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Textarea placeholder="Please specify any allergies or dietary requirements" {...field} />
                                 </FormControl>
                                 <FormMessage />
@@ -267,7 +267,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Would you like Asoebi?</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Asoebi preference" />
@@ -288,7 +288,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Would you like to go to the church service?</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Yes or no" />
@@ -308,8 +308,8 @@ export function RSVPForm() {
                         name="reception"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Would you like to go to the church?</FormLabel>
-                                <FormControl>
+                                <FormLabel>Would you like to go to the reception?</FormLabel>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Yes or no" />
@@ -330,7 +330,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Would you like to go to the after party?</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Yes or no" />
@@ -351,7 +351,7 @@ export function RSVPForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>RSVP</FormLabel>
-                                <FormControl>
+                                <FormControl className="form-input-group  fa fa-envelope">
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="RSVP" />
@@ -371,7 +371,7 @@ export function RSVPForm() {
                         )}
                     />
                      <Toaster />
-                    <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto mt-2 justify-center rsvp-btn" type="submit" 
+                    <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto justify-center rsvp-btn" type="submit" 
                             >Send</Button>
                            
                 </form>
