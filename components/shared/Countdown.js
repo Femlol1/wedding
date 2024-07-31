@@ -26,7 +26,7 @@ const Countdown = ({ eventDate }) => {
 	}, [eventDate]);
 
 	return (
-		<div className="text-center my-4 text-2xl font-bold">
+		<div className="text-center my-4 text-1xl font-bold">
 			Countdown to Wedding: {timeLeft}
 		</div>
 	);

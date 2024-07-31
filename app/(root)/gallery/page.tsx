@@ -3,11 +3,10 @@ import Gallery from '@/components/shared/Gallery'; // Adjust import path if nece
 
 const GalleryPage = () => {
   // Set your event date here
-  const eventDate = "2025-03-22T11:00:00";
+  const eventDate = "2025-03-20T11:00:00";
 
   return (
     <div className="container mx-auto">
-     
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <div className="wrapper h3-bold text-center">GALLERY</div>
       </section>

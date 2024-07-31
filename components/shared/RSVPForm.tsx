@@ -1,6 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+
 import {
     Form,
     FormControl,
@@ -18,6 +20,7 @@ import $ from "jquery";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { ToastAction } from "../ui/toast";
 
 // Define the schema with a placeholder for the code validation
 const formSchema = z.object({
@@ -38,6 +41,7 @@ const formSchema = z.object({
 });
 
 export function RSVPForm() {
+    const { toast } = useToast()
     // Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -66,6 +70,10 @@ export function RSVPForm() {
         const hashedCode = MD5(values.code).toString();
 
         if (hashedCode !== "b0e53b10c1f55ede516b240036b88f40" && hashedCode !== "2ac7f43695eb0479d5846bb38eec59cc") {
+            toast({
+                variant: "destructive",
+                description: "Sorry! Your invite code is incorrect.",
+              })
             setAlert({ type: "danger", message: "Sorry! Your invite code is incorrect." });
             return;
         }
@@ -73,6 +81,11 @@ export function RSVPForm() {
         const data = values;
 
         setAlert({ type: "info", message: "Just a sec! We are saving your details." });
+         toast({
+                    variant: "destructive",
+                    title: "Thank You for sending Your RSVP.",
+                    description: "Just a sec! We are saving your details.",
+                  })
 
         $.post(
             "https://script.google.com/macros/s/AKfycbw2OnhyJWPuuuKjeN2bIhPA5WhtBqEpr5CWUv1N0UYmmtbseCQmsuNIqJxptSxn8fY/exec",
@@ -80,31 +93,38 @@ export function RSVPForm() {
         )
         .done(function (response) {
             if (response.result === "error") {
-                setAlert({ type: "danger", message: response.message });
+                toast({
+                    variant: "destructive",
+                    description: response.message,
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                  })
             } else {
-                setAlert(null);
-                $("#rsvp-modal").modal("show");
+                toast({
+                    variant: "destructive",
+                    title: "Thank You for sending Your RSVP.",
+                    description: response.message + "Your RSVP has been sent",
+                  })
             }
         })
         .fail(function () {
-            setAlert({ type: "danger", message: "Sorry! There is some issue with the server." });
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description:  "Sorry! There is some issue with the server.",
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+              })
         });
 
-        console.log(data);
     }
+    
 
     return (
         <div className="container mx-auto rsvp">
-            <p className="text-center mt-4">
+            <a className="text-center mt-4">
                 We would greatly appreciate if you could RSVP before 1st November 2024
-            </p>
-            {alert && (
-                <div className={`alert alert-${alert.type}`} role="alert">
-                    {alert.message}
-                </div>
-            )}
+            </a>
             <Form  {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rsvp-form">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rsvp">
                     <FormField
                         control={form.control}
                         name="firstName"
@@ -353,8 +373,8 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     />
-                    
-                    <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto mt-2 justify-center" type="submit">Send</Button>
+                    <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto mt-2 justify-center rsvp-btn" type="submit" 
+                            >Send</Button>
                 </form>
             </Form>
         </div>

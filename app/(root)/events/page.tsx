@@ -35,7 +35,7 @@ export default function Events() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl text-center font-bold text-gray-800 mb-6">Events</h1>
+      <h1 className="text-3xl text-center font-bold mb-6 events">Events</h1>
       {events.map((event, index) => (
         <EventDetails
           key={index}

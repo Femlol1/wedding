@@ -40,7 +40,7 @@ const WelcomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between pt-16 pb-16 relative overflow-hidden">
-      <section className="flex-1 mt-[64px] md:mt-[72px]"> {/* Adjust margin-top according to header height */}
+      <section>
         {transitions((style, item) =>
           loaded && (
             <animated.div
@@ -56,7 +56,7 @@ const WelcomePage: React.FC = () => {
           )
         )}
       </section>
-      <section className="flex items-center justify-center flex-grow relative z-10 h-[calc(50vh-64px)] md:h-[calc(50vh-72px)]"> {/* Adjust height according to header height */}
+      <section className="flex items-center justify-center flex-grow relative z-10">
         <div className="bg-black bg-opacity-50 p-4 flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold text-center text-white mt-8">Welcome to Our Wedding</h1>
           <p className="text-center text-white mt-4">Join us on our special day!</p>
