@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
             We’ve created this website as a helpful resource for all of the need-to-know details.
             <br />
             <br />
-            <strong>Tolu and Ope Forever <br /><a>#TOforever</a></strong>
+            <strong>Tolu and Ope Forever <br /><a><Link href={"https://www.instagram.com/explore/tags/TOFOREVER/"}>#TOforever</Link></a></strong>
           </p>
           <Link href="/rsvp">
             <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">

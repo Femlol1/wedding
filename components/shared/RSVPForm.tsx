@@ -371,9 +371,9 @@ export function RSVPForm() {
                         )}
                     />
                      <Toaster />
-                    <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto justify-center rsvp-btn" type="submit" 
+                     <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200 align-middle" type="submit"
                             >Send</Button>
-                           
+                           {/* <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto justify-center rsvp-btn" type="submit"  */}
                 </form>
             </Form>
         </div>
