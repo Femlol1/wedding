@@ -17,10 +17,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MD5 from "crypto-js/md5";
 import $ from "jquery";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ToastAction } from "../ui/toast";
+import { Toaster } from "../ui/toaster";
 
 // Define the schema with a placeholder for the code validation
 const formSchema = z.object({
@@ -63,7 +63,6 @@ export function RSVPForm() {
         },
     });
 
-    const [alert, setAlert] = useState<{ type: string, message: string } | null>(null);
 
     // Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -74,13 +73,10 @@ export function RSVPForm() {
                 variant: "destructive",
                 description: "Sorry! Your invite code is incorrect.",
               })
-            setAlert({ type: "danger", message: "Sorry! Your invite code is incorrect." });
             return;
         }
 
         const data = values;
-
-        setAlert({ type: "info", message: "Just a sec! We are saving your details." });
          toast({
                     variant: "destructive",
                     title: "Thank You for sending Your RSVP.",
@@ -124,15 +120,17 @@ export function RSVPForm() {
                 We would greatly appreciate if you could RSVP before 1st November 2024
             </a>
             <Form  {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rsvp">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 rsvp-form" id="rsvp-form" method="POST">
                     <FormField
                         control={form.control}
                         name="firstName"
+                        
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem >
                                 <FormLabel>First Name</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="John" {...field} />
+                                <FormControl className="form-input-group  fa fa-envelope">
+                                    <Input placeholder="John" {...field} 
+                                    required/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -347,7 +345,6 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     />
-                    
                     <FormField
                         control={form.control}
                         name="rsvp"
@@ -373,8 +370,10 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     />
+                     <Toaster />
                     <Button className=" btn-fill font-bold py-2 px-4 rounded block mx-auto mt-2 justify-center rsvp-btn" type="submit" 
                             >Send</Button>
+                           
                 </form>
             </Form>
         </div>

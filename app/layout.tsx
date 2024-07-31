@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Tolu and ope's wedding ",
-  description: "A wonderful dad for awesome people",
+  description: "A wonderful day for awesome people",
   icons : {
     icon : '/assets/images/logo.png'
   }
@@ -24,8 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.variable}>{children}
-
+      <body className={poppins.variable}>
+       <main>{children}</main> 
       </body>
     </html>
   );

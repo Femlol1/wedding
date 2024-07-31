@@ -7,6 +7,7 @@ import NavItems from "./NavItems";
 const Header = () => {
   const handleClose = () => {
     // Define what should happen when handleClose is called
+
   };
 
   return (
