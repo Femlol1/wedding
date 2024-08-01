@@ -14,8 +14,8 @@ const HomePage: React.FC = () => {
           <Image
             src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
             alt="Welcome Image"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             quality={100}
             className="z-0"
           />
