@@ -17,11 +17,13 @@ import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MD5 from "crypto-js/md5";
 import $ from "jquery";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ToastAction } from "../ui/toast";
 import { Toaster } from "../ui/toaster";
+
 
 // Define the schema with a placeholder for the code validation
 const formSchema = z.object({
@@ -60,6 +62,7 @@ const formSchema = z.object({
 
 export function RSVPForm() {
     const { toast } = useToast();
+    const router = useRouter();
     const [showOtherStaying, setShowOtherStaying] = useState(false);
 
     // Define your form.
@@ -74,12 +77,12 @@ export function RSVPForm() {
             stayingPlace: "At home with family",
             otherStaying: "",
             allergies: "",
-            asoEbi: "Yes",
+            asoEbi: "No",
             relations: "Brides family",
-            church: "Yes",
-            reception: "Yes",
-            afterParty: "Yes",
-            rsvp: "Yes, I accept with pleasure.",
+            church: "No",
+            reception: "No",
+            afterParty: "No",
+            rsvp: "No, I decline with regrets.",
         },
     });
 
@@ -131,6 +134,7 @@ export function RSVPForm() {
                         title: "Thank You for sending Your RSVP.",
                         description: "Your RSVP has been sent",
                     });
+                    router.push("/story");
                 }
             })
             .fail(function () {
