@@ -924,15 +924,15 @@ section .header {
 	z-index: 999;
 }
 /* need to change collour  */
-.fixed {
+/* .fixed {
 	position: fixed;
 	background-color: rgba(55, 36, 40, 0.88);
 	z-index: 999;
 	width: 100%;
-}
+} */
 header {
 	padding: 5px 0;
-	border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+	border-bottom: none;
 	position: relative;
 	width: 1170px;
 	margin: 0 auto;
@@ -1439,4 +1439,8 @@ body.modal-open {
 }
 .modal-body {
 	padding: 25px;
+}
+.modal-content {
+	max-height: calc(100vh - 2rem); /* Adjust this value as needed */
+	overflow-y: auto;
 }

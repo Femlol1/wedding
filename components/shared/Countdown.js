@@ -1,3 +1,4 @@
+// components/shared/Countdown.js
 "use client";
 import { useEffect, useState } from "react";
 
@@ -10,6 +11,7 @@ const Countdown = ({ eventDate }) => {
 			const event = new Date(eventDate);
 			const difference = event - now;
 
+			const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
 			const days = Math.floor(difference / (1000 * 60 * 60 * 24));
 			const hours = Math.floor(
 				(difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -18,7 +20,9 @@ const Countdown = ({ eventDate }) => {
 			const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
 			setTimeLeft(
-				`${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+				`${months} months, ${
+					days % 30
+				} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
 			);
 		}, 1000);
 
@@ -26,8 +30,8 @@ const Countdown = ({ eventDate }) => {
 	}, [eventDate]);
 
 	return (
-		<div className="text-center my-4 text-1xl font-bold">
-			Countdown to Wedding: {timeLeft}
+		<div className="text-center my-4 text-xl font-bold bg-gray-100 p-4 rounded-md shadow-md">
+			{timeLeft}
 		</div>
 	);
 };

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { animated, useTransition } from '@react-spring/web';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { FiChevronRight } from 'react-icons/fi';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const WelcomePage: React.FC = () => {
@@ -57,15 +58,28 @@ const WelcomePage: React.FC = () => {
         )}
       </section>
       <section className="flex items-center justify-center flex-grow relative z-10">
-        <div className="bg-black bg-opacity-50 p-4 flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold text-center text-white mt-8">Welcome to Our Wedding</h1>
-          <p className="text-center text-white mt-4">Join us on our special day!</p>
+        <div className="bg-black bg-opacity-10 p-4 flex flex-col items-center justify-center">
+          <h1 className="text-2xl text-center text-white mt-8">Together with their families</h1>
+          <h1 className="text-3xl font-bold text-center text-white ">Tolu and Ope</h1>
+          <p className="text-center text-white mt-4">Invite you to join them <br /> Saturday 22nd March 2025</p>
           <div className="text-center mt-8">
             <Link href="/rsvp">
-              <Button className="inline-block px-6 py-3 bg-amber-500 text-white rounded-md hover:bg-yellow-700 transition-colors duration-200">RSVP</Button>
+            <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
+              RSVP
+            </Button>
             </Link>
           </div>
         </div>
+      </section>
+    
+      <section className="fixed bottom-4 right-4">
+        <Link href="/home">
+        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+          <Button className="px-4 py-2 transition-colors duration-200">
+            <FiChevronRight className="ml-1 text-6xl" />
+          </Button>
+          </div>
+        </Link>
       </section>
     </div>
   );

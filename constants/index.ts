@@ -17,10 +17,10 @@ export const headerLinks = [
     label: "Ope & Tolu's story",
     route: '/story',
   },
-  {
-    label: 'Events',
-    route: '/events',
-  },
+  // {
+  //   label: 'Events',
+  //   route: '/events',
+  // },
   {
     label: 'Gifts',
     route: '/gifts',
@@ -47,6 +47,26 @@ export const headerLinks = [
   
 ];
 
+export const events = [
+  {
+    time: "11am",
+    title: "Church Ceremony",
+    location: "Foursquare Gospel Church, Lekki Headquarters",
+    gmap: "https://maps.app.goo.gl/ecTwa2JodZuKdjsc6"
+  },
+  {
+    time: "3pm",
+    title: "Reception",
+    location: "The Monarch Event Centre",
+    gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
+  },
+  {
+    time: "7pm",
+    title: "After Party",
+    location: "The Monarch Event Centre",
+    gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
+  }
+];
   
   // export const eventDefaultValues = {
   //   title: '',
