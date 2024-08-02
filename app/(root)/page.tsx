@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button } from '@/components/ui/button';
 import { animated, useTransition } from '@react-spring/web';
@@ -64,21 +64,19 @@ const WelcomePage: React.FC = () => {
           <p className="text-center text-white mt-4">Invite you to join them <br /> Saturday 22nd March 2025</p>
           <div className="text-center mt-8">
             <Link href="/rsvp">
-            <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
-              RSVP
-            </Button>
+              <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
+                RSVP
+              </Button>
             </Link>
           </div>
         </div>
       </section>
-    
-      <section className="fixed bottom-4 right-4">
+
+      <section className="fixed bottom-4 right-4 z-20">
         <Link href="/home">
-        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-          <Button className="px-4 py-2 transition-colors duration-200">
-            <FiChevronRight className="ml-1 text-6xl" />
+          <Button className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+            <FiChevronRight className="text-6xl text-white" />
           </Button>
-          </div>
         </Link>
       </section>
     </div>
