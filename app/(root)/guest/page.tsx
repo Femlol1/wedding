@@ -14,12 +14,12 @@ export default function Guests() {
             <GuestBook />
             <CommentsSection />
             <section className="fixed bottom-4 right-4 z-20">
-        <Link href="/travel">
-          <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
-            <FiChevronRight className="text-6xl text-white" />
-          </Button>
-        </Link>
-      </section>
+                <Link href="/travel">
+                <Button className="w-12 h-12 text-white btn-fill font-bold py-2 px-3 rounded-full transition duration-200 flex items-center justify-center shadow-lg">
+                  <FiChevronRight className="text-2xl text-white" />
+                </Button>
+                </Link>
+            </section>
         </div>
     );
 }

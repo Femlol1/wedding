@@ -71,7 +71,6 @@ const WelcomePage: React.FC = () => {
           </div>
         </div>
       </section>
-
       <section className="fixed bottom-4 right-4 z-20">
         <Link href="/home">
           <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">

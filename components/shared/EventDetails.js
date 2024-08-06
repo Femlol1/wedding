@@ -10,12 +10,12 @@ function EventDetails({ time, title, location, setShowDressCode, gmap }) {
 			</h2>
 			<p className="text-gray-600">{location}</p>
 			<div className="mt-4 flex justify-between">
-				<Button
+				{/* <Button
 					className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200"
 					onClick={() => setShowDressCode(true)}
 				>
 					Dress Code
-				</Button>
+				</Button> */}
 				<Link href={`${gmap}`}>
 					<Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
 						Google map

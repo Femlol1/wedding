@@ -1,13 +1,15 @@
 "use client";
 
+import DressCodeModal from "@/components/shared/DressCodeModal";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import React from 'react';
+import React, { useState } from 'react';
 import { FiChevronRight } from "react-icons/fi";
 import Events from "../events/page";
 
 const HomePage: React.FC = () => {
+  const [showDressCode, setShowDressCode] = useState(false);
   return (
     <div className="flex flex-col min-h-screen mt-20">
       <div className="flex flex-col md:flex-row flex-grow">
@@ -45,11 +47,22 @@ const HomePage: React.FC = () => {
             <br />
             <strong>Tolu and Ope Forever <br /><Link href={"https://www.instagram.com/explore/tags/TOFOREVER/"}>#TOforever</Link></strong>
           </p>
-          <Link href="/rsvp">
-            <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
-              RSVP
+          <div className="flex flex-col items-center space-y-4">
+            <Link href="/rsvp">
+              <Button className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200">
+                RSVP
+              </Button>
+            </Link>
+            <Button
+              className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200 text-sm"
+              onClick={() => setShowDressCode(true)}
+            >
+              Dress Code
             </Button>
-          </Link>
+          </div>
+          {showDressCode && (
+            <DressCodeModal onClose={() => setShowDressCode(false)} />
+          )}
         </section>
       </div>
       <section className="flex flex-col items-center justify-center py-10 px-5 bg-white w-full">
@@ -58,8 +71,8 @@ const HomePage: React.FC = () => {
       </section>
       <section className="fixed bottom-4 right-4 z-20">
         <Link href="/rsvp">
-          <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
-            <FiChevronRight className="text-6xl text-white" />
+          <Button className="w-12 h-12 text-white btn-fill font-bold py-2 px-3 rounded-full transition duration-200 flex items-center justify-center shadow-lg">
+            <FiChevronRight className="text-2xl text-white" />
           </Button>
         </Link>
       </section>

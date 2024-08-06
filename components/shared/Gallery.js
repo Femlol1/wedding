@@ -1,4 +1,3 @@
-// components/Gallery.js
 "use client";
 import {
 	Carousel,
@@ -44,7 +43,7 @@ const Gallery = () => {
 
 	return (
 		<div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+			<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
 				{images.map((src, index) => (
 					<div
 						key={index}
@@ -70,6 +69,7 @@ const Gallery = () => {
 					<Carousel
 						opts={{
 							align: "start",
+							startIndex: currentIndex,
 						}}
 						plugins={[
 							Autoplay({
@@ -78,7 +78,6 @@ const Gallery = () => {
 						]}
 						selectedItem={currentIndex}
 						showThumbs={false}
-						onClickItem={closeCarousel}
 						className="w-full max-w-sm"
 					>
 						<CarouselContent className="-ml-2 md:-ml-4">

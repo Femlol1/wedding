@@ -14,6 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { rsvpFormSchema } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MD5 from "crypto-js/md5";
 import $ from "jquery";
@@ -25,49 +26,14 @@ import { ToastAction } from "../ui/toast";
 import { Toaster } from "../ui/toaster";
 
 
-// Define the schema with a placeholder for the code validation
-const formSchema = z.object({
-    firstName: z
-        .string()
-        .min(2, { message: "First Name must be at least 2 characters." })
-        .max(50),
-    lastName: z
-        .string()
-        .min(2, { message: "Last Name must be at least 2 characters." })
-        .max(50),
-    code: z.string().min(1, { message: "Code is required." }), // Removed enum and made it a string
-    email: z.string().email({ message: "Please enter a valid email address." }),
-    mobile: z.string().min(10, { message: "Please enter a valid mobile number." }),
-    stayingPlace: z.enum([
-        "At home with family",
-        "Hotel on the Island",
-        "Hotel on the Mainland",
-        "Other",
-    ]),
-    otherStaying: z.string().optional(),
-    allergies: z.string().optional(),
-    asoEbi: z.enum(["Yes", "No"]),
-    relations: z.enum([
-        "Brides family",
-        "Grooms family",
-        "Brides friend",
-        "Grooms friend",
-        "Other",
-    ]),
-    church: z.enum(["Yes", "No"]),
-    reception: z.enum(["Yes", "No"]),
-    afterParty: z.enum(["Yes", "No"]),
-    rsvp: z.enum(["Yes, I accept with pleasure.", "No, I decline with regrets."]),
-});
-
 export function RSVPForm() {
     const { toast } = useToast();
     const router = useRouter();
     const [showOtherStaying, setShowOtherStaying] = useState(false);
 
     // Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof rsvpFormSchema>>({
+        resolver: zodResolver(rsvpFormSchema),
         defaultValues: {
             firstName: "",
             lastName: "",
@@ -96,7 +62,7 @@ export function RSVPForm() {
     }, [form]);
 
     // Define a submit handler.
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof rsvpFormSchema>) {
         const hashedCode = MD5(values.code).toString();
 
         if (
@@ -118,7 +84,7 @@ export function RSVPForm() {
         });
 
         $.post(
-            "https://script.google.com/macros/s/AKfycbw2OnhyJWPuuuKjeN2bIhPA5WhtBqEpr5CWUv1N0UYmmtbseCQmsuNIqJxptSxn8fY/exec",
+            "https://script.google.com/macros/s/AKfycbwTbyT4fOIaJCTIwvSm6O0Tw4lL7h-MvDAwysx01iW33OJQxJPlf1uJTTF4G-i1lNuo/exec",
             data
         )
             .done(function (response) {
