@@ -134,7 +134,7 @@ export function RSVPForm() {
                         title: "Thank You for sending Your RSVP.",
                         description: "Your RSVP has been sent",
                     });
-                    router.push("/story");
+                    // router.push("/story");
                 }
             })
             .fail(function () {
