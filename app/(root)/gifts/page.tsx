@@ -1,8 +1,12 @@
 // pages/gifts.js
 
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { FiChevronRight } from "react-icons/fi";
+
 const Gifts = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 mt-20">
 
       <h1 className="text-4xl font-semibold text-center">Gifts</h1>
       <p className="mt-4 text-lg text-center">
@@ -33,7 +37,15 @@ const Gifts = () => {
         <h2 className="mt-8 text-2xl font-semibold">Stripe/PayPal</h2>
         <p className="mt-4">For convenience, you can also use Stripe or PayPal. Links will be provided directly to registered guests.</p>
       </div>
+      <section className="fixed bottom-4 right-4 z-20">
+        <Link href="/guest">
+          <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+            <FiChevronRight className="text-6xl text-white" />
+          </Button>
+        </Link>
+      </section>
     </div>
+    
   );
 }
 

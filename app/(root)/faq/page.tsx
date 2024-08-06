@@ -1,5 +1,8 @@
 // pages/faq.js
 import Collapsible from '@/components/shared/Collapsible';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { FiChevronRight } from 'react-icons/fi';
 
 export default function FAQ() {
     return (
@@ -47,6 +50,13 @@ export default function FAQ() {
                     <p>Please contact our wedding planner to arrange airport pickup. Provide your flight details and arrival time for coordination.</p>
                 </Collapsible>
             </section>
+            <section className="fixed bottom-4 right-4 z-20">
+        <Link href="/gallery">
+          <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+            <FiChevronRight className="text-6xl text-white" />
+          </Button>
+        </Link>
+      </section>
         </div>
     );
 }

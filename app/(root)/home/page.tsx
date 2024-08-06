@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from 'react';
+import { FiChevronRight } from "react-icons/fi";
 import Events from "../events/page";
 
 const HomePage: React.FC = () => {
@@ -54,6 +55,13 @@ const HomePage: React.FC = () => {
       <section className="flex flex-col items-center justify-center py-10 px-5 bg-white w-full">
         <h2 className="text-3xl font-semibold mb-4">Events</h2>
         <Events />
+      </section>
+      <section className="fixed bottom-4 right-4 z-20">
+        <Link href="/rsvp">
+          <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+            <FiChevronRight className="text-6xl text-white" />
+          </Button>
+        </Link>
       </section>
     </div>
   );

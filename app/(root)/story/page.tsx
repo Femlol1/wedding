@@ -9,7 +9,9 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import { FiChevronRight } from "react-icons/fi";
 
 type StoryKey = 'Ope' | 'Tolu';
 
@@ -103,6 +105,14 @@ export default function OurStory() {
           </Dialog>
         </div>
       </div>
+      <section className="fixed bottom-4 right-4 z-20">
+        <Link href="/gifts">
+          <Button className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+            <FiChevronRight className="text-6xl text-white" />
+          </Button>
+        </Link>
+      </section>
     </div>
+    
   );
 }
