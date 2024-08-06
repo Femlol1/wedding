@@ -84,7 +84,7 @@ export function RSVPForm() {
         });
 
         $.post(
-            "https://script.google.com/macros/s/AKfycbwTbyT4fOIaJCTIwvSm6O0Tw4lL7h-MvDAwysx01iW33OJQxJPlf1uJTTF4G-i1lNuo/exec",
+            "https://script.google.com/macros/s/AKfycbwV2itu-7F4BiBQ2TVdtwVGSWd3hBhpgFbd0AMiFDpF7CrbsXydOx5w4q5Ew1eC-63Q/exec",
             data
         )
             .done(function (response) {
