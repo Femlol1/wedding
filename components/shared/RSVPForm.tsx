@@ -71,7 +71,8 @@ export function RSVPForm() {
                     title: "Thank You for sending Your RSVP.",
                     description: "Your RSVP has been sent",
                 });
-                router.push("/story");
+                form.reset(); // Reset the form after a successful submission
+                // router.push("/story");
             }
         } catch (error: any) { // Cast error to any
             if (error.response?.status === 400) {
