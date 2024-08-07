@@ -1,14 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -16,8 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { rsvpFormSchema } from "@/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
-import MD5 from "crypto-js/md5";
-import $ from "jquery";
+import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,13 +17,11 @@ import { z } from "zod";
 import { ToastAction } from "../ui/toast";
 import { Toaster } from "../ui/toaster";
 
-
 export function RSVPForm() {
     const { toast } = useToast();
     const router = useRouter();
     const [showOtherStaying, setShowOtherStaying] = useState(false);
 
-    // Define your form.
     const form = useForm<z.infer<typeof rsvpFormSchema>>({
         resolver: zodResolver(rsvpFormSchema),
         defaultValues: {
@@ -61,57 +51,46 @@ export function RSVPForm() {
         return () => subscription.unsubscribe();
     }, [form]);
 
-    // Define a submit handler.
-    async function onSubmit(values: z.infer<typeof rsvpFormSchema>) {
-        const hashedCode = MD5(values.code).toString();
-
-        if (
-            hashedCode !== "b0e53b10c1f55ede516b240036b88f40" &&
-            hashedCode !== "2ac7f43695eb0479d5846bb38eec59cc"
-        ) {
-            toast({
-                variant: "destructive",
-                description: "Sorry! Your invite code is incorrect.",
-            });
-            return;
-        }
-
-        const data = values;
+    const onSubmit = async (values: z.infer<typeof rsvpFormSchema>) => {
         toast({
             variant: "default",
             title: "Thank You for sending Your RSVP.",
             description: "Just a sec! We are saving your details.",
         });
-
-        $.post(
-            "https://script.google.com/macros/s/AKfycbwV2itu-7F4BiBQ2TVdtwVGSWd3hBhpgFbd0AMiFDpF7CrbsXydOx5w4q5Ew1eC-63Q/exec",
-            data
-        )
-            .done(function (response) {
-                if (response.result === "error") {
-                    toast({
-                        variant: "destructive",
-                        description: response.message,
-                        action: <ToastAction altText="Try again">Try again</ToastAction>,
-                    });
-                } else {
-                    toast({
-                        variant: "default",
-                        title: "Thank You for sending Your RSVP.",
-                        description: "Your RSVP has been sent",
-                    });
-                    // router.push("/story");
-                }
-            })
-            .fail(function () {
+        try {
+            const response = await axios.post('/api/rsvp', values);
+            if (response.data.result === 'error') {
+                toast({
+                    variant: "destructive",
+                    description: response.data.message,
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                });
+            } else {
+                toast({
+                    variant: "default",
+                    title: "Thank You for sending Your RSVP.",
+                    description: "Your RSVP has been sent",
+                });
+                router.push("/story");
+            }
+        } catch (error: any) { // Cast error to any
+            if (error.response?.status === 400) {
+                toast({
+                    variant: "destructive",
+                    title: "Invalid Code",
+                    description: "The RSVP code you entered is invalid. Please check your code and try again.",
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                });
+            } else {
                 toast({
                     variant: "destructive",
                     title: "Uh oh! Something went wrong.",
                     description: "Sorry! There is some issue with the server.",
                     action: <ToastAction altText="Try again">Try again</ToastAction>,
                 });
-            });
-    }
+            }
+        }
+    };
 
     const isFormValid = form.formState.isValid;
 
