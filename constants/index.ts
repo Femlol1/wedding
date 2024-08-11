@@ -1,7 +1,7 @@
 
 import { z } from "zod";
 
-export const headerLinks = [
+export const userLinks = [
   {
     label: 'Home',
     route: '/',
@@ -15,7 +15,7 @@ export const headerLinks = [
     route: '/rsvp',
   },
   {
-    label: "Ope & Tolu's story",
+    label: "Our story",
     route: '/story',
   },
   // {
@@ -38,33 +38,57 @@ export const headerLinks = [
     label: 'FAQ',
     route: '/faq',
   },
-  {
-    label: 'Gallery',
-    route: '/gallery',
-  },
+  // {
+  //   label: 'Gallery',
+  //   route: '/gallery',
+  // },
   
   
 
   
 ];
 
+export const adminLinks = [
+  {
+    label: 'Dashboard',
+    route: '/dashboard',
+  },
+  {
+    label: 'Rsvps',
+    route: '/allRsvps',
+  },
+  {
+    label: 'Scannner',
+    route: '/scanner',
+  },
+ 
+];
 export const events = [
   {
-    time: "11am",
-    title: "Church Ceremony",
+    time: "11am - 1:30pm",
+    title: "Church Ceremony",//ceremoney should be untop
     location: "Foursquare Gospel Church, Lekki Headquarters",
+    icon: "/assets/icons/church.png",//church icon
+    heading:" ",
+    description: " ",
     gmap: "https://maps.app.goo.gl/ecTwa2JodZuKdjsc6"
   },
   {
-    time: "3pm",
+    time: "2:30pm",
     title: "Reception",
     location: "The Monarch Event Centre",
+    icon: "/assets/icons/dance.png",//
+    heading:" ",
+    description: " ",
     gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
   },
   {
     time: "7pm",
     title: "After Party",
     location: "The Monarch Event Centre",
+    icon: "/assets/icons/disco-light.png",//
+    heading:" ",
+    description: " ",
     gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
   }
 ];

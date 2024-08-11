@@ -1,13 +1,32 @@
 // pages/travel.js
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FiChevronRight } from 'react-icons/fi';
 
+
 export default function Travel() {
     return (
-        <div className="container mx-auto px-4 py-8 mt-20">
-            <h1 className="text-3xl font-bold text-center mb-6">Travel & Accommodation</h1>
-            
+
+        <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col md:flex-row flex-grow">
+        {/* Image Section */}
+        <section className="relative w-full md:w-1/2 h-64 md:h-auto">
+          <Image
+            src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
+            alt="Welcome Image"
+            fill
+            style={{ objectFit: 'cover' }}
+            quality={100}
+            className="z-0"
+          />
+          <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-20">
+            <h3 className="text-3xl md:text-5xl font-bold mt-2">Lagos</h3>
+          </div>
+        </section>
+        <div className="container mx-auto px-4 py-8">
+
             <section className="mb-6">
     <h2 className="text-2xl font-semibold">Hotels</h2>
     <p className="mt-2">For your convenience, we have reserved a block of rooms at the following hotels. Please mention our wedding when booking to receive a special rate.</p>
@@ -39,6 +58,8 @@ export default function Travel() {
                 </Button>
         </Link>
       </section>
+        </div>
+        </div>
         </div>
     );
 }

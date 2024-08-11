@@ -19,6 +19,9 @@ export default function Events() {
           time={event.time}
           title={event.title}
           location={event.location}
+          icon={event.icon}
+          heading={event.heading}
+          description={event.description}
           gmap={event.gmap}
           setShowDressCode={setShowDressCode}
         />

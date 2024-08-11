@@ -1,21 +1,144 @@
-import type { Config } from "tailwindcss";
+/** @type {import('tailwindcss').Config} */
+import { PluginAPI } from 'tailwindcss/types/config';
 
-const config: Config = {
+module.exports = ({
+  darkMode: ['class'],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
       },
-      
+    },
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#FFD700', // Gold color
+          '50': '#FFF8DC',
+          '100': '#FFF1B8',
+          '200': '#FFE38F',
+          '300': '#FFD700',
+          '400': '#E6C200',
+          '500': '#CCAD00',
+          '600': '#B39800',
+          '700': '#998300',
+          '800': '#806D00',
+          '900': '#665800',
+          foreground: '#FFFFFF', // White foreground color
+        },
+        secondary: {
+          DEFAULT: '#FFFFFF', // White color
+          foreground: '#FFD700', // Gold foreground color
+        },
+        accent: {
+          DEFAULT: '#FFD700', // Gold accent color
+          foreground: '#FFFFFF', // White foreground color
+        },
+        dark: {
+          DEFAULT: '#1A1A1A',
+          '50': '#333333',
+          '100': '#4D4D4D',
+          '200': '#666666',
+          '300': '#808080',
+          '400': '#999999',
+          '500': '#B3B3B3',
+          '600': '#CCCCCC',
+          '700': '#E6E6E6',
+          '800': '#F2F2F2',
+          '900': '#FFFFFF',
+        },
+        coral: {
+          500: '#15BF59',
+        },
+        grey: {
+          600: '#545454',
+          500: '#757575',
+          400: '#AFAFAF',
+          100: '#F2EFEF',
+          50: '#F6F6F6',
+        },
+        black: '#000000',
+        white: '#FFFFFF',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        foreground: 'hsl(var(--foreground))',
+        destructive: {
+          DEFAULT: '#FF0000', // Red color for destructive actions
+          foreground: '#FFFFFF', // White foreground color
+        },
+        muted: {
+          DEFAULT: '#CCCCCC', // Muted grey color
+          foreground: '#333333', // Dark grey foreground color
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      fontFamily: {
+        poppins: ['var(--font-poppins)'],
+      },
+      backgroundImage: {
+        'dotted-pattern': "url('/assets/images/dotted-pattern.png')",
+        'hero-img': "url('/assets/images/hero.png')",
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      boxShadow: {
+        'neon-gold': '0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 40px #FFD700',
+        'neon-white': '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 40px #FFFFFF',
+      },
+      textShadow: {
+        'neon-gold': '0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 40px #FFD700',
+        'neon-white': '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 40px #FFFFFF',
+      },
     },
   },
-  plugins: [],
-};
-export default config;
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addUtilities }: PluginAPI) {
+      const newUtilities = {
+        '.text-shadow-neon-gold': {
+          textShadow: '0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 40px #FFD700',
+        },
+        '.text-shadow-neon-white': {
+          textShadow: '0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 40px #FFFFFF',
+        },
+      };
+
+      addUtilities(newUtilities, {
+        respectPrefix: false,
+        respectImportant: false,
+      });
+    },
+  ],
+});

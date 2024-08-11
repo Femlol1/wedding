@@ -17,12 +17,12 @@ const Countdown = ({ eventDate }) => {
 				(difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
 			);
 			const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-			const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+			// const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
 			setTimeLeft(
 				`${months} months, ${
 					days % 30
-				} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+				} days, ${hours} hours, ${minutes} minutes`
 			);
 		}, 1000);
 

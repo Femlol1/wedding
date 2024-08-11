@@ -97,8 +97,8 @@ export function RSVPForm() {
 
     return (
         <div className="container mx-auto rsvp">
-            <div className="text-center mt-4">
-                We would greatly appreciate if you could RSVP before 1st November 2024
+            <div className="text-center">
+                We would greatly appreciate if you could RSVP before 1st Nov 2024
             </div>
             <Form {...form}>
                 <form
@@ -114,7 +114,7 @@ export function RSVPForm() {
                             <FormItem>
                                 <FormLabel>First Name</FormLabel>
                                 <FormControl className="form-input-group fa fa-envelope">
-                                    <Input placeholder="John" {...field} required />
+                                    <Input placeholder=" " {...field} required />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -127,7 +127,7 @@ export function RSVPForm() {
                             <FormItem>
                                 <FormLabel>Last Name</FormLabel>
                                 <FormControl className="form-input-group fa fa-envelope">
-                                    <Input placeholder="Doe" {...field} />
+                                    <Input placeholder=" " {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -166,7 +166,7 @@ export function RSVPForm() {
                             <FormItem>
                                 <FormLabel>Mobile</FormLabel>
                                 <FormControl className="form-input-group fa fa-envelope">
-                                    <Input placeholder="+1234567890" {...field} />
+                                    <Input placeholder="" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -11,7 +11,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full border-b bg-opacity-50 bg-black fixed top-0 z-50">
+    <header className="w-full bg-opacity-50 fixed top-0 z-50">
       <div className="flex wrapper items-center justify-between w-full py-4 px-6">
         <Link href={"/"} className="w-36">
           <Image src={"/assets/images/logo.png"} width={70} height={38} alt="Opes wedding logo" />

@@ -5,6 +5,7 @@ import { Workbook } from 'exceljs';
 import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { PDFDocument, rgb } from 'pdf-lib';
 import { Readable } from 'stream';
 
 const EXCEL_FILE_NAME = 'rsvps.xlsx';
@@ -45,11 +46,32 @@ export async function POST(req: NextRequest) {
       textxalign: 'center',  // Always good to set this
     });
 
-    // Convert barcode buffer to base64
-    const barcodeBase64 = barcodeBuffer.toString('base64');
-    const barcodeDataUrl = `data:image/png;base64,${barcodeBase64}`;
+    // Generate a PDF with the barcode
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([300, 150]);
+    const pngImage = await pdfDoc.embedPng(barcodeBuffer);
+    const { width, height } = pngImage.scale(1);
 
-    // Send confirmation email
+    page.drawImage(pngImage, {
+      x: page.getWidth() / 2 - width / 2,
+      y: page.getHeight() / 2 - height / 2,
+      width,
+      height,
+    });
+
+    page.drawText(`RSVP Code: ${rsvpDocId}`, {
+      x: 10,
+      y: 10,
+      size: 12,
+      color: rgb(0, 0, 0),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+
+    // Convert pdfBytes (Uint8Array) to Buffer
+    const pdfBuffer = Buffer.from(pdfBytes);
+
+    // Send confirmation email with PDF attachment
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: data.email,
@@ -58,8 +80,15 @@ export async function POST(req: NextRequest) {
         <p>Dear ${data.firstName} ${data.lastName},</p>
         <p>Thank you for your RSVP!</p>
         <p>Your RSVP Code is: ${rsvpDocId}</p>
-        <p><img src="${barcodeDataUrl}" alt="RSVP Code Barcode" /></p>
+        <p>Attached is a PDF file with your RSVP code barcode.</p>
       `,
+      attachments: [
+        {
+          filename: 'RSVP_Code.pdf',
+          content: pdfBuffer,
+          contentType: 'application/pdf',
+        },
+      ],
     };
 
     const transporter = nodemailer.createTransport({

@@ -1,6 +1,6 @@
 'use client';
 
-import { headerLinks } from "@/constants";
+import { userLinks } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC } from 'react';
@@ -13,7 +13,7 @@ const NavItems: FC<NavItemsProps> = ({ handleClose }) => {
     const pathname = usePathname();
     return (
         <ul className="md:flex-between flex w-full flex-full flex-col items-start gap-5 md:flex-row">
-            {headerLinks.map((link) => {
+            {userLinks.map((link) => {
                 const isActive = pathname === link.route;
 
                 return (
