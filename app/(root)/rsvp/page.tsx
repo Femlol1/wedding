@@ -1,5 +1,5 @@
 "use client"
-import FlipClock from "@/components/shared/FlipClock/FlipClock";
+import Countdown from "@/components/shared/Countdown";
 import { RSVPForm } from "@/components/shared/RSVPForm";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -13,7 +13,7 @@ const Rsvp: React.FC = () => {
         <div className="wrapper h3-bold text-center">RSVP</div>
       </section>
       <section>
-        <FlipClock eventDate={eventDate} />  {/* Use the new FlipClock component */}
+        <Countdown eventDate={eventDate} />
       </section>
       <section>
         <div className="mb-4 rsvp">

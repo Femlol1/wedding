@@ -2,12 +2,26 @@
 import { useEffect, useState } from "react";
 import styles from "./FlipClock.module.css";
 
-const FlipClock = ({ eventDate }) => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [prevTimeLeft, setPrevTimeLeft] = useState(timeLeft);
-  const [flippingUnits, setFlippingUnits] = useState({});
+interface FlipClockProps {
+  eventDate: string;
+}
 
-  function calculateTimeLeft() {
+interface TimeLeft {
+  months: number;
+  days: number;
+  hours: number;
+  minutes: number;
+}
+
+interface FlippingUnits {
+  months: boolean;
+  days: boolean;
+  hours: boolean;
+  minutes: boolean;
+}
+
+const FlipClock: React.FC<FlipClockProps> = ({ eventDate }) => {
+  const calculateTimeLeft = (): TimeLeft => {
     const now = new Date();
     const event = new Date(eventDate);
     const difference = event.getTime() - now.getTime();
@@ -18,7 +32,11 @@ const FlipClock = ({ eventDate }) => {
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       minutes: Math.floor((difference / 1000 / 60) % 60),
     };
-  }
+  };
+
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+  const [prevTimeLeft, setPrevTimeLeft] = useState<TimeLeft>(timeLeft);
+  const [flippingUnits, setFlippingUnits] = useState<Partial<FlippingUnits>>({});
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -42,9 +60,9 @@ const FlipClock = ({ eventDate }) => {
     <div className={styles.flipClock}>
       {Object.keys(timeLeft).map((unit, index) => (
         <div key={index} className={styles.flipUnitContainer}>
-          <div className={`${styles.flipCard} ${flippingUnits[unit] ? styles.flipping : ""}`}>
-            <div className={styles.upperCard}>{timeLeft[unit]}</div>
-            <div className={styles.lowerCard}>{prevTimeLeft[unit]}</div>
+          <div className={`${styles.flipCard} ${flippingUnits[unit as keyof FlippingUnits] ? styles.flipping : ""}`}>
+            <div className={styles.upperCard}>{timeLeft[unit as keyof TimeLeft]}</div>
+            <div className={styles.lowerCard}>{prevTimeLeft[unit as keyof TimeLeft]}</div>
           </div>
           <div className={styles.flipLabel}>{unit.charAt(0).toUpperCase() + unit.slice(1)}</div>
         </div>
