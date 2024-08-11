@@ -65,16 +65,16 @@ export const adminLinks = [
 ];
 export const events = [
   {
-    time: "11am - 1:30pm",
+    time: "11:00am - 1:30pm",
     title: "Church Ceremony",//ceremoney should be untop
-    location: "Foursquare Gospel Church, Lekki Headquarters",
+    location: "Foursquare Gospel Church, Lekki",
     icon: "/assets/icons/church.png",//church icon
     heading:" ",
     description: " ",
     gmap: "https://maps.app.goo.gl/ecTwa2JodZuKdjsc6"
   },
   {
-    time: "2:30pm",
+    time: "02:30pm - 07:00pm",
     title: "Reception",
     location: "The Monarch Event Centre",
     icon: "/assets/icons/dance.png",//
@@ -83,7 +83,7 @@ export const events = [
     gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
   },
   {
-    time: "7pm",
+    time: "07:00pm",
     title: "After Party",
     location: "The Monarch Event Centre",
     icon: "/assets/icons/disco-light.png",//
