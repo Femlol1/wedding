@@ -258,3 +258,17 @@ footer span.fa-heart {
 		transform: scale(1);
 	}
 }
+
+@keyframes beat {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+}
+
+.animate-beat {
+	animation: beat 1s infinite;
+}

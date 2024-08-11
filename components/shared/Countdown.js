@@ -30,7 +30,7 @@ const Countdown = ({ eventDate }) => {
 	}, [eventDate]);
 
 	return (
-		<div className="text-center my-4 text-xl font-bold bg-gray-100 p-4 rounded-md shadow-md">
+		<div className="text-center my-4 font-bold bg-gray-100 p-4 rounded-md shadow-md">
 			{timeLeft}
 		</div>
 	);

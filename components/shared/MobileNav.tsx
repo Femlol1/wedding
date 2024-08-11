@@ -16,13 +16,17 @@ const MobileNav = () => {
         <nav className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger className="align-middle" onClick={handleOpen}>
-                    <Image 
-                        src={"/assets/icons/menu.svg"}
-                        alt="menu"
-                        width={24}
-                        height={24}
-                        className="cursor-pointer"
-                    />
+                    {/* Inline SVG for menu icon */}
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        fill="currentColor" 
+                        className="text-primary cursor-pointer"
+                        viewBox="0 0 16 16"
+                    >
+                        <path fillRule="evenodd" d="M1.5 3.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
                 </SheetTrigger>
                 <SheetContent className="flex flex-col gap-2 bg-gray md:hidden bg-white">
                     <Image 

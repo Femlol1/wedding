@@ -44,7 +44,8 @@ const HomePage: React.FC = () => {
             <strong>Please do not bring Kids</strong>
             <br />
             <br />
-            <strong>Tolu and Ope Forever <br /><Link href={"https://www.instagram.com/explore/tags/TOFOREVER/"}>#TOforever</Link></strong>
+            <strong>Tolu and Ope Forever <br /><u><Link className="
+            text-primary" href={"https://www.instagram.com/explore/tags/TOFOREVER/"}>#TOforever</Link></u></strong>
           </p>
           <div className="flex flex-row items-center space-x-4">
             <Link href="/rsvp">

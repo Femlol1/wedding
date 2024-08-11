@@ -28,7 +28,7 @@ const EventDetails: FC<EventDetailsProps> = ({ time, title, location, setShowDre
       </div>
 
       <h2 className="text-lg font-semibold text-center mt-4">{heading}</h2>
-      <p className="text-center text-gray-600">{description}</p>
+      <p className="text-center text-gray-600 text-sm">{description}</p>
 
       <div className="mt-4 flex justify-center">
         <Link href={gmap}>
