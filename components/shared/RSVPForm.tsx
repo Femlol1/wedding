@@ -21,6 +21,7 @@ export function RSVPForm() {
     const { toast } = useToast();
     const router = useRouter();
     const [showOtherStaying, setShowOtherStaying] = useState(false);
+    const [showTypeAsoebi, setShowTypeAsoebi] = useState(false);
 
     const form = useForm<z.infer<typeof rsvpFormSchema>>({
         resolver: zodResolver(rsvpFormSchema),
@@ -34,6 +35,7 @@ export function RSVPForm() {
             otherStaying: "",
             allergies: "",
             asoEbi: "No",
+            asoebiType: "",
             relations: "Brides family",
             church: "No",
             reception: "No",
@@ -46,6 +48,14 @@ export function RSVPForm() {
         const subscription = form.watch((value, { name }) => {
             if (name === "stayingPlace") {
                 setShowOtherStaying(value.stayingPlace === "Other");
+            }
+        });
+        return () => subscription.unsubscribe();
+    }, [form]);
+    useEffect(() => {
+        const subscription = form.watch((value, { name }) => {
+            if (name === "asoEbi") {
+                setShowTypeAsoebi(value.asoEbi === "Yes");
             }
         });
         return () => subscription.unsubscribe();
@@ -140,7 +150,7 @@ export function RSVPForm() {
                             <FormItem>
                                 <FormLabel>Invite Code</FormLabel>
                                 <FormControl className="form-input-group fa fa-envelope">
-                                    <Input type="password" placeholder="Enter code" {...field} />
+                                    <Input placeholder="Enter code" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -256,6 +266,38 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     />
+                    {showTypeAsoebi && (
+                        <FormField
+                            control={form.control}
+                            name="asoebiType"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>If yes, Please Specify Clothes Type</FormLabel>
+                                    <FormControl>
+                                    <RadioGroup
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                        className="flex "
+                                    >
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="Male" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">Male</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormControl>
+                                                <RadioGroupItem value="Female" />
+                                            </FormControl>
+                                            <FormLabel className="font-normal">Female</FormLabel>
+                                        </FormItem>
+                                    </RadioGroup>
+                                </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    )}
                     <FormField
                         control={form.control}
                         name="church"

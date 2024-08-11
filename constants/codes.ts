@@ -1,8 +1,9 @@
 export const validCodes = {
-    opesGuest: ['TOforeverOG25', 'VIP456', 'VIP789'],
-    tolusGuest: ['TOforeverTG25', 'REG456', 'REG789'],
-    osibemekunFamilyGuest: ['TOforeverOsi25', 'FAM456', 'FAM789'],
-    oyediranFamilyGuest: ['TOforeverOyed25', 'FRI456', 'FRI789'],
+    vip:['VIP789'],
+    opesGuest: ['TOforeverOG25'],
+    tolusGuest: ['TOforeverTG25'],
+    osibemekunFamilyGuest: ['TOforeverOsi25'],
+    oyediranFamilyGuest: ['TOforeverOyed25'],
     bridalParty: ['TOforeverBP25']
   };
   

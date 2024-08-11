@@ -113,6 +113,7 @@ export const rsvpFormSchema = z.object({
   otherStaying: z.string().optional(),
   allergies: z.string().optional(),
   asoEbi: z.enum(["Yes", "No"]),
+  asoebiType: z.string().optional(),
   relations: z.enum([
       "Brides family",
       "Grooms family",
