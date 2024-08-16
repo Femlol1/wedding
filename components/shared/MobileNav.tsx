@@ -28,7 +28,7 @@ const MobileNav = () => {
                         <path fillRule="evenodd" d="M1.5 3.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5z"/>
                     </svg>
                 </SheetTrigger>
-                <SheetContent className="flex flex-col gap-2 bg-gray md:hidden bg-white">
+                <SheetContent className="flex flex-col gap-2 bg-gray md:hidden bg-white w-auto">
                     <Image 
                         src={"/assets/images/logo.png"}
                         alt="logo"
