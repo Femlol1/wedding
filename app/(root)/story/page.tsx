@@ -80,12 +80,13 @@ export default function OurStory() {
   return (
       <div className="flex flex-col md:flex-col md:mt-20">
         {/* Image Section */}
-        <section className="relative w-full md:w-1/2 h-64 md:h-auto">
+        <section className="relative w-full h-64 ">
           <Image
             src="/assets/images/OurStoryPage/ourStoryHeader.jpg" // Replace with your image path
             alt="Welcome Image"
             fill
             style={{ objectFit: 'cover' }}
+            priority={true} // {false} | {true}
             quality={100}
             className="z-0"
           />
@@ -106,7 +107,7 @@ export default function OurStory() {
                 alt="Ope"
                 width={150}
                 height={150}
-                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
+                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110 rounded-full"
               />
               <div className="flex flex-col justify-between">
               <div className=" text-xl flex font-bold flex-row">Ope&rsquo;s Story</div>
@@ -135,7 +136,7 @@ export default function OurStory() {
                 alt="Tolu"
                 width={150}
                 height={150}
-                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
+                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110 rounded-full"
               />
               <div className="flex flex-col justify-between">
               <div className=" text-xl flex font-bold flex-row">Tolu&rsquo;s Story</div>

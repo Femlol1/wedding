@@ -53,9 +53,10 @@ const Gallery = () => {
 						<Image
 							src={src}
 							alt={`Gallery image ${index + 1}`}
-							layout="fill"
-							objectFit="cover"
+							fill
+							style={{ objectFit: "cover" }}
 							className="rounded-lg cursor-pointer"
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 						/>
 					</div>
 				))}
