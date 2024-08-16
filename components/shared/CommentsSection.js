@@ -1,57 +1,89 @@
 // components/CommentsSection.js
-"use client";
+"use client"; // This is important to ensure this component is client-side
+
+import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
+import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
+import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
 
 export default function CommentsSection() {
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState("");
 
 	useEffect(() => {
-		fetch("/api/comments")
-			.then((response) => response.json())
-			.then((data) => setComments(data));
+		const fetchComments = async () => {
+			const commentsCollection = collection(db, "comments");
+			const commentsSnapshot = await getDocs(commentsCollection);
+			const commentsList = commentsSnapshot.docs.map((doc) => doc.data());
+			setComments(commentsList);
+		};
+
+		fetchComments();
 	}, []);
 
 	const handleCommentSubmit = async (event) => {
 		event.preventDefault();
-		const response = await fetch("/api/comments", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ comment: newComment }),
-		});
-		const data = await response.json();
-		setComments([...comments, data]);
-		setNewComment("");
+		if (newComment.trim() === "") return;
+
+		const commentData = {
+			comment: newComment,
+			timestamp: Timestamp.now(),
+		};
+
+		try {
+			// Add a new document with the comment data
+			await addDoc(collection(db, "comments"), commentData);
+			// Update the local state to include the new comment
+			setComments([...comments, commentData]);
+			setNewComment("");
+		} catch (error) {
+			console.error("Error adding comment: ", error);
+		}
 	};
 
 	return (
 		<div className="mt-6">
-			<h2 className="text-2xl font-semibold text-center">
+			<h2 className="text-xl font-semibold text-center">
 				Messages to the Bride and Groom
 			</h2>
+
+			<div className="relative overflow-hidden container">
+				<div className="flex whitespace-nowrap animate-scroll gap-4">
+					{[...comments, ...comments].map((comment, index) => (
+						<>
+							<div
+								key={index}
+								className="bg-primary-50 rounded-full p-4 mx-2 min-w-[300px] shadow-md text-center"
+							>
+								<Image
+									src={"/assets/icons/heart.png"}
+									alt="heart"
+									width={20}
+									height={20}
+									className="mb-2 text-center"
+								/>
+								{comment.comment}
+							</div>
+						</>
+					))}
+				</div>
+			</div>
 			<form onSubmit={handleCommentSubmit} className="my-4">
-				<textarea
+				<Textarea
 					value={newComment}
 					onChange={(e) => setNewComment(e.target.value)}
 					className="w-full p-2 border"
 					placeholder="Leave a message..."
 				/>
-				<button
+				<Button
 					type="submit"
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded block mx-auto mt-2"
+					className="bg-primary hover:bg-primary-700 font-bold py-2 px-4 rounded block mx-auto mt-2"
 				>
 					Submit
-				</button>
+				</Button>
 			</form>
-			<div>
-				{comments.map((comment, index) => (
-					<p key={index} className="bg-gray-100 rounded p-2 my-2">
-						{comment.comment}
-					</p>
-				))}
-			</div>
 		</div>
 	);
 }

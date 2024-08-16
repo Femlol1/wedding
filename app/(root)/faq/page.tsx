@@ -12,7 +12,7 @@ export default function FAQ() {
           {/* Image Section */}
           <section className="relative w-full md:w-1/2 h-64 md:h-auto">
             <Image
-              src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
+              src="/assets/images/Faq/FaqHeader.jpg" // Replace with your image path
               alt="Welcome Image"
               fill
               style={{ objectFit: 'cover' }}
@@ -28,7 +28,7 @@ export default function FAQ() {
 
             <section className="mb-6">
                 <h2 className="text-2xl font-semibold">Contact Us</h2>
-                <p>If you need to get in touch, please email us at [Your Email Address]. We would love to hear from you!</p>
+                <p>If you need to get in touch, please email us at femi@toluandope.com. We would love to hear from you!</p>
                 <p>If it’s regarding the vendors, please reach out to our wedding planner at Kahi Company (Ehi) - +234 808 091 8070.</p>
             </section>
 
@@ -55,7 +55,7 @@ export default function FAQ() {
             <section>
                 <h2 className="text-2xl font-semibold">Travel Information</h2>
                 <Collapsible label="How do I apply for a Nigerian visa?">
-                    <p>To apply for a Nigerian visa, visit the official Nigerian immigration website and follow the application instructions.</p>
+                    <p>To apply for a Nigerian visa, visit <u><Link className='text-primary' href={"https://immigration.gov.ng/"}>the official Nigerian immigration website</Link></u> and follow the application instructions.</p>
                 </Collapsible>
                 <Collapsible label="How do I renew my Nigerian Passport?">
                     <p>To renew your Nigerian passport, visit the official Nigerian immigration website and follow the renewal instructions.</p>

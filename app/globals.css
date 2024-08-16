@@ -272,3 +272,28 @@ footer span.fa-heart {
 .animate-beat {
 	animation: beat 1s infinite;
 }
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.container {
+	overflow: hidden;
+	width: 100%;
+}
+
+.animate-scroll {
+	display: flex;
+	width: 200%; /* Double the width to accommodate the duplicated comments */
+	animation: scroll 20s linear infinite;
+}
+
+@media (max-width: 768px) {
+	.animate-scroll {
+		animation-duration: 30s; /* Slow down the scroll on smaller screens */
+	}
+}

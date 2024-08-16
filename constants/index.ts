@@ -124,5 +124,4 @@ export const rsvpFormSchema = z.object({
   church: z.union([z.enum(["Yes", "No"]), z.undefined()]),
   reception: z.union([z.enum(["Yes", "No"]), z.undefined()]),
   afterParty: z.union([z.enum(["Yes", "No"]), z.undefined()]),
-  rsvp: z.enum(["Yes, I accept with pleasure.", "No, I decline with regrets."]),
 });

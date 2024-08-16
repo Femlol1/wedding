@@ -40,7 +40,6 @@ export function RSVPForm() {
             church: "No",
             reception: "No",
             afterParty: "No",
-            rsvp: "No, I decline with regrets.",
         },
     });
 
@@ -388,7 +387,7 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     />
-                    <FormField
+                    {/* <FormField
                         control={form.control}
                         name="rsvp"
                         render={({ field }) => (
@@ -412,7 +411,7 @@ export function RSVPForm() {
                                 <FormMessage />
                             </FormItem>
                         )}
-                    />
+                    /> */}
                     <Toaster />
                     <Button
                         className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200 align-middle"

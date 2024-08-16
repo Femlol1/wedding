@@ -7,7 +7,7 @@ import { FiChevronRight } from "react-icons/fi";
 
 const Gifts = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen md:mt-20">
       <div className="flex flex-col md:flex-row flex-grow">
         {/* Image Section */}
         <section className="relative w-full md:w-1/2 h-64 md:h-auto">
@@ -35,17 +35,36 @@ const Gifts = () => {
         <h2 className="text-2xl font-semibold">Bank Details</h2>
         <div className="mt-4 space-y-3">
           <div>
-            <h3 className="font-semibold">United States</h3>
+            <h3 className="font-semibold"><span className="inline-block">
+                <Image
+                src="/assets/icons/usa.png" // Replace with your image path
+                alt="isa logo"
+                width={10}
+                height={10}
+                className=" pb-0.5 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"></Image></span> United States</h3>
             <p>Please contact us directly for details.</p>
           </div>
           <div>
-            <h3 className="font-semibold">United Kingdom</h3>
+            <h3 className="font-semibold"><span className="inline-block">
+                <Image
+                src="/assets/icons/united-kingdom.png" // Replace with your image path
+                alt="isa logo"
+                width={10}
+                height={10}
+                className="pb-0.5 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"></Image></span> United Kingdom 
+              </h3>
             <p>Name on the account: Ope Osibemekun <br />
                 Sort code: 30-65-85 <br />
             Account number: 44706068</p>
           </div>
           <div>
-            <h3 className="font-semibold">Nigeria</h3>
+            <h3 className="font-semibold"><span className="inline-block">
+                <Image
+                src="/assets/icons/nigeria.png" // Replace with your image path
+                alt="isa logo"
+                width={10}
+                height={10}
+                className="pb-0.4 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"></Image></span> Nigeria</h3>
             <p>Please contact us directly for details.</p>
           </div>
         </div>

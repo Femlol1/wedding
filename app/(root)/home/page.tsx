@@ -11,12 +11,12 @@ import Events from "../events/page";
 const HomePage: React.FC = () => {
   const [showDressCode, setShowDressCode] = useState(false);
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen  md:mt-20">
       <div className="flex flex-col md:flex-row flex-grow">
         {/* Image Section */}
         <section className="relative w-full md:w-1/2 h-64 md:h-auto">
           <Image
-            src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
+            src="/assets/images/WelcomePage/welcomeHeader.jpg" // Replace with your image path
             alt="Welcome Image"
             fill
             style={{ objectFit: 'cover' }}

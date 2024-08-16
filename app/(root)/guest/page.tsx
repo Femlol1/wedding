@@ -1,5 +1,6 @@
 // pages/guests.js
-import CommentsSection from '@/components/shared/CommentsSection';
+import CommentForm from '@/components/shared/CommentForm';
+import CommentsList from '@/components/shared/CommentsList';
 import GuestBook from '@/components/shared/GuestBook';
 import { Button } from '@/components/ui/button';
 import Image from "next/image";
@@ -9,7 +10,7 @@ import { FiChevronRight } from 'react-icons/fi';
 
 export default function Guests() {
     return (
-        <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen">
       <div className="flex flex-col md:flex-row flex-grow">
         {/* Image Section */}
         <section className="relative w-full md:w-1/2 h-64 md:h-auto">
@@ -27,8 +28,10 @@ export default function Guests() {
           </div>
         </section>
         <div className="container mx-auto px-4 py-8">
+            <CommentsList/>
             <GuestBook />
-            <CommentsSection />
+            <CommentForm />
+            {/* <CommentsSection /> */}
             <section className="fixed bottom-4 right-4 z-20">
                 <Link href="/travel">
                 <Button className="w-12 h-12 text-white btn-fill font-bold py-2 px-3 rounded-full transition duration-200 flex items-center justify-center shadow-lg">
