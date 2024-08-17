@@ -130,11 +130,11 @@ export async function POST(req: NextRequest) {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
-        {
-          filename: 'weddingLogo.png',
-          path: 'public/assets/images/WeddingEmail/weddingLogo.jpeg', // Replace with actual path to your logo image for online
-          cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
-        },
+        // {
+        //   filename: 'weddingLogo.png',
+        //   path: 'public/assets/images/WeddingEmail/weddingLogo.jpeg', // Replace with actual path to your logo image for online
+        //   cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
+        // },
         {
           filename: 'barcode.png',
           content: barcodeBuffer,
