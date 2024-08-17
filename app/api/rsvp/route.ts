@@ -70,17 +70,17 @@ export async function POST(req: NextRequest) {
 
     // Convert pdfBytes (Uint8Array) to Buffer
     const pdfBuffer = Buffer.from(pdfBytes);
-    // <img src="cid:weddingLogo" alt="Wedding Logo" style="max-width: 200px;"/>
+
     // Send confirmation email with PDF attachment
     const mailOptions = {
       from: process.env.OUTLOOK_USER,
       to: data.email,
-      subject: "RSVP Confirmation - Tolu and ope's wedding",
+      subject: 'RSVP Confirmation - ope and Tolu&apos;s wedding',
       html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
           <div style="max-width: 600px; margin: auto; padding: 20px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 10px;">
             <div style="text-align: center; padding: 10px;">
-              
+              <img src="cid:weddingLogo" alt="Wedding Logo" style="max-width: 200px;"/>
             </div>
             
             <h2 style="color: #D4AF37; text-align: center;">Your RSVP is Confirmed!</h2>
@@ -130,11 +130,11 @@ export async function POST(req: NextRequest) {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
-        // {
-        //   filename: 'weddingLogo.png',
-        //   path: 'public/assets/images/WeddingEmail/weddingLogo.jpeg', // Replace with actual path to your logo image for online
-        //   cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
-        // },
+        {
+          filename: 'weddingLogo.png',
+          path: 'public/assets/images/WeddingEmail/weddingLogo.jpeg', // Replace with actual path to your logo image
+          cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
+        },
         {
           filename: 'barcode.png',
           content: barcodeBuffer,
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingCoupleImage.jpg',
-          path: '/assets/hero.jpg', // Replace with actual path to your couple image
+          path: 'public/assets/hero.jpg', // Replace with actual path to your couple image
           cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
         }
       ],
