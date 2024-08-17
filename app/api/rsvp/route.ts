@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
             </div>
             
             <div style="text-align: center; margin-top: 20px;">
-              <img src="cid:barcode" alt="RSVP Code Barcode" style="max-width: 100%; height: auto;" />
+              <img src="cid:barcode" valt="RSVP Code Barcode" style="max-width: 100%; height: auto;" />
             </div>
             
             <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
