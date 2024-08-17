@@ -132,7 +132,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingLogo.png',
-          path: '/assets/images/Wedding-email/wedding-logo.jpeg', // Replace with actual path to your logo image for online
+          path: '/assets/images/WeddingEmail/weddingLogo.jpeg', // Replace with actual path to your logo image for online
           cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
         },
         {
