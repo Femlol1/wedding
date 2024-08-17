@@ -38,9 +38,9 @@ export default function Travel() {
                             />
                             <div className="md:w-2/3">
                                 <h3 className="text-xl font-semibold">Hotel Vintanio</h3>
-                                <p>We have reserved Hotel Vintanio in Lekki for those seeking accommodation at N80,000 per night. Please contact the hotel manager at <span className='text-primary'><a href={`tel:${`+234813508382`}`}>+234(0)813508382</a></span> to book a room at our discounted rate.</p>
-                                <p>More information: <Link href="https://vintanohotel.com/" legacyBehavior><a className="text-primary hover:text-primary-700">Hotel Vintanio Website</a></Link></p>
-                            </div>
+                                <p>We have reserved Hotel Vintanio in Lekki for those seeking accommodation at N80,000 per night. Please contact the hotel manager at <span className='text-primary-500 hover:text-primary-700'><a href={`tel:${`+234813508382`}`}>+234(0)813508382</a></span> to book a room at our discounted rate.</p>
+                                <p>More information: <Link href="https://vintanohotel.com/" legacyBehavior><a className="text-primary-500 hover:text-primary-700">Hotel Vintanio Website</a></Link></p>
+                            </div>\
                         </div>
                         
                         {/* <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
@@ -63,7 +63,7 @@ export default function Travel() {
                         <h2 className="text-2xl font-semibold">Airbnb Options</h2>
                         <p className="mt-2">There are also numerous Airbnb options available around the event locations. Here are links to Airbnb listings recommended for their quality and proximity to our wedding events:</p>
                         <ul className="list-disc list-inside">
-                            <li><Link href="https://www.airbnb.com/s/Lagos--Nigeria/homes" legacyBehavior><a className="text-primary hover:text-primary-700">Airbnbs near Lagos</a></Link></li>
+                            <li><Link href="https://www.airbnb.com/s/Lagos--Nigeria/homes" legacyBehavior><a className="text-primary-500 hover:text-primary-700">Airbnbs near Lagos</a></Link></li>
                         </ul>
                     </section>
 

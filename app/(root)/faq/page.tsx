@@ -29,7 +29,7 @@ export default function FAQ() {
             <section className="mb-6">
                 <h2 className="text-2xl font-semibold">Contact Us</h2>
                 <p>If you need to get in touch, please email us at femi@toluandope.com. We would love to hear from you!</p>
-                <p>If it’s regarding the vendors, please reach out to our wedding planner at Kahi Company (Ehi) - +234 808 091 8070.</p>
+                <p>If it’s regarding the vendors, please reach out to our wedding planner at Kahi Company (Ehi) - <span className='text-primary-500 hover:text-primary-700'><a href={`tel:${`+2348080918070`}`}>+234(0)808 091 8070</a></span> . </p>
             </section>
 
             <section className="mb-6">
@@ -55,13 +55,13 @@ export default function FAQ() {
             <section>
                 <h2 className="text-2xl font-semibold">Travel Information</h2>
                 <Collapsible label="How do I apply for a Nigerian visa?">
-                    <p>To apply for a Nigerian visa, visit <u><Link className='text-primary' href={"https://immigration.gov.ng/"}>the official Nigerian immigration website</Link></u> and follow the application instructions.</p>
+                    <p>To apply for a Nigerian visa, visit the official <Link className='text-primary-500 hover:text-primary-700 underline' href={"https://immigration.gov.ng/"}>Nigerian immigration website</Link> and follow the application instructions.</p>
                 </Collapsible>
                 <Collapsible label="How do I renew my Nigerian Passport?">
-                    <p>To renew your Nigerian passport, visit the official Nigerian immigration website and follow the renewal instructions.</p>
+                    <p>To renew your Nigerian passport, visit the official <Link className='text-primary-500 hover:text-primary-700 underline' href={"https://immigration.gov.ng/"}>Nigerian immigration website</Link> and follow the renewal instructions.</p>
                 </Collapsible>
                 <Collapsible label="How can I get a Nigerian passport for the first time?">
-                    <p>To get a Nigerian passport for the first time, visit the official Nigerian immigration website and follow the application instructions for a new passport.</p>
+                    <p>To get a Nigerian passport for the first time, visit the official <Link className='text-primary-500 hover:text-primary-700 underline' href={"https://immigration.gov.ng/"}>Nigerian immigration website</Link> and follow the application instructions for a new passport.</p>
                 </Collapsible>
                 <Collapsible label="How can I arrange airport pick up?">
                     <p>Please contact our wedding planner to arrange airport pickup. Provide your flight details and arrival time for coordination.</p>

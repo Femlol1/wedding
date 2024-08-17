@@ -117,7 +117,7 @@ export default function OurStory() {
                 </p>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Link className="mt-2 text-primary" href={""}>Read More</Link>
+                    <Link className="mt-2 text-primary-500 hover:text-primary-700" href={""}>Read More</Link>
                   </DialogTrigger>
                   <DialogTitle></DialogTitle>
                   <DialogContent className="max-h-[80vh] overflow-y-auto bg-white">
@@ -146,7 +146,7 @@ export default function OurStory() {
                 </p>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Link className="mt-2 text-primary" href={""}>Read More</Link>
+                    <Link className="mt-2 text-primary-500 hover:text-primary-700" href={""}>Read More</Link>
                   </DialogTrigger>
                   <DialogTitle></DialogTitle>
                   <DialogContent className="max-h-[80vh] overflow-y-auto bg-white">
