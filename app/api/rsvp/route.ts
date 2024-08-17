@@ -73,14 +73,56 @@ export async function POST(req: NextRequest) {
 
     // Send confirmation email with PDF attachment
     const mailOptions = {
-      from: process.env.GMAIL_USER,
+      from: process.env.OUTLOOK_USER,
       to: data.email,
-      subject: 'RSVP Confirmation',
+      subject: "RSVP Confirmation - Tolu and ope's wedding",
       html: `
-        <p>Dear ${data.firstName} ${data.lastName},</p>
-        <p>Thank you for your RSVP!</p>
-        <p>Your RSVP Code is: ${rsvpDocId}</p>
-        <p>Attached is a PDF file with your RSVP code barcode.</p>
+        <div style="font-family: Arial, sans-serif; color: #333;">
+          <div style="max-width: 600px; margin: auto; padding: 20px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 10px;">
+            <div style="text-align: center; padding: 10px;">
+              <img src="cid:weddingLogo" alt="Wedding Logo" style="max-width: 200px;"/>
+            </div>
+            
+            <h2 style="color: #D4AF37; text-align: center;">Your RSVP is Confirmed!</h2>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center;">
+              Dear ${data.firstName} ${data.lastName},
+            </p>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center;">
+              Thank you for RSVPing to our wedding! We are thrilled to celebrate this special day with you.
+            </p>
+            
+            <div style="background-color: #f8f8f8; padding: 15px; border-radius: 5px; margin-top: 20px;">
+              <p style="font-size: 16px; line-height: 1.5; color: #333; text-align: center;">
+                <strong>Your RSVP Code:</strong> ${rsvpDocId}
+              </p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+              <img src="cid:barcode" alt="RSVP Code Barcode" style="max-width: 100%; height: auto;" />
+            </div>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
+              Please keep this code safe as it will be needed for your entry to the event.
+            </p>
+            
+            <div style="text-align: center; margin-top: 20px;">
+              <img src="cid:weddingCoupleImage" alt="Wedding Couple" style="max-width: 100%; height: auto; border-radius: 10px;" />
+            </div>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
+              We look forward to celebrating with you on our special day!
+            </p>
+            
+            <div style="text-align: center; margin-top: 20px;">
+              <p style="font-size: 14px; line-height: 1.5; color: #999;">
+                With love,<br/>
+                Tolu and Ope
+              </p>
+            </div>
+          </div>
+        </div>
       `,
       attachments: [
         {
@@ -88,17 +130,40 @@ export async function POST(req: NextRequest) {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
+        {
+          filename: 'weddingLogo.png',
+          path: 'public/assets/images/Wedding-email/wedding-logo.jpeg', // Replace with actual path to your logo image
+          cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
+        },
+        {
+          filename: 'barcode.png',
+          content: barcodeBuffer,
+          cid: 'barcode' // This is referenced in the HTML above with <img src="cid:barcode" />
+        },
+        {
+          filename: 'weddingCoupleImage.jpg',
+          path: 'public/assets/hero.jpg', // Replace with actual path to your couple image
+          cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
+        }
       ],
     };
-
+    
+    // const transporter = nodemailer.createTransport({
+    //   service: 'gmail',
+    //   auth: {
+    //     user: process.env.GMAIL_USER,
+    //     pass: process.env.GMAIL_PASS, // Use the app password here
+    //   },
+    // });
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.office365.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS, // Use the app password here
+        user: process.env.OUTLOOK_USER, // Your Outlook email address
+        pass: process.env.OUTLOOK_PASS, // Your Outlook email password or app password
       },
     });
-
     await transporter.sendMail(mailOptions);
 
     // Update Excel file in Firebase Storage
