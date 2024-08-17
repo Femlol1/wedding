@@ -5,8 +5,10 @@ import { Workbook } from 'exceljs';
 import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import path from 'path';
 import { PDFDocument, rgb } from 'pdf-lib';
 import { Readable } from 'stream';
+
 
 const EXCEL_FILE_NAME = 'rsvps.xlsx';
 
@@ -132,7 +134,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingLogo.png',
-          path: 'public/assets/images/WeddingEmail/weddingLogo.jpeg', // Replace with actual path to your logo image
+          path: path.resolve('public/assets/images/WeddingEmail/weddingLogo.jpeg'), // Replace with actual path to your logo image
           cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
         },
         {
@@ -142,7 +144,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingCoupleImage.jpg',
-          path: 'public/assets/hero.jpg', // Replace with actual path to your couple image
+          path: path.resolve('public/assets/hero.jpg'), // Replace with actual path to your couple image
           cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
         }
       ],
