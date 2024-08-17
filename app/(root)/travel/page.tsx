@@ -38,7 +38,7 @@ export default function Travel() {
                             />
                             <div className="md:w-2/3">
                                 <h3 className="text-xl font-semibold">Hotel Vintanio</h3>
-                                <p>We have reserved Hotel Vintanio in Lekki for those seeking accommodation at N80,000 per night. Please contact the hotel manager at <span className='text-primary'>+234(0)813508382</span> to book a room at our discounted rate.</p>
+                                <p>We have reserved Hotel Vintanio in Lekki for those seeking accommodation at N80,000 per night. Please contact the hotel manager at <span className='text-primary'><a href={`tel:${+234813508382}`}>+234(0)813508382</a></span> to book a room at our discounted rate.</p>
                                 <p>More information: <Link href="https://vintanohotel.com/" legacyBehavior><a className="text-primary hover:text-primary-700">Hotel Vintanio Website</a></Link></p>
                             </div>
                         </div>
