@@ -167,7 +167,7 @@ export async function POST(req: NextRequest) {
     await transporter.sendMail(mailOptions);
 
     // Update Excel file in Firebase Storage
-    await updateExcel({ ...rsvpData, docId: rsvpDocId });
+    // await updateExcel({ ...rsvpData, docId: rsvpDocId });
 
     return NextResponse.json({ result: 'success', message: 'RSVP received and confirmation email sent.' }, { status: 200 });
   } catch (error) {
