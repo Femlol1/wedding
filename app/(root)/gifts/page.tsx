@@ -54,8 +54,8 @@ const Gifts = () => {
                 className="pb-0.5 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"></Image></span> United Kingdom 
               </h3>
             <p>Name on the account: Ope Osibemekun <br />
-                Sort code: 30-65-85 <br />
-            Account number: 44706068</p>
+                Sort code: 60-84-07 <br />
+            Account number: 81453566</p>
           </div>
           <div>
             <h3 className="font-semibold"><span className="inline-block">
@@ -70,7 +70,7 @@ const Gifts = () => {
         </div>
 
         <h2 className="mt-8 text-2xl font-semibold">PayPal</h2>
-        <p className="mt-4">For convenience, you can also use Stripe or PayPal. Links will be provided directly to registered guests.</p>
+        <p className="mt-4">For convenience, you can also use <Link className="text-primary underline " href={"https://www.paypal.me/OpeOsibemekun"}>PayPal</Link> .</p>
       </div>
       <section className="fixed bottom-4 right-4 z-20">
         <Link href="/guest">

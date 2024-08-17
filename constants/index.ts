@@ -70,7 +70,7 @@ export const events = [
     location: "Foursquare Gospel Church, Lekki",
     icon: "/assets/icons/church.png",//church icon
     heading:" ",
-    description: "Opeoluwa Osibemekun and Toluwanimi Oyediran will be joyfully united in holy matrimony. The ceremony will feature a heartfelt wedding message, congregational hymns, and special prayers, marking the beginning of their blessed union. ",
+    description: "Opeoluwa Osibemekun and Toluwanimi Oyediran will be joyfully united in holy matrimony, with a wedding message, hymns, and special prayers marking the beginning of their blessed union. ",
     gmap: "https://maps.app.goo.gl/ecTwa2JodZuKdjsc6"
   },
   {
@@ -79,7 +79,7 @@ export const events = [
     location: "The Monarch Event Centre",
     icon: "/assets/icons/dance.png",//
     heading:" ",
-    description: "The wedding reception will be held at Monarch Event Centre in Lagos, where family and friends will gather to celebrate the newlyweds with joyful festivities, delicious cuisine, and memorable moments in a beautifully decorated setting. ",
+    description: "Family and friends will gather to celebrate the newlyweds with joyful festivities, delicious cuisine, and memorable moments in a beautifully decorated setting. ",
     gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
   },
   {
@@ -88,7 +88,7 @@ export const events = [
     location: "The Monarch Event Centre",
     icon: "/assets/icons/disco-light.png",//
     heading:" ",
-    description: "After the reception, the celebration will continue with an exciting after-party, where friends can enjoy music, dancing, and more intimate moments with the newlyweds, extending the joy of the day late into the night. ",
+    description: "The celebration will continue where friends can enjoy music, dancing, and more intimate moments with the newlyweds, extending the joy of the day late into the night. ",
     gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
   }
 ];
