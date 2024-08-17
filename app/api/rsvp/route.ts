@@ -132,7 +132,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingLogo.png',
-          path: 'public/assets/images/Wedding-email/wedding-logo.jpeg', // Replace with actual path to your logo image
+          path: '/assets/images/Wedding-email/wedding-logo.jpeg', // Replace with actual path to your logo image for online
           cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
         },
         {
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingCoupleImage.jpg',
-          path: 'public/assets/hero.jpg', // Replace with actual path to your couple image
+          path: '/assets/hero.jpg', // Replace with actual path to your couple image
           cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
         }
       ],
