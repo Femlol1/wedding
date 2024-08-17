@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
 
     // Convert pdfBytes (Uint8Array) to Buffer
     const pdfBuffer = Buffer.from(pdfBytes);
-
+    // <img src="cid:weddingLogo" alt="Wedding Logo" style="max-width: 200px;"/>
     // Send confirmation email with PDF attachment
     const mailOptions = {
       from: process.env.OUTLOOK_USER,
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
         <div style="font-family: Arial, sans-serif; color: #333;">
           <div style="max-width: 600px; margin: auto; padding: 20px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 10px;">
             <div style="text-align: center; padding: 10px;">
-              <img src="cid:weddingLogo" alt="Wedding Logo" style="max-width: 200px;"/>
+              
             </div>
             
             <h2 style="color: #D4AF37; text-align: center;">Your RSVP is Confirmed!</h2>
