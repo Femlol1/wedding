@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     const mailOptions = {
       from: process.env.OUTLOOK_USER,
       to: data.email,
-      subject: 'RSVP Confirmation - ope and Tolu&apos;s wedding',
+      subject: 'RSVP Confirmation - Tolu & Ope',
       html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
           <div style="max-width: 600px; margin: auto; padding: 20px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 10px;">
