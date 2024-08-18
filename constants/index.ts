@@ -38,6 +38,11 @@ export const userLinks = [
     label: 'FAQ',
     route: '/faq',
   },
+  {
+    label: 'Admin',
+    route: '/admin',
+  },
+
   // {
   //   label: 'Gallery',
   //   route: '/gallery',
@@ -50,16 +55,16 @@ export const userLinks = [
 
 export const adminLinks = [
   {
-    label: 'Dashboard',
-    route: '/dashboard',
+    label: 'Home',
+    route: '/',
   },
   {
-    label: 'Rsvps',
-    route: '/allRsvps',
+    label: 'Admin Panel',
+    route: '/admin',
   },
   {
     label: 'Scannner',
-    route: '/scanner',
+    route: '/check-in',
   },
  
 ];

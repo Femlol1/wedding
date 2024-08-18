@@ -1,6 +1,6 @@
 'use client';
 
-import { userLinks } from "@/constants";
+import { adminLinks, userLinks } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC } from 'react';
@@ -11,9 +11,16 @@ interface NavItemsProps {
 
 const NavItems: FC<NavItemsProps> = ({ handleClose }) => {
     const pathname = usePathname();
+
+    // Determine if the current path is for admin or check-in
+    const isAdminPath = pathname.startsWith('/admin') || pathname.startsWith('/check-in');
+
+    // Choose the appropriate links based on the current path
+    const links = isAdminPath ? adminLinks : userLinks;
+
     return (
         <ul className="md:flex-between flex w-full flex-full flex-col items-start gap-5 md:flex-row">
-            {userLinks.map((link) => {
+            {links.map((link) => {
                 const isActive = pathname === link.route;
 
                 return (
