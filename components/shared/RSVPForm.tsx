@@ -8,8 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { rsvpFormSchema } from "@/constants";
+import { db } from '@/lib/firebase';
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -51,6 +53,7 @@ export function RSVPForm() {
         });
         return () => subscription.unsubscribe();
     }, [form]);
+
     useEffect(() => {
         const subscription = form.watch((value, { name }) => {
             if (name === "asoEbi") {
@@ -60,17 +63,36 @@ export function RSVPForm() {
         return () => subscription.unsubscribe();
     }, [form]);
 
+    const checkEmailExists = async (email: string): Promise<boolean> => {
+        const q = query(collection(db, "rsvps"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
+        return !querySnapshot.empty;
+    };
+
     const onSubmit = async (values: z.infer<typeof rsvpFormSchema>) => {
         toast({
             variant: "default",
             title: "Thank You for sending Your RSVP.",
             description: "Just a sec! We are saving your details.",
         });
+
         try {
+            // Check if email already exists
+            const emailExists = await checkEmailExists(values.email);
+            if (emailExists) {
+                toast({
+                    variant: "default",
+                    title: "Duplicate Email",
+                    description: "This email has already been used to RSVP. Please use a different email.",
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                });
+                return;
+            }
+
             const response = await axios.post('/api/rsvp', values);
             if (response.data.result === 'error') {
                 toast({
-                    variant: "destructive",
+                    variant: "default",
                     description: response.data.message,
                     action: <ToastAction altText="Try again">Try again</ToastAction>,
                 });
@@ -81,19 +103,18 @@ export function RSVPForm() {
                     description: "Your RSVP has been sent",
                 });
                 form.reset(); // Reset the form after a successful submission
-                // router.push("/story");
             }
         } catch (error: any) { // Cast error to any
             if (error.response?.status === 400) {
                 toast({
-                    variant: "destructive",
+                    variant: "default",
                     title: "Invalid Code",
                     description: "The RSVP code you entered is invalid. Please check your code and try again.",
                     action: <ToastAction altText="Try again">Try again</ToastAction>,
                 });
             } else {
                 toast({
-                    variant: "destructive",
+                    variant: "default",
                     title: "Uh oh! Something went wrong.",
                     description: "Sorry! There is some issue with the server.",
                     action: <ToastAction altText="Try again">Try again</ToastAction>,

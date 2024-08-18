@@ -1,18 +1,26 @@
 "use client";
+import { useMediaStream } from '@/components/shared/useMediaStream';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 const QrScanner = dynamic(() => import('react-qr-scanner'), { ssr: false });
+interface CustomMediaTrackConstraints extends MediaTrackConstraints {
+    video: {
+      facingMode: 'user' | 'environment';
+    };
+  }
 
 const CheckInPage = () => {
   const [guestId, setGuestId] = useState('');
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false); // State for modal visibility
-  const [constraints, setConstraints] = useState({
+  const [constraints, setConstraints] = useState<CustomMediaTrackConstraints>({
     video: { facingMode: 'environment' }, // Start with environment (back) camera
   });
+
+  const { stream, error } = useMediaStream(constraints);
 
   const handleCheckIn = async (id: string) => {
     if (!id) return;
@@ -94,7 +102,7 @@ const CheckInPage = () => {
           onError={handleError}
           onScan={handleScan}
           style={previewStyle}
-          constraints={constraints} // Use the dynamic constraints state
+          constraints={constraints} // Use the custom constraints state
         />
       </div>
 

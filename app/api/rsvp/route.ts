@@ -16,6 +16,8 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     const { code } = data;
 
+    
+
     // Find the user type based on the provided code
     let userType: UserType | null = null;
     for (const type in validCodes) {

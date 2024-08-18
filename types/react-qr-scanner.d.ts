@@ -1,3 +1,4 @@
+//@types/react-qr-scanner.d.ts
 declare module 'react-qr-scanner' {
     import { Component } from 'react';
   
