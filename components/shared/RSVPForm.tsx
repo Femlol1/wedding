@@ -16,14 +16,17 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ToastAction } from "../ui/toast";
-import { Toaster } from "../ui/toaster";
+import Modal from "./Modal";
+
 
 export function RSVPForm() {
     const { toast } = useToast();
     const router = useRouter();
     const [showOtherStaying, setShowOtherStaying] = useState(false);
     const [showTypeAsoebi, setShowTypeAsoebi] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof rsvpFormSchema>>({
         resolver: zodResolver(rsvpFormSchema),
@@ -69,59 +72,95 @@ export function RSVPForm() {
         return !querySnapshot.empty;
     };
 
+    // const onSubmit = async (values: z.infer<typeof rsvpFormSchema>) => {
+    //     toast({
+    //         variant: "default",
+    //         title: "Thank You for sending Your RSVP.",
+    //         description: "Just a sec! We are saving your details.",
+    //     });
+
+    //     try {
+    //         // Check if email already exists
+    //         const emailExists = await checkEmailExists(values.email);
+    //         if (emailExists) {
+    //             toast({
+    //                 variant: "default",
+    //                 title: "Duplicate Email",
+    //                 description: "This email has already been used to RSVP. Please use a different email.",
+    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
+    //             });
+    //             return;
+    //         }
+
+    //         const response = await axios.post('/api/rsvp', values);
+    //         if (response.data.result === 'error') {
+    //             toast({
+    //                 variant: "default",
+    //                 description: response.data.message,
+    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
+    //             });
+    //         } else {
+    //             toast({
+    //                 variant: "default",
+    //                 title: "Thank You for sending Your RSVP.",
+    //                 description: "Your RSVP has been sent",
+    //             });
+    //             form.reset(); // Reset the form after a successful submission
+    //         }
+    //     } catch (error: any) { // Cast error to any
+    //         if (error.response?.status === 400) {
+    //             toast({
+    //                 variant: "default",
+    //                 title: "Invalid Code",
+    //                 description: "The RSVP code you entered is invalid. Please check your code and try again.",
+    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
+    //             });
+    //         } else {
+    //             toast({
+    //                 variant: "default",
+    //                 title: "Uh oh! Something went wrong.",
+    //                 description: "Sorry! There is some issue with the server.",
+    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
+    //             });
+    //         }
+    //     }
+    // };
     const onSubmit = async (values: z.infer<typeof rsvpFormSchema>) => {
-        toast({
-            variant: "default",
-            title: "Thank You for sending Your RSVP.",
-            description: "Just a sec! We are saving your details.",
-        });
+        setIsLoading(true);
+        setShowModal(true);
 
         try {
             // Check if email already exists
             const emailExists = await checkEmailExists(values.email);
             if (emailExists) {
-                toast({
-                    variant: "default",
-                    title: "Duplicate Email",
-                    description: "This email has already been used to RSVP. Please use a different email.",
-                    action: <ToastAction altText="Try again">Try again</ToastAction>,
-                });
+                setModalMessage("This email has already been used to RSVP. Please use a different email.");
+                setIsLoading(false);
                 return;
             }
 
             const response = await axios.post('/api/rsvp', values);
             if (response.data.result === 'error') {
-                toast({
-                    variant: "default",
-                    description: response.data.message,
-                    action: <ToastAction altText="Try again">Try again</ToastAction>,
-                });
+                setModalMessage(response.data.message);
             } else {
-                toast({
-                    variant: "default",
-                    title: "Thank You for sending Your RSVP.",
-                    description: "Your RSVP has been sent",
-                });
+                setModalMessage("Your RSVP has been sent successfully.");
                 form.reset(); // Reset the form after a successful submission
             }
         } catch (error: any) { // Cast error to any
             if (error.response?.status === 400) {
-                toast({
-                    variant: "default",
-                    title: "Invalid Code",
-                    description: "The RSVP code you entered is invalid. Please check your code and try again.",
-                    action: <ToastAction altText="Try again">Try again</ToastAction>,
-                });
+                setModalMessage("The RSVP code you entered is invalid. Please check your code and try again.");
             } else {
-                toast({
-                    variant: "default",
-                    title: "Uh oh! Something went wrong.",
-                    description: "Sorry! There is some issue with the server.",
-                    action: <ToastAction altText="Try again">Try again</ToastAction>,
-                });
+                setModalMessage("Sorry! There was an issue with the server. Please try again later.");
             }
+        } finally {
+            setIsLoading(false);
         }
     };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setModalMessage('');
+    };
+
 
     const isFormValid = form.formState.isValid;
 
@@ -433,16 +472,23 @@ export function RSVPForm() {
                             </FormItem>
                         )}
                     /> */}
-                    <Toaster />
+                    {/* <Toaster /> */}
                     <Button
                         className="text-white btn-fill font-bold py-2 px-4 rounded-full transition duration-200 align-middle"
                         type="submit"
-                        disabled={!isFormValid}
+                        disabled={!isFormValid || isLoading}
                     >
                         Submit RSVP
                     </Button>
                 </form>
             </Form>
+            <Modal
+                show={showModal}
+                onClose={closeModal}
+                title={isLoading ? "Sending RSVP..." : "RSVP Submission"}
+                message={modalMessage}
+                isLoading={isLoading}
+            />
         </div>
     );
 }

@@ -40,16 +40,23 @@ export function middleware(req: NextRequest) {
                   border-radius: 5px;
                   cursor: pointer;
                   font-size: 16px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
               }
               button:hover {
                   background-color: #005bb5;
               }
+              .icon {
+                  font-size: 24px;
+              }
           </style>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       </head>
       <body>
-          <h1>Sorry, you don't have access to this page.</h1>
+          <h1><i class="fas fa-exclamation-triangle icon"></i> Sorry, you don't have access to this page.</h1>
           <p>Please use the button below to go back to the home page.</p>
-          <button onclick="window.location.href='/'">Back to Home Page</button>
+          <button onclick="window.location.href='/'"><i class="fas fa-home"></i> Back to Home Page</button>
       </body>
       </html>
       `,
@@ -104,16 +111,23 @@ export function middleware(req: NextRequest) {
                   border-radius: 5px;
                   cursor: pointer;
                   font-size: 16px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
               }
               button:hover {
                   background-color: #005bb5;
               }
+              .icon {
+                  font-size: 24px;
+              }
           </style>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       </head>
       <body>
-          <h1>Sorry, you don't have access to this page.</h1>
+          <h1><i class="fas fa-exclamation-triangle icon"></i> Sorry, you don't have access to this page.</h1>
           <p>Please use the button below to go back to the home page.</p>
-          <button onclick="window.location.href='/'">Back to Home Page</button>
+          <button onclick="window.location.href='/'"><i class="fas fa-home"></i> Back to Home Page</button>
       </body>
       </html>
       `,

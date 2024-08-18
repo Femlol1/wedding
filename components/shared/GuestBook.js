@@ -16,6 +16,7 @@ export default function GuestBook() {
 					src={qrCodeUrl}
 					alt="QR Code"
 					className="mx-auto"
+					priority
 					width={300}
 					height={300}
 				/>
