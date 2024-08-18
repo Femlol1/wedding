@@ -1,14 +1,13 @@
 import { UserType, validCodes } from '@/constants/codes';
 import { db, storage } from '@/lib/firebaseAdmin';
-import bwipjs from 'bwip-js';
 import { Workbook } from 'exceljs';
 import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import path from 'path';
 import { PDFDocument, rgb } from 'pdf-lib';
+import qrcode from 'qrcode';
 import { Readable } from 'stream';
-
 
 const EXCEL_FILE_NAME = 'rsvps.xlsx';
 
@@ -38,20 +37,13 @@ export async function POST(req: NextRequest) {
     const rsvpDocRef = await db.collection('rsvps').add(rsvpData);
     const rsvpDocId = rsvpDocRef.id;
 
-    // Generate barcode for the document ID
-    const barcodeBuffer = await bwipjs.toBuffer({
-      bcid: 'code128',       // Barcode type
-      text: rsvpDocId,       // Text to encode
-      scale: 3,              // 3x scaling factor
-      height: 10,            // Bar height, in millimeters
-      includetext: true,     // Show human-readable text
-      textxalign: 'center',  // Always good to set this
-    });
+    // Generate QR code for the document ID
+    const qrCodeBuffer = await qrcode.toBuffer(rsvpDocId);
 
-    // Generate a PDF with the barcode
+    // Generate a PDF with the QR code
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([300, 150]);
-    const pngImage = await pdfDoc.embedPng(barcodeBuffer);
+    const pngImage = await pdfDoc.embedPng(qrCodeBuffer);
     const { width, height } = pngImage.scale(1);
 
     page.drawImage(pngImage, {
@@ -73,7 +65,7 @@ export async function POST(req: NextRequest) {
     // Convert pdfBytes (Uint8Array) to Buffer
     const pdfBuffer = Buffer.from(pdfBytes);
 
-    // Send confirmation email with PDF attachment
+    // Send confirmation email with PDF attachment and QR code
     const mailOptions = {
       from: process.env.OUTLOOK_USER,
       to: data.email,
@@ -102,7 +94,7 @@ export async function POST(req: NextRequest) {
             </div>
             
             <div style="text-align: center; margin-top: 20px;">
-              <img src="cid:barcode" valt="RSVP Code Barcode" style="max-width: 100%; height: auto;" />
+              <img src="cid:qrCode" alt="RSVP Code QR" style="max-width: 100%; height: auto;" />
             </div>
             
             <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
@@ -138,9 +130,9 @@ export async function POST(req: NextRequest) {
           cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
         },
         {
-          filename: 'barcode.png',
-          content: barcodeBuffer,
-          cid: 'barcode' // This is referenced in the HTML above with <img src="cid:barcode" />
+          filename: 'qrCode.png',
+          content: qrCodeBuffer,
+          cid: 'qrCode' // This is referenced in the HTML above with <img src="cid:qrCode" />
         },
         {
           filename: 'weddingCoupleImage.jpg',
@@ -150,13 +142,6 @@ export async function POST(req: NextRequest) {
       ],
     };
     
-    // const transporter = nodemailer.createTransport({
-    //   service: 'gmail',
-    //   auth: {
-    //     user: process.env.GMAIL_USER,
-    //     pass: process.env.GMAIL_PASS, // Use the app password here
-    //   },
-    // });
     const transporter = nodemailer.createTransport({
       host: 'smtp.office365.com',
       port: 587,

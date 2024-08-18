@@ -49,6 +49,11 @@ const CheckInPage = () => {
     console.error('QR scan error:', err);
   };
 
+  const previewStyle = {
+    height: 240,
+    width: 320,
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 mt-20 text-center">
       <h1 className="text-3xl font-bold mb-6">Guest Check-In</h1>
@@ -73,7 +78,10 @@ const CheckInPage = () => {
           delay={300}
           onError={handleError}
           onScan={handleScan}
-          style={{ width: '100%' }}
+          style={previewStyle}
+          constraints={{
+            facingMode: "environment", // This requests the back camera
+          }}
         />
       </div>
 
