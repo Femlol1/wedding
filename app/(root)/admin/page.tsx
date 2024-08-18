@@ -134,68 +134,69 @@ const AdminPage = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="px-4 py-2 text-left">Guest Type</th>
-              <th className="px-4 py-2 text-left">Relations</th>
-              <th className="px-4 py-2 text-left">First Name</th>
-              <th className="px-4 py-2 text-left">Last Name</th>
-              <th className="px-4 py-2 text-left">Email</th>
-              <th className="px-4 py-2 text-left">Mobile</th>
-              <th className="px-4 py-2 text-left">Staying Place</th>
-              <th className="px-4 py-2 text-left">Allergies</th>
-              <th className="px-4 py-2 text-left">Asoebi</th>
-              <th className="px-4 py-2 text-left">Church</th>
-              <th className="px-4 py-2 text-left">Reception</th>
-              <th className="px-4 py-2 text-left">After Party</th>
-              <th className="px-4 py-2 text-left">Checked In</th>
-              <th className="px-4 py-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredRsvps.map((rsvp) => (
-              <tr key={rsvp.id} className="border-b">
-                <td className="px-4 py-2">{rsvp.userType}</td>
-                <td className="px-4 py-2">{rsvp.relations}</td>
-                <td className="px-4 py-2">{rsvp.firstName}</td>
-                <td className="px-4 py-2">{rsvp.lastName}</td>
-                <td className="px-4 py-2">{rsvp.email}</td>
-                <td className="px-4 py-2">{rsvp.mobile}</td>
-                <td className="px-4 py-2">{rsvp.stayingPlace}, Other: {rsvp.otherStaying}</td>
-                <td className="px-4 py-2">{rsvp.allergies}</td>
-                <td className="px-4 py-2">{rsvp.asoEbi} + {rsvp.asoebiType}</td>
-                <td className="px-4 py-2">{rsvp.church ? 'Yes' : 'No'}</td>
-                <td className="px-4 py-2">{rsvp.reception ? 'Yes' : 'No'}</td>
-                <td className="px-4 py-2">{rsvp.afterParty ? 'Yes' : 'No'}</td>
-                <td className="px-4 py-2">{rsvp.checkedIn ? 'Yes' : 'No'}</td>
-                <td className="px-4 py-2 flex justify-center gap-2">
-                  {!rsvp.checkedIn ? (
-                    <button
-                      className="bg-green-500 text-white px-4 py-2 rounded"
-                      onClick={() => handleCheckIn(rsvp.id)}
-                    >
-                      Check In
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-yellow-500 text-white px-4 py-2 rounded"
-                      onClick={() => handleCheckOut(rsvp.id)}
-                    >
-                      Check Out
-                    </button>
-                  )}
-                  <button
-                    className="bg-red-500 text-white px-4 py-2 rounded"
-                    onClick={() => handleDelete(rsvp.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <table className="min-w-full table-auto">
+  <thead>
+    <tr className="bg-gray-100">
+      <th className="px-4 py-2 text-left userType">Guest Type</th>
+      <th className="px-4 py-2 text-left firstName">First Name</th>
+      <th className="px-4 py-2 text-left lastName">Last Name</th>
+      <th className="px-4 py-2 text-left email">Email</th>
+      <th className="px-4 py-2 text-left mobile">Mobile</th>
+      <th className="px-4 py-2 text-left stayingPlace">Staying Place</th>
+      <th className="px-4 py-2 text-left allergies">Allergies</th>
+      <th className="px-4 py-2 text-left asoEbi">Asoebi</th>
+      <th className="px-4 py-2 text-left church">Church</th>
+      <th className="px-4 py-2 text-left reception">Reception</th>
+      <th className="px-4 py-2 text-left afterParty">After Party</th>
+      <th className="px-4 py-2 text-left checkedIn">Checked In</th>
+      <th className="px-4 py-2 text-left actions">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredRsvps.map((rsvp) => (
+      <tr key={rsvp.id} className="border-b">
+        <td className="px-4 py-2 userType">{rsvp.userType}</td>
+        <td className="px-4 py-2 firstName">{rsvp.firstName}</td>
+        <td className="px-4 py-2 lastName">{rsvp.lastName}</td>
+        <td className="px-4 py-2 email">{rsvp.email}</td>
+        <td className="px-4 py-2 mobile">{rsvp.mobile}</td>
+        <td className="px-4 py-2 stayingPlace">
+          {rsvp.stayingPlace}, Other: {rsvp.otherStaying}
+        </td>
+        <td className="px-4 py-2 allergies">{rsvp.allergies}</td>
+        <td className="px-4 py-2 asoEbi">{rsvp.asoEbi} + {rsvp.asoebiType}</td>
+        <td className="px-4 py-2 church">{rsvp.church ? 'Yes' : 'No'}</td>
+        <td className="px-4 py-2 reception">{rsvp.reception ? 'Yes' : 'No'}</td>
+        <td className="px-4 py-2 afterParty">{rsvp.afterParty ? 'Yes' : 'No'}</td>
+        <td className="px-4 py-2 checkedIn">{rsvp.checkedIn ? 'Yes' : 'No'}</td>
+        <td className="px-4 py-2 flex justify-center gap-2 actions">
+          {!rsvp.checkedIn ? (
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded"
+              onClick={() => handleCheckIn(rsvp.id)}
+            >
+              Check In
+            </button>
+          ) : (
+            <button
+              className="bg-yellow-500 text-white px-4 py-2 rounded"
+              onClick={() => handleCheckOut(rsvp.id)}
+            >
+              Check Out
+            </button>
+          )}
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded"
+            onClick={() => handleDelete(rsvp.id)}
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
       </div>
 
       <div className="mt-8 text-center">

@@ -297,3 +297,57 @@ footer span.fa-heart {
 		animation-duration: 30s; /* Slow down the scroll on smaller screens */
 	}
 }
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+}
+
+.modal-enter {
+	animation: fadeIn 0.3s forwards;
+}
+
+.modal-exit {
+	animation: fadeOut 0.3s forwards;
+}
+@media (max-width: 640px) {
+	/* Hide unnecessary columns */
+	.email,
+	.mobile,
+	.stayingPlace,
+	.allergies,
+	.asoEbi,
+	.church,
+	.reception,
+	.afterParty,
+	.checkedIn {
+		display: none;
+	}
+
+	/* Reorder the important columns */
+	.userType {
+		order: 1;
+	}
+	.firstName {
+		order: 2;
+	}
+	.actions {
+		order: 3;
+	}
+}
