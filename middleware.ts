@@ -3,35 +3,133 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
-  
-  // Check if the Authorization header is present
+
+  // If the Authorization header is not present, prompt for login
   if (!authHeader) {
-    return new Response('Authorization Required', {
-      status: 401,
-      headers: {
-        'WWW-Authenticate': 'Basic realm="Secure Area"',
-      },
-    });
+    return new Response(
+      `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Access Denied</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100vh;
+                  background-color: #f9f9f9;
+                  margin: 0;
+                  padding: 0;
+              }
+              h1 {
+                  color: #333;
+              }
+              p {
+                  margin-bottom: 20px;
+              }
+              button {
+                  background-color: #0070f3;
+                  color: white;
+                  padding: 10px 20px;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+                  font-size: 16px;
+              }
+              button:hover {
+                  background-color: #005bb5;
+              }
+          </style>
+      </head>
+      <body>
+          <h1>Sorry, you don't have access to this page.</h1>
+          <p>Please use the button below to go back to the home page.</p>
+          <button onclick="window.location.href='/'">Back to Home Page</button>
+      </body>
+      </html>
+      `,
+      {
+        status: 401,
+        headers: {
+          'Content-Type': 'text/html',
+          'WWW-Authenticate': 'Basic realm="Secure Area"',
+        },
+      }
+    );
   }
 
   // Decode the authorization header
   const auth = authHeader.split(' ')[1];
   const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':');
 
-  // Check the password
-  if (pwd !== '14725') {
-    return new Response('Unauthorized', {
-      status: 403,
-      headers: {
-        'WWW-Authenticate': 'Basic realm="Secure Area"',
-      },
-    });
+  // Check if username is 'wedding' and password is '14725'
+  if (user !== 'wedding' || pwd !== '14725') {
+    // Redirect to the custom "Access Denied" page if credentials are incorrect
+    return new Response(
+      `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Access Denied</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100vh;
+                  background-color: #f9f9f9;
+                  margin: 0;
+                  padding: 0;
+              }
+              h1 {
+                  color: #333;
+              }
+              p {
+                  margin-bottom: 20px;
+              }
+              button {
+                  background-color: #0070f3;
+                  color: white;
+                  padding: 10px 20px;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+                  font-size: 16px;
+              }
+              button:hover {
+                  background-color: #005bb5;
+              }
+          </style>
+      </head>
+      <body>
+          <h1>Sorry, you don't have access to this page.</h1>
+          <p>Please use the button below to go back to the home page.</p>
+          <button onclick="window.location.href='/'">Back to Home Page</button>
+      </body>
+      </html>
+      `,
+      {
+        status: 403,
+        headers: {
+          'Content-Type': 'text/html',
+        },
+      }
+    );
   }
 
+  // If authorization is successful, continue to the requested page
   return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/admin/:path*', '/check-in/:path*'], // Protect admin and check-in routes
-  };
-  
+  matcher: ['/admin/:path*', '/check-in/:path*'], // Protect only admin and check-in routes
+};
