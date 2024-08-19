@@ -362,7 +362,7 @@ export function RSVPForm() {
                         name="church"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Will you attend the church ceremony?</FormLabel>
+                                <FormLabel>Will you be attending the church ceremony?</FormLabel>
                                 <FormControl>
                                     <RadioGroup
                                         onValueChange={field.onChange}
@@ -392,7 +392,7 @@ export function RSVPForm() {
                         name="reception"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Will you attend the reception?</FormLabel>
+                                <FormLabel>Will you be attending the reception?</FormLabel>
                                 <FormControl>
                                     <RadioGroup
                                         onValueChange={field.onChange}
@@ -422,7 +422,7 @@ export function RSVPForm() {
                         name="afterParty"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Will you attend the after party?</FormLabel>
+                                <FormLabel>Will you be attending the after party?</FormLabel>
                                 <FormControl>
                                     <RadioGroup
                                         onValueChange={field.onChange}

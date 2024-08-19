@@ -6,10 +6,9 @@ import { FiChevronRight } from 'react-icons/fi';
 
 export default function Travel() {
     return (
-        <div className="flex flex-col min-h-screen md:mt-20">
-            <div className="flex flex-col md:flex-row flex-grow">
-                {/* Image Section */}
-                <section className="relative w-full md:w-1/2 h-64 md:h-auto">
+        <div className="flex flex-col md:flex-col md:mt-20">
+        {/* Image Section */}
+        <section className="relative w-full h-64 ">
                     <Image
                         src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
                         alt="Welcome Image"
@@ -134,6 +133,5 @@ export default function Travel() {
                     </section>
                 </div>
             </div>
-        </div>
     );
 }

@@ -19,8 +19,8 @@ const MobileNav = () => {
                     {/* Inline SVG for menu icon */}
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
-                        width="24" 
-                        height="24" 
+                        width="30" 
+                        height="30" 
                         fill="currentColor" 
                         className="text-primary cursor-pointer"
                         viewBox="0 0 16 16"
@@ -30,7 +30,7 @@ const MobileNav = () => {
                 </SheetTrigger>
                 <SheetContent className="flex flex-col gap-2 bg-gray md:hidden bg-white w-auto">
                     <Image 
-                        src={"/assets/images/logo.png"}
+                        src={"/assets/images/WeddingEmail/weddingLogo.jpeg"}
                         alt="logo"
                         width={70}
                         height={38}
