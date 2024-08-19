@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Tolu and ope's wedding ",
   description: "A wonderful day for awesome people",
   icons : {
-    icon : '/assets/images/Wedding-email/wedding-logo.jpeg'
+    icon : '/assets/logo.png'
   }
 };
 
