@@ -33,26 +33,30 @@ export default function OurStory() {
                 alt="Ope"
                 width={150}
                 height={150}
-                className="mx-auto transition-transform duration-300 transform hover:scale-110"
+                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110 rounded-full"
               />
               </div>
         <h2 className="text-2xl font-semibold text-gray-700">By Ope</h2>
         <p>
-          We first met in November 2022 at a TLC Vibe, a Christian youth group. I had no idea who he was when his friend introduced us. I thought he was cute, but I didn’t think much of it at the time.
-          Six months later, on my birthday, Sunday, May 8th, after church service in Canary Wharf, he tapped my shoulder and said, “I think I know you.” I didn’t remember him, but I was trying to place his face.
-          🤔 As we talked, I realized we both worked in tech. I definitely hadn’t seen him in service, so it must have been at the youth group. I asked for his Instagram to stay connected since we were in the same industry. Once I got his Instagram, something clicked.
-          💡 I remembered seeing this profile add me a few months ago, but I ignored it because I didn’t know who it was. It dawned on me that he had already added me on social media when we first met, but I didn’t realize it was him. 😲
+        We first met in November 2022 at a TLC Vibe Christian youth group. I didn’t recognize him at the time, though I thought he was cute. Six months later, on my birthday, May 8th, after church in Canary Wharf, he tapped my shoulder and said, “I think I know you.” I didn’t remember him, but as we talked, I realized we both worked in tech. I asked for his Instagram to stay connected, and it clicked—I had ignored his profile request months earlier. 😲
         </p>
         <p>
-          Fast forward, I post book reviews on social media, and he kept asking me about the books I was reading. 📚 It was kind of cute; I thought he was also interested in reading and looking for his next book. Little did I know, he was making excuses to talk to me. 🥰 He kept popping up and commenting on everything I posted online, including our “non-alcoholic gin” joke. 😂 Eventually, he asked me out.
-          I said No! Haha. I wasn’t a big fan of dating, so I wanted us to know each other more before considering going on a date. We decided to have a phone call and ended up speaking for hours about our faith, family, friends, and career ambitions. We had so many similar values and came from similar backgrounds. We kept talking for months, and it was pretty fun getting to know each other. 😄
+        He started commenting on my book reviews online, which I thought was cute and showed interest in reading. 🥰 He kept finding reasons to talk to me and eventually asked me out. I said no initially, as I wanted to get to know him better first. We had long phone conversations about our values and ambitions, discovering many similarities. 😄
         </p>
         <p>
-          After about two months of talking, I invited him to a friend’s BBQ party to check him out. We had fun that evening, really good vibes. 🎉 I think at that point, I knew he was the one I wanted as my husband. 💖 He then asked me on a date, and I said yes. We had never had sushi before, so we went to a nice place to try it together and practiced using chopsticks. 🍣 I liked his spirit of trying new things and not being embarrassed to learn.
+        After two months, I invited him to a friend’s BBQ, and we had great vibes. 🎉 I knew he could be the one. He then asked me on a date, and I said yes. We went for sushi, and I admired his eagerness to try new things. 🍣
         </p>
         <p>
-          I remember one time he invited me to his house to cook for me on a date; he lives in flat 29. Coincidentally, I was buying my first flat, and it was also flat 29! 😱 We kept dating and started praying to God for confirmation. We thank God we got just that. 🙏
+        On another date, he cooked for me at his flat—number 29. Coincidentally, I was buying my first flat, also number 29! 😱 We continued dating, prayed for confirmation, and realised that the period I began praying for my husband in 2021 was the same time he left Nigeria for London. We’re grateful for the confirmation we received. 🙏
         </p>
+        <br/>
+        <Image
+                src="/assets/images/OurStoryPage/OpeStoryBottom.jpg" // Replace with your image path
+                alt="ope buttom picture"
+                width={450}
+                height={450}
+                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
+              />
       </div>
     ),
     Tolu: (
@@ -63,7 +67,7 @@ export default function OurStory() {
                 alt="Tolu"
                 width={150}
                 height={150}
-                className="mx-auto transition-transform duration-300 transform hover:scale-110"
+                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110 rounded-full"
               />
               </div>
         <h2 className="text-2xl font-semibold text-gray-700">By Tolu</h2>
@@ -73,6 +77,14 @@ export default function OurStory() {
         <p>
           Following a couple of confirmations from God, we started dating and have been growing stronger ever since.
         </p>
+        <br/>
+        <Image
+                src="/assets/images/OurStoryPage/ToluStoryButtom.jpg" // Replace with your image path
+                alt="tolu buttom picture"
+                width={450}
+                height={450}
+                className="border-4 border-primary flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
+              />
       </div>
     ),
   };
@@ -82,12 +94,13 @@ export default function OurStory() {
         {/* Image Section */}
         <section className="relative w-full h-64 ">
           <Image
-            src="/assets/images/OurStoryPage/ourStoryHeader.jpg" // Replace with your image path
+            src="/assets/images/OurStoryPage/2S6A1507.jpg" // Replace with your image path
             alt="Welcome Image"
             fill
             style={{ objectFit: 'cover' }}
             priority={true} // {false} | {true}
             quality={100}
+    
             className="z-0"
           />
           <div className="absolute inset-0 bg-black opacity-50 z-10"></div>

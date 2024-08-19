@@ -18,7 +18,7 @@ const Gallery = () => {
 
 	useEffect(() => {
 		const fetchImages = async () => {
-			const res = await fetch("/api/gallery");
+			const res = await fetch("/api/images");
 			const images = await res.json();
 			setImages(images);
 		};

@@ -15,7 +15,7 @@ const WelcomePage: React.FC = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const res = await fetch('/api/images');
+      const res = await fetch('/api/gallery');
       const images = await res.json();
       setGalleryImages(images);
       if (images.length > 0) {

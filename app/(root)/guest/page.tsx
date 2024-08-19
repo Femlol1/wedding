@@ -15,7 +15,7 @@ export default function Guests() {
         {/* Image Section */}
         <section className="relative w-full h-64 ">
           <Image
-            src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
+            src="/assets/images/Guest/GuestHeader.jpg" // Replace with your image path
             alt="Welcome Image"
             fill
             style={{ objectFit: 'cover' }}
@@ -29,6 +29,7 @@ export default function Guests() {
         </section>
         <div className="container mx-auto px-4 py-8">
             <CommentsList/>
+            <div className='mt-10'/>
             <GuestBook />
             <CommentForm />
             {/* <CommentsSection /> */}

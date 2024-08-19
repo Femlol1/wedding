@@ -254,8 +254,7 @@ export function RSVPForm() {
                                         </SelectTrigger>
                                         <SelectContent className="bg-white">
                                             <SelectItem value="At home with family">At home with family</SelectItem>
-                                            <SelectItem value="Hotel on the Island">Hotel on the Island</SelectItem>
-                                            <SelectItem value="Hotel on the Mainland">Hotel on the Mainland</SelectItem>
+                                            <SelectItem value="Recommended Hotel Vintanio">Recommended Hotel Vintanio</SelectItem>
                                             <SelectItem value="Other">Other</SelectItem>
                                         </SelectContent>
                                     </Select>

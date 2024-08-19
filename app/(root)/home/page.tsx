@@ -11,10 +11,9 @@ import Events from "../events/page";
 const HomePage: React.FC = () => {
   const [showDressCode, setShowDressCode] = useState(false);
   return (
-    <div className="flex flex-col min-h-screen  md:mt-20">
-      <div className="flex flex-col md:flex-row flex-grow">
+    <div className="flex flex-col md:flex-col md:mt-20">
         {/* Image Section */}
-        <section className="relative w-full md:w-1/2 h-64 md:h-auto">
+        <section className="relative w-full h-64 ">
           <Image
             src="/assets/images/WelcomePage/welcomeHeader.jpg" // Replace with your image path
             alt="Welcome Image"
@@ -29,7 +28,7 @@ const HomePage: React.FC = () => {
           </div>
         </section>
         {/* Text Section */}
-        <section className="flex flex-col items-center justify-center py-10 px-5 bg-white w-full md:w-1/2">
+        <section className="flex flex-col items-center justify-center py-10 px-5 bg-white w-full ">
           <h2 className="text-xl font-semibold mb-4 text-center">Welcome to Our Wedding Website</h2>
           <p className="text-center mb-8">
             Family + Friends,
@@ -64,7 +63,6 @@ const HomePage: React.FC = () => {
             <DressCodeModal onClose={() => setShowDressCode(false)} />
           )}
         </section>
-      </div>
       <section className="flex flex-col items-center justify-center py-10 px-5 bg-white w-full">
         <h2 className="text-3xl font-semibold mb-4">Events</h2>
         <Events />

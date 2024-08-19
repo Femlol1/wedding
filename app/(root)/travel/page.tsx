@@ -10,7 +10,7 @@ export default function Travel() {
         {/* Image Section */}
         <section className="relative w-full h-64 ">
                     <Image
-                        src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
+                        src="/assets/images/Travel/Lagos.jpg" // Replace with your image path
                         alt="Welcome Image"
                         fill
                         style={{ objectFit: 'cover' }}
@@ -29,7 +29,7 @@ export default function Travel() {
                         
                         <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
                             <Image
-                                src="/assets/images/Travel/Reception.webp" // Replace with the actual image path
+                                src="/assets/images/Travel/1709116341696.jpeg" // Replace with the actual image path
                                 alt="Hotel Vintanio"
                                 width={300}
                                 height={200}
@@ -49,80 +49,102 @@ export default function Travel() {
                     </section>
                     
                     <section>
-                        <h2 className="text-2xl font-semibold mt-6">Things to do in Lagos</h2>
-                        <p className="mt-2">Lagos is a vibrant city with plenty to offer. Whether you are interested in cultural sites, shopping, or outdoor activities, there&apos;s something for everyone. Below are some recommendations:</p>
-                        <ul className="mt-4 list-disc list-inside space-y-2">
-                            <li>
-                                <Link className='text-primary-500 hover:text-primary-700 underline' href="https://www.tripadvisor.co.uk/Attractions-g304026-Activities-Lagos_Lagos_State.html" target="_blank">
-                                    Explore Top Attractions on TripAdvisor
-                                </Link> – Get a list of the best things to do in Lagos, from cultural sites to beaches.
-                            </li>
-                            <li>
-                                <Link className='text-primary-500 hover:text-primary-700 underline' href="https://www.viator.com/Nigeria/d22316-ttd" target="_blank">
-                                    Explore Tours and Activities on Viator
-                                </Link> – Discover exciting tours, activities, and attractions in Lagos and beyond.
-                            </li>
-                            <li>
-                                <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                                    <Image
-                                        src="/assets/images/Travel/lekki-market.jpg" // Replace with the actual image path
-                                        alt="Lekki Market"
-                                        width={300}
-                                        height={200}
-                                        className="rounded-lg w-full md:w-1/3 object-cover"
-                                    />
-                                    <p className="text-gray-700">
-                                        Enjoy the bustling markets like Lekki Market or Balogun Market where you can buy local crafts and souvenirs.
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                                    <Image
-                                        src="/assets/images/Travel/nike-art-gallery.jpg" // Replace with the actual image path
-                                        alt="Nike Art Gallery"
-                                        width={300}
-                                        height={200}
-                                        className="rounded-lg w-full md:w-1/3 object-cover"
-                                    />
-                                    <p className="text-gray-700">
-                                        Visit the Nike Art Gallery, one of the largest art galleries in West Africa, showcasing the best of Nigerian art.
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                                    <Image
-                                        src="/assets/images/Travel/Tarkwa-Bay-Beach.jpg" // Replace with the actual image path
-                                        alt="Tarkwa Bay Beach"
-                                        width={300}
-                                        height={200}
-                                        className="rounded-lg w-full md:w-1/3 object-cover"
-                                    />
-                                    <p className="text-gray-700">
-                                        Spend a day at Tarkwa Bay Beach, an ideal spot for relaxation and water sports.
-                                    </p>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                                    <Image
-                                        src="/assets/images/Travel/Lagos-National-Museum.jpeg" // Replace with the actual image path
-                                        alt="Lagos National Museum"
-                                        width={300}
-                                        height={200}
-                                        className="rounded-lg w-full md:w-1/3 object-cover"
-                                    />
-                                    <p className="text-gray-700">
-                                        Discover the history of Lagos at the National Museum, where you can learn about Nigeria’s rich cultural heritage.
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-                        <p className="mt-4 text-gray-700">
-                            For more personalized recommendations and assistance with bookings, feel free to reach out to our wedding planner at <span className='text-primary-500 hover:text-primary-700'><a href={`tel:${`+234813508382`}`}>+234(0)813508382</a></span>.
-                        </p>
+                    <h2 className="text-2xl font-semibold mt-6">Things to do in Lagos</h2>
+                    <p className="mt-2">
+                        Lagos is a vibrant city with plenty to offer. Whether you are interested in
+                        cultural sites, shopping, or outdoor activities, there&apos;s something for
+                        everyone. Below are some recommendations: <Link
+                            className="text-primary-500 hover:text-primary-700 underline"
+                            href="https://www.tripadvisor.co.uk/Attractions-g304026-Activities-Lagos_Lagos_State.html"
+                            target="_blank"
+                        >
+                            Explore Top Attractions on TripAdvisor
+                        </Link>{"   ,  "}
+                        <Link
+                            className="text-primary-500 hover:text-primary-700 underline"
+                            href="https://www.viator.com/Nigeria/d22316-ttd"
+                            target="_blank"
+                        >
+                            Explore Tours and Activities on Viator
+                        </Link>
+                    </p>
+                    <ul className="mt-4 list-disc list-inside space-y-2 flex-row">
+                        <li>
+                        
+                        </li>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                        <li>
+                            <div className="flex flex-col items-center gap-4">
+                            <Image
+                                src="/assets/images/Travel/lekki-market.jpg"
+                                alt="Lekki Market"
+                                width={300}
+                                height={200}
+                                className="rounded-lg w-full object-cover"
+                            />
+                            <p className="text-gray-700 text-center">
+                                Enjoy the bustling markets like Lekki Market or Balogun Market where
+                                you can buy local crafts and souvenirs.
+                            </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="flex flex-col items-center gap-4">
+                            <Image
+                                src="/assets/images/Travel/nike-art-gallery.jpg"
+                                alt="Nike Art Gallery"
+                                width={300}
+                                height={200}
+                                className="rounded-lg w-full object-cover"
+                            />
+                            <p className="text-gray-700 text-center">
+                                Visit the Nike Art Gallery, one of the largest art galleries in West
+                                Africa, showcasing the best of Nigerian art.
+                            </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="flex flex-col items-center gap-4">
+                            <Image
+                                src="/assets/images/Travel/Tarkwa-Bay-Beach.jpg"
+                                alt="Tarkwa Bay Beach"
+                                width={300}
+                                height={200}
+                                className="rounded-lg w-full object-cover"
+                            />
+                            <p className="text-gray-700 text-center">
+                                Spend a day at Tarkwa Bay Beach, an ideal spot for relaxation and
+                                water sports.
+                            </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="flex flex-col items-center gap-4">
+                            <Image
+                                src="/assets/images/Travel/Lagos-National-Museum.jpeg"
+                                alt="Lagos National Museum"
+                                width={300}
+                                height={200}
+                                className="rounded-lg w-full object-cover"
+                            />
+                            <p className="text-gray-700 text-center">
+                                Discover the history of Lagos at the National Museum, where you can
+                                learn about Nigeria’s rich cultural heritage.
+                            </p>
+                            </div>
+                        </li>
+                        </div>
+                    </ul>
+                    <p className="mt-4 text-gray-700">
+                        For more personalized recommendations and assistance with bookings, feel
+                        free to reach out to our wedding planner at{" "}
+                        <span className="text-primary-500 hover:text-primary-700">
+                        <a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
+                        </span>
+                        .
+                    </p>
                     </section>
+
 
                     <section className="fixed bottom-4 right-4 z-20">
                         <Link href="/faq">

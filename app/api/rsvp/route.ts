@@ -1,13 +1,11 @@
 import { UserType, validCodes } from '@/constants/codes';
-import { db, storage } from '@/lib/firebaseAdmin';
-import { Workbook } from 'exceljs';
+import { db } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import path from 'path';
 import { PDFDocument, rgb } from 'pdf-lib';
 import qrcode from 'qrcode';
-import { Readable } from 'stream';
 
 const EXCEL_FILE_NAME = 'rsvps.xlsx';
 
@@ -67,6 +65,30 @@ export async function POST(req: NextRequest) {
     // Convert pdfBytes (Uint8Array) to Buffer
     const pdfBuffer = Buffer.from(pdfBytes);
 
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Your Company//Your Product//EN
+BEGIN:VEVENT
+UID:${rsvpDocId}
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:20250322T100000Z
+DTEND:20250322T180000Z
+SUMMARY:Tolu & Ope's Wedding
+DESCRIPTION:Join us to celebrate our special day!
+LOCATION:Lagos, Nigeria
+BEGIN:VALARM
+TRIGGER:-PT15M
+REPEAT:1
+DURATION:PT15M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+const icsBuffer = Buffer.from(icsContent);
+
+
     // Send confirmation email with PDF attachment and QR code
     const mailOptions = {
       from: process.env.OUTLOOK_USER,
@@ -95,6 +117,10 @@ export async function POST(req: NextRequest) {
               </p>
             </div>
             
+            <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
+              The wedding is scheduled for <strong>22nd March 2025</strong>. Please save the date!
+            </p>
+            
             <div style="text-align: center; margin-top: 20px;">
               <img src="cid:qrCode" alt="RSVP Code QR" style="max-width: 100%; height: auto;" />
             </div>
@@ -102,6 +128,12 @@ export async function POST(req: NextRequest) {
             <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
               Please keep this code safe as it will be needed for your entry to the event.
             </p>
+    
+            <div style="text-align: center; margin-top: 20px;">
+              <a href="cid:addToCalendar" download="Tolu_Ope_Wedding.ics" style="display: inline-block; background-color: #D4AF37; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                Add to Calendar
+              </a>
+            </div>
             
             <div style="text-align: center; margin-top: 20px;">
               <img src="cid:weddingCoupleImage" alt="Wedding Couple" style="max-width: 100%; height: auto; border-radius: 10px;" />
@@ -128,7 +160,7 @@ export async function POST(req: NextRequest) {
         },
         {
           filename: 'weddingLogo.png',
-          path: path.resolve('public/assets/images/WeddingEmail/weddingLogo.jpeg'), // Replace with actual path to your logo image
+          path: path.resolve('public/assets/logo.png'), // Replace with actual path to your logo image
           cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
         },
         {
@@ -140,9 +172,16 @@ export async function POST(req: NextRequest) {
           filename: 'weddingCoupleImage.jpg',
           path: path.resolve('public/assets/hero.jpg'), // Replace with actual path to your couple image
           cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
+        },
+        {
+          filename: 'Tolu_Ope_Wedding.ics',
+          content: icsBuffer,
+          contentType: 'text/calendar',
+          cid: 'addToCalendar'
         }
       ],
     };
+    
     
     const transporter = nodemailer.createTransport({
       host: 'smtp.office365.com',
@@ -155,8 +194,6 @@ export async function POST(req: NextRequest) {
     });
     await transporter.sendMail(mailOptions);
 
-    // Update Excel file in Firebase Storage
-    // await updateExcel({ ...rsvpData, docId: rsvpDocId });
 
     return NextResponse.json({ result: 'success', message: 'RSVP received and confirmation email sent.' }, { status: 200 });
   } catch (error) {
@@ -165,68 +202,3 @@ export async function POST(req: NextRequest) {
   }
 }
 
-const updateExcel = async (newData: any) => {
-  try {
-    const bucket = storage.bucket(process.env.FIREBASE_STORAGE_BUCKET);
-    const file = bucket.file(EXCEL_FILE_NAME);
-    const rows: any[] = [];
-
-    const exists = await file.exists();
-    let workbook = new Workbook();
-
-    let sheet;
-    if (exists[0]) {
-      // File exists, download and parse the existing Excel file
-      const [fileContents] = await file.download();
-      await workbook.xlsx.load(fileContents);
-      sheet = workbook.getWorksheet('RSVPs');
-    } else {
-      // File does not exist, create a new workbook and add headers
-      sheet = workbook.addWorksheet('RSVPs');
-      sheet.columns = [
-        { header: 'Document ID', key: 'docId' },
-        { header: 'First Name', key: 'firstName' },
-        { header: 'Last Name', key: 'lastName' },
-        { header: 'Email', key: 'email' },
-        { header: 'Mobile', key: 'mobile' },
-        { header: 'Staying Place', key: 'stayingPlace' },
-        { header: 'Other Staying', key: 'otherStaying' },
-        { header: 'Allergies', key: 'allergies' },
-        { header: 'AsoEbi', key: 'asoEbi' },
-        { header: 'Relations', key: 'relations' },
-        { header: 'Church', key: 'church' },
-        { header: 'Reception', key: 'reception' },
-        { header: 'After Party', key: 'afterParty' },
-        { header: 'RSVP', key: 'rsvp' },
-        { header: 'User Type', key: 'userType' },
-        { header: 'Timestamp', key: 'timestamp' },
-      ];
-    }
-
-    if (!sheet) {
-      throw new Error('Worksheet could not be created or accessed.');
-    }
-
-    const formattedData = {
-      ...newData,
-      timestamp: newData.timestamp.toDate().toISOString(),
-    };
-    sheet.addRow(formattedData);
-
-    // Convert workbook to buffer and upload to Firebase Storage
-    const buffer = await workbook.xlsx.writeBuffer();
-
-    // Convert buffer to readable stream
-    const bufferStream = new Readable();
-    bufferStream.push(buffer);
-    bufferStream.push(null); // End the stream
-
-    await file.save(bufferStream, {
-      metadata: { contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
-    });
-
-    console.log('Excel file updated successfully');
-  } catch (error) {
-    console.error('Error updating Excel:', error);
-  }
-};
