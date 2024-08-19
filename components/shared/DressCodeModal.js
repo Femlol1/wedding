@@ -9,14 +9,14 @@ function DressCodeModal({ onClose }) {
 					<span className="flex items-center">
 						<span
 							className="inline-block w-4 h-4 mr-2 rounded-full"
-							style={{ backgroundColor: "#7B3F00" }} // Chocolate Brown color code
+							style={{ backgroundColor: "#411900" }} // Chocolate Brown color code
 						></span>
 						<p>CHOCOLATE BROWN</p> (Bride)
 					</span>
 					<span className="flex items-center">
 						<span
 							className="inline-block w-4 h-4 mr-2 rounded-full"
-							style={{ backgroundColor: "#50C878" }} // Emerald Green color code
+							style={{ backgroundColor: "#00674F" }} // Emerald Green color code
 						></span>
 						<p> EMERALD GREEN</p> (Groom)
 					</span>
