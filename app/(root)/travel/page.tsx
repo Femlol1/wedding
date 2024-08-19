@@ -83,7 +83,7 @@ export default function Travel() {
                                 className="rounded-lg w-full object-cover"
                             />
                             <p className="text-gray-700 text-center">
-                                Enjoy the bustling markets like Lekki Market or Balogun Market where
+                                Enjoy the bustling markets like <strong>Lekki Market or Balogun Market</strong> where
                                 you can buy local crafts and souvenirs.
                             </p>
                             </div>
@@ -98,7 +98,7 @@ export default function Travel() {
                                 className="rounded-lg w-full object-cover"
                             />
                             <p className="text-gray-700 text-center">
-                                Visit the Nike Art Gallery, one of the largest art galleries in West
+                                Visit the <strong>Nike Art Gallery</strong>, one of the largest art galleries in West
                                 Africa, showcasing the best of Nigerian art.
                             </p>
                             </div>
@@ -113,7 +113,7 @@ export default function Travel() {
                                 className="rounded-lg w-full object-cover"
                             />
                             <p className="text-gray-700 text-center">
-                                Spend a day at Tarkwa Bay Beach, an ideal spot for relaxation and
+                                Spend a day at <strong>Tarkwa Bay Beach</strong>, an ideal spot for relaxation and
                                 water sports.
                             </p>
                             </div>
@@ -128,7 +128,7 @@ export default function Travel() {
                                 className="rounded-lg w-full object-cover"
                             />
                             <p className="text-gray-700 text-center">
-                                Discover the history of Lagos at the National Museum, where you can
+                                Discover the history of Lagos at the <strong>National Museum</strong>, where you can
                                 learn about Nigeria’s rich cultural heritage.
                             </p>
                             </div>

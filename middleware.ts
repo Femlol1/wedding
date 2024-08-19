@@ -145,5 +145,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/check-in/:path*',  '/stats/:path*'], // Protect only admin and check-in routes
+  matcher: ['/admin/:path*', '/check-in/:path*',  '/stats/:path*','/comments/:path*'], // Protect only admin and check-in routes
 };

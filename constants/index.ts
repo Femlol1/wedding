@@ -63,6 +63,10 @@ export const adminLinks = [
     route: '/admin',
   },
   {
+    label: 'Comments',
+    route: '/comments',
+  },
+  {
     label: 'Scannner',
     route: '/check-in',
   },

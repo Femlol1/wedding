@@ -1,5 +1,6 @@
 "use client";
 // pages/admin/page.tsx
+import ModalAdmin from '@/components/shared/ModalAdmin'; // Import the ModalAdmin component
 import { db } from '@/lib/firebase'; // Adjust the import according to your setup
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,8 @@ const AdminPage = () => {
   const [userTypeFilter, setUserTypeFilter] = useState(''); // State for single user type filter
   const [stayingPlaceFilter, setStayingPlaceFilter] = useState(''); // State for staying place filter
   const [asoEbiFilter, setAsoEbiFilter] = useState(''); // State for Asoebi filter
+  const [showModalAdmin, setShowModalAdmin] = useState(false); // State for showing the ModalAdmin
+  const [selectedRsvp, setSelectedRsvp] = useState<string | null>(null); // State to store the selected RSVP ID
 
   useEffect(() => {
     const fetchRSVPs = async () => {
@@ -45,16 +48,26 @@ const AdminPage = () => {
     );
   };
 
-  const handleDelete = async (id: string) => {
-    // Confirm before deleting
-    const confirmed = window.confirm("Do you really want to delete this RSVP? This action cannot be undone.");
-    if (confirmed) {
-      const rsvpDocRef = doc(db, 'rsvps', id);  // Correctly reference the document by ID
+  const handleDelete = async () => {
+    if (selectedRsvp) {
+      const rsvpDocRef = doc(db, 'rsvps', selectedRsvp);  // Correctly reference the document by ID
       await deleteDoc(rsvpDocRef);
       setRsvps(prev =>
-        prev.filter(rsvp => rsvp.id !== id)
+        prev.filter(rsvp => rsvp.id !== selectedRsvp)
       );
+      setSelectedRsvp(null);
+      setShowModalAdmin(false); // Close the ModalAdmin after deletion
     }
+  };
+
+  const confirmDelete = (id: string) => {
+    setSelectedRsvp(id); // Set the selected RSVP ID
+    setShowModalAdmin(true); // Show the ModalAdmin
+  };
+
+  const closeModalAdmin = () => {
+    setShowModalAdmin(false);
+    setSelectedRsvp(null);
   };
 
   // Filtered and searched RSVP data
@@ -138,69 +151,68 @@ const AdminPage = () => {
       </div>
 
       <div className="overflow-x-auto">
-      <table className="min-w-full table-auto">
-  <thead>
-    <tr className="bg-gray-100">
-      <th className="px-4 py-2 text-left userType">Guest Type</th>
-      <th className="px-4 py-2 text-left firstName">First Name</th>
-      <th className="px-4 py-2 text-left lastName">Last Name</th>
-      <th className="px-4 py-2 text-left email">Email</th>
-      <th className="px-4 py-2 text-left mobile">Mobile</th>
-      <th className="px-4 py-2 text-left stayingPlace">Staying Place</th>
-      <th className="px-4 py-2 text-left allergies">Allergies</th>
-      <th className="px-4 py-2 text-left asoEbi">Asoebi</th>
-      <th className="px-4 py-2 text-left church">Church</th>
-      <th className="px-4 py-2 text-left reception">Reception</th>
-      <th className="px-4 py-2 text-left afterParty">After Party</th>
-      <th className="px-4 py-2 text-left checkedIn">Checked In</th>
-      <th className="px-4 py-2 text-left actions">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {filteredRsvps.map((rsvp) => (
-      <tr key={rsvp.id} className="border-b">
-        <td className="px-4 py-2 userType">{rsvp.userType}</td>
-        <td className="px-4 py-2 firstName">{rsvp.firstName}</td>
-        <td className="px-4 py-2 lastName">{rsvp.lastName}</td>
-        <td className="px-4 py-2 email">{rsvp.email}</td>
-        <td className="px-4 py-2 mobile">{rsvp.mobile}</td>
-        <td className="px-4 py-2 stayingPlace">
-          {rsvp.stayingPlace}, Other: {rsvp.otherStaying}
-        </td>
-        <td className="px-4 py-2 allergies">{rsvp.allergies}</td>
-        <td className="px-4 py-2 asoEbi">{rsvp.asoEbi} + {rsvp.asoebiType}</td>
-        <td className="px-4 py-2 church">{rsvp.church ? 'Yes' : 'No'}</td>
-        <td className="px-4 py-2 reception">{rsvp.reception ? 'Yes' : 'No'}</td>
-        <td className="px-4 py-2 afterParty">{rsvp.afterParty ? 'Yes' : 'No'}</td>
-        <td className="px-4 py-2 checkedIn">{rsvp.checkedIn ? 'Yes' : 'No'}</td>
-        <td className="px-4 py-2 flex justify-center gap-2 actions">
-          {!rsvp.checkedIn ? (
-            <button
-              className="bg-green-500 text-white px-4 py-2 rounded"
-              onClick={() => handleCheckIn(rsvp.id)}
-            >
-              Check In
-            </button>
-          ) : (
-            <button
-              className="bg-yellow-500 text-white px-4 py-2 rounded"
-              onClick={() => handleCheckOut(rsvp.id)}
-            >
-              Check Out
-            </button>
-          )}
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded"
-            onClick={() => handleDelete(rsvp.id)}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2 text-left userType">Guest Type</th>
+              <th className="px-4 py-2 text-left firstName">First Name</th>
+              <th className="px-4 py-2 text-left lastName">Last Name</th>
+              <th className="px-4 py-2 text-left email">Email</th>
+              <th className="px-4 py-2 text-left mobile">Mobile</th>
+              <th className="px-4 py-2 text-left stayingPlace">Staying Place</th>
+              <th className="px-4 py-2 text-left allergies">Allergies</th>
+              <th className="px-4 py-2 text-left asoEbi">Asoebi</th>
+              <th className="px-4 py-2 text-left church">Church</th>
+              <th className="px-4 py-2 text-left reception">Reception</th>
+              <th className="px-4 py-2 text-left afterParty">After Party</th>
+              <th className="px-4 py-2 text-left checkedIn">Checked In</th>
+              <th className="px-4 py-2 text-left actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredRsvps.map((rsvp) => (
+              <tr key={rsvp.id} className="border-b">
+                <td className="px-4 py-2 userType">{rsvp.userType}</td>
+                <td className="px-4 py-2 firstName">{rsvp.firstName}</td>
+                <td className="px-4 py-2 lastName">{rsvp.lastName}</td>
+                <td className="px-4 py-2 email">{rsvp.email}</td>
+                <td className="px-4 py-2 mobile">{rsvp.mobile}</td>
+                <td className="px-4 py-2 stayingPlace">
+                  {rsvp.stayingPlace}, Other: {rsvp.otherStaying}
+                </td>
+                <td className="px-4 py-2 allergies">{rsvp.allergies}</td>
+                <td className="px-4 py-2 asoEbi">{rsvp.asoEbi} + {rsvp.asoebiType}</td>
+                <td className="px-4 py-2 church">{rsvp.church ? 'Yes' : 'No'}</td>
+                <td className="px-4 py-2 reception">{rsvp.reception ? 'Yes' : 'No'}</td>
+                <td className="px-4 py-2 afterParty">{rsvp.afterParty ? 'Yes' : 'No'}</td>
+                <td className="px-4 py-2 checkedIn">{rsvp.checkedIn ? 'Yes' : 'No'}</td>
+                <td className="px-4 py-2 flex justify-center gap-2 actions">
+                  {!rsvp.checkedIn ? (
+                    <button
+                      className="bg-green-500 text-white px-4 py-2 rounded"
+                      onClick={() => handleCheckIn(rsvp.id)}
+                    >
+                      Check In
+                    </button>
+                  ) : (
+                    <button
+                      className="bg-yellow-500 text-white px-4 py-2 rounded"
+                      onClick={() => handleCheckOut(rsvp.id)}
+                    >
+                      Check Out
+                    </button>
+                  )}
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded"
+                    onClick={() => confirmDelete(rsvp.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div className="mt-8 text-center">
@@ -212,6 +224,17 @@ const AdminPage = () => {
           Download Filtered CSV
         </CSVLink>
       </div>
+
+      {/* ModalAdmin Component for Confirming Deletion */}
+      <ModalAdmin
+        show={showModalAdmin}
+        title="Confirm Deletion"
+        message="Are you sure you want to delete this RSVP? This action cannot be undone."
+        onClose={closeModalAdmin}
+        onConfirm={handleDelete}
+        confirmText="Delete"
+        closeText="Cancel"
+      />
     </div>
   );
 };
