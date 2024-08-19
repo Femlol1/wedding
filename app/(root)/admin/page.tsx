@@ -46,11 +46,15 @@ const AdminPage = () => {
   };
 
   const handleDelete = async (id: string) => {
-    const rsvpDocRef = doc(db, 'rsvps', id);  // Correctly reference the document by ID
-    await deleteDoc(rsvpDocRef);
-    setRsvps(prev =>
-      prev.filter(rsvp => rsvp.id !== id)
-    );
+    // Confirm before deleting
+    const confirmed = window.confirm("Do you really want to delete this RSVP? This action cannot be undone.");
+    if (confirmed) {
+      const rsvpDocRef = doc(db, 'rsvps', id);  // Correctly reference the document by ID
+      await deleteDoc(rsvpDocRef);
+      setRsvps(prev =>
+        prev.filter(rsvp => rsvp.id !== id)
+      );
+    }
   };
 
   // Filtered and searched RSVP data

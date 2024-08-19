@@ -66,6 +66,10 @@ export const adminLinks = [
     label: 'Scannner',
     route: '/check-in',
   },
+  {
+    label: 'All stats',
+    route: '/stats',
+  },
  
 ];
 export const events = [

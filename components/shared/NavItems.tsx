@@ -13,7 +13,7 @@ const NavItems: FC<NavItemsProps> = ({ handleClose }) => {
     const pathname = usePathname();
 
     // Determine if the current path is for admin or check-in
-    const isAdminPath = pathname.startsWith('/admin') || pathname.startsWith('/check-in');
+    const isAdminPath = pathname.startsWith('/admin') || pathname.startsWith('/check-in') || pathname.startsWith('/stats');
 
     // Choose the appropriate links based on the current path
     const links = isAdminPath ? adminLinks : userLinks;

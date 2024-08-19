@@ -63,7 +63,7 @@ export default function FAQ() {
                     <p>To get a Nigerian passport for the first time, visit the official <Link className='text-primary-500 hover:text-primary-700 underline' href={"https://immigration.gov.ng/"}>Nigerian immigration website</Link> and follow the application instructions for a new passport.</p>
                 </Collapsible>
                 <Collapsible label="How can I arrange airport pick up?">
-                    <p>If you are staying at the recommended hotel Vintanio, you can arrange pickunp through them. If not please contact our wedding planner to arrange airport pickup. Provide your flight details and arrival time for coordination.</p>
+                    <p>If you are staying at the recommended hotel Vintanio, you can arrange pickup through the hotel. If not please contact our wedding planner to arrange airport pickup. Provide your flight details and arrival time for coordination.</p>
                 </Collapsible>
             </section>
             <section className="fixed bottom-4 right-4 z-20">
