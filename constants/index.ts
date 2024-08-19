@@ -38,10 +38,10 @@ export const userLinks = [
     label: 'FAQ',
     route: '/faq',
   },
-  {
-    label: 'Admin',
-    route: '/admin',
-  },
+  // {
+  //   label: 'Admin',
+  //   route: '/admin',
+  // },
 
   // {
   //   label: 'Gallery',
