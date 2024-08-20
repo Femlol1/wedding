@@ -65,38 +65,59 @@ export async function POST(req: NextRequest) {
     // Convert pdfBytes (Uint8Array) to Buffer
     const pdfBuffer = Buffer.from(pdfBytes);
 
-      const icsContent = `BEGIN:VCALENDAR
-      VERSION:2.0
-      PRODID:-//Your Company//Your Product//EN
-      CALSCALE:GREGORIAN
-      METHOD:PUBLISH
-      BEGIN:VEVENT
-      UID:${rsvpDocId}
-      DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
-      DTSTART:20250322T100000Z
-      DTEND:20250322T180000Z
-      SUMMARY:Tolu & Ope's Wedding
-      DESCRIPTION:Join us to celebrate our special day!
-      LOCATION:Lagos, Nigeria
-      STATUS:CONFIRMED
-      SEQUENCE:0
-      BEGIN:VALARM
-      TRIGGER:-P3M
-      ACTION:DISPLAY
-      DESCRIPTION:Reminder: Tolu & Ope's Wedding is in 3 months
-      END:VALARM
-      BEGIN:VALARM
-      TRIGGER:-PT15M
-      REPEAT:1
-      DURATION:PT15M
-      ACTION:DISPLAY
-      DESCRIPTION:Reminder: Tolu & Ope's Wedding starts in 15 minutes
-      END:VALARM
-      END:VEVENT
-      END:VCALENDAR`;
+      // const icsContent = `BEGIN:VCALENDAR
+      // VERSION:2.0
+      // PRODID:-//Your Company//Your Product//EN
+      // CALSCALE:GREGORIAN
+      // METHOD:PUBLISH
+      // BEGIN:VEVENT
+      // UID:${rsvpDocId}
+      // DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+      // DTSTART:20250322T100000Z
+      // DTEND:20250322T180000Z
+      // SUMMARY:Tolu & Ope's Wedding
+      // DESCRIPTION:Join us to celebrate our special day!
+      // LOCATION:Lagos, Nigeria
+      // STATUS:CONFIRMED
+      // SEQUENCE:0
+      // BEGIN:VALARM
+      // TRIGGER:-P3M
+      // ACTION:DISPLAY
+      // DESCRIPTION:Reminder: Tolu & Ope's Wedding is in 3 months
+      // END:VALARM
+      // BEGIN:VALARM
+      // TRIGGER:-PT15M
+      // REPEAT:1
+      // DURATION:PT15M
+      // ACTION:DISPLAY
+      // DESCRIPTION:Reminder: Tolu & Ope's Wedding starts in 15 minutes
+      // END:VALARM
+      // END:VEVENT
+      // END:VCALENDAR`;
       
-      const icsBuffer = Buffer.from(icsContent);
-    
+      // const icsBuffer = Buffer.from(icsContent);
+      const icsContent = `BEGIN:VCALENDAR
+        VERSION:2.0
+        PRODID:-//Your Company//Your Product//EN
+        BEGIN:VEVENT
+        UID:${rsvpDocId}
+        DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+        DTSTART:20250322T100000Z
+        DTEND:20250322T180000Z
+        SUMMARY:Tolu & Ope's Wedding
+        DESCRIPTION:Join us to celebrate our special day!
+        LOCATION:Lagos, Nigeria
+        BEGIN:VALARM
+        TRIGGER:-PT15M
+        REPEAT:1
+        DURATION:PT15M
+        ACTION:DISPLAY
+        DESCRIPTION:Reminder
+        END:VALARM
+        END:VEVENT
+        END:VCALENDAR`;
+
+        const icsBuffer = Buffer.from(icsContent);
 
 
     // Send confirmation email with PDF attachment and QR code
@@ -118,7 +139,7 @@ export async function POST(req: NextRequest) {
             </p>
             
             <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center;">
-              Thank you for RSVPing to our wedding! We are thrilled to celebrate this special day with you.
+              Thank you for your response to our Invitation! We are thrilled to celebrate this special day with you.
             </p>
             
             <div style="background-color: #f8f8f8; padding: 15px; border-radius: 5px; margin-top: 20px;">

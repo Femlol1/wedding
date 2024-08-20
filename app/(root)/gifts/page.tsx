@@ -42,7 +42,10 @@ const Gifts = () => {
                 width={10}
                 height={10}
                 className=" pb-0.5 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"></Image></span> United States</h3>
-            <p>Please contact us directly for details.</p>
+                <p>Bank of America<br />
+            Name on the account: Toluwanimi Oyediran <br />
+            Account number: 446055799865 <br /><br />
+            For Zele: toluoyed26@gmail.com</p>
           </div>
           <div>
             <h3 className="font-semibold"><span className="inline-block">
@@ -71,6 +74,7 @@ const Gifts = () => {
 
         <h2 className="mt-8 text-2xl font-semibold">PayPal</h2>
         <p className="mt-4">For convenience, you can also use <Link className="text-primary underline " href={"https://www.paypal.me/OpeOsibemekun"}>PayPal</Link> .</p>
+        
       </div>
       <section className="fixed bottom-4 right-4 z-20">
         <Link href="/guest">

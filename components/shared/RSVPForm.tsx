@@ -142,7 +142,7 @@ export function RSVPForm() {
             if (response.data.result === 'error') {
                 setModalMessage(response.data.message);
             } else {
-                setModalMessage("Your RSVP has been sent successfully. You should soon receive a confirmation email with your RSVP code.");
+                setModalMessage("Your RSVP has been sent successfully. You should soon receive a confirmation email with your RSVP code. check inbox|junk ");
                 form.reset(); // Reset the form after a successful submission
             }
         } catch (error: any) { // Cast error to any
@@ -421,7 +421,7 @@ export function RSVPForm() {
                         name="afterParty"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Will you be attending the after party?</FormLabel>
+                                <FormLabel>Would you like to attend the after party?</FormLabel>
                                 <FormControl>
                                     <RadioGroup
                                         onValueChange={field.onChange}

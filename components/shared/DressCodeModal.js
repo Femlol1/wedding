@@ -9,21 +9,21 @@ function DressCodeModal({ onClose }) {
 					<span className="flex items-center">
 						<span
 							className="inline-block w-4 h-4 mr-2 rounded-full"
-							style={{ backgroundColor: "#7B3F00" }} // Chocolate Brown color code
+							style={{ backgroundColor: "#411900" }} // Chocolate Brown color code
 						></span>
-						<p>CHOCOLATE BROWN</p> (Bride)
+						<p>CHOCOLATE BROWN </p> + Gold (Bride)
 					</span>
 					<span className="flex items-center">
 						<span
 							className="inline-block w-4 h-4 mr-2 rounded-full"
-							style={{ backgroundColor: "#50C878" }} // Emerald Green color code
+							style={{ backgroundColor: "#00674f" }} // Emerald Green color code
 						></span>
-						<p> EMERALD GREEN</p> (Groom)
+						<p> EMERALD GREEN</p> + Gold (Groom)
 					</span>
 				</p>
 				<p className="mb-2">
 					Please kindly let us know if you are interested in participating in
-					ASO EBI (TRADITIONAL ATTIRE). Information is as follows:
+					ASO EBI (TRADITIONAL ATTIRE).
 				</p>
 
 				<h4 className="text-lg font-bold mt-4 mb-2">What is available:</h4>
@@ -32,7 +32,7 @@ function DressCodeModal({ onClose }) {
 					Ipele
 				</p>
 				<p className="mb-2">
-					<strong>Men:</strong> Complete set Akitu & Cap
+					<strong>Men:</strong> Complete set Atiku & Cap
 				</p>
 				<p className="mb-2">
 					<strong>Women:</strong> Gele & Ipele

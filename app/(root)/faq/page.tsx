@@ -1,11 +1,18 @@
 // pages/faq.js
+"use client"
 import Collapsible from '@/components/shared/Collapsible';
+import DressCodeModal from "@/components/shared/DressCodeModal";
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 
+
+
 export default function FAQ() {
+    const [showDressCode, setShowDressCode] = useState(false);
+
     return (
         <div className="flex flex-col md:flex-col md:mt-20">
         {/* Image Section */}
@@ -48,6 +55,18 @@ export default function FAQ() {
                 </Collapsible>
                 <Collapsible label="How do I get a tailor to sew my clothes?">
                     <p>We have a list of recommended tailors. Please contact our wedding planner for more details.</p>
+                </Collapsible>
+                <Collapsible label="What is the dress code?">
+                    <p>Please see dress code here <Button
+              className="text-white btn-fill font-bold py-6 px-6 rounded-full transition duration-200"
+              onClick={() => setShowDressCode(true)}
+            >
+              Dress Code
+            </Button>
+          
+          {showDressCode && (
+            <DressCodeModal onClose={() => setShowDressCode(false)} />
+          )}</p>
                 </Collapsible>
             </section>
 
