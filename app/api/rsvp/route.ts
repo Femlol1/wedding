@@ -152,6 +152,12 @@ export async function POST(req: NextRequest) {
             <p style="font-size: 16px; line-height: 1.5; color: #666; text-align: center; margin-top: 20px;">
               We look forward to celebrating with you on our special day!
             </p>
+    
+            <div style="text-align: center; margin-top: 20px;">
+              <a href="https://toluandope.com/home" style="display: inline-block; background-color: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                Visit Our Website for More Information
+              </a>
+            </div>
             
             <div style="text-align: center; margin-top: 20px;">
               <p style="font-size: 14px; line-height: 1.5; color: #999;">
@@ -191,6 +197,7 @@ export async function POST(req: NextRequest) {
         }
       ],
     };
+    
     
     
     const transporter = nodemailer.createTransport({
