@@ -32,7 +32,7 @@ function DressCodeModal({ onClose }) {
 					Ipele
 				</p>
 				<p className="mb-2">
-					<strong>Men:</strong> Complete set Ankara & Cap
+					<strong>Men:</strong> Complete set Akitu & Cap
 				</p>
 				<p className="mb-2">
 					<strong>Women:</strong> Gele & Ipele
