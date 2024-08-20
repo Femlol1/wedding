@@ -172,6 +172,20 @@ export default function OurStory() {
               </div>
             </div>
           </div>
+          {/* Proposal Video Section */}
+          <section className="mt-10">
+            <div className="wrapper h3-bold text-center">THE PROPOSAL</div>
+            <div className="flex justify-center mt-4">
+              <video
+                width="800"
+                controls
+                className="border-4 border-primary rounded-lg shadow-lg"
+              >
+                <source src="/assets/videos/PROPOSALREEL1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </section>
 
           <section className="mt-10">
             <div className="wrapper h3-bold text-center">GALLERY</div>

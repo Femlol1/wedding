@@ -96,7 +96,7 @@ export const events = [
     gmap: "https://maps.app.goo.gl/NnAmnLHLcRkqQaDX8"
   },
   {
-    time: "07:00pm",
+    time: "07:00pm - 10:00pm",
     title: "After Party",
     location: "The Monarch Event Centre",
     icon: "/assets/icons/disco-light.png",//

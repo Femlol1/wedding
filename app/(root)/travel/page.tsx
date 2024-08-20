@@ -91,7 +91,7 @@ export default function Travel() {
                         <li>
                             <div className="flex flex-col items-center gap-4">
                             <Image
-                                src="/assets/images/Travel/nike-art-gallery.jpg"
+                                src="/assets/images/Travel/NikeArt.jpg"
                                 alt="Nike Art Gallery"
                                 width={300}
                                 height={200}
