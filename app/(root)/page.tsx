@@ -60,7 +60,7 @@ const WelcomePage: React.FC = () => {
       <section className="flex items-center justify-center flex-grow relative z-10">
         <div className="bg-black bg-opacity-10 p-4 flex flex-col items-center justify-center">
           <h1 className="text-2xl text-center text-white mt-8">Together with their families</h1>
-          <h1 className="text-5xl font-bold text-center text-white">Tolu <span className='text-sm'>and</span> Ope</h1>
+          <h1 className="text-3xl font-bold text-center text-white">Tolu <span className='text-sm'>and</span> Ope</h1>
           <p className="text-center text-white mt-4">Invite you to their wedding <br /> Saturday 22nd March 2025</p>
           <div className="text-center mt-8">
             <Link href="/rsvp">
