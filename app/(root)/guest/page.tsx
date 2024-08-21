@@ -1,7 +1,6 @@
 // pages/guests.js
 import CommentForm from '@/components/shared/CommentForm';
 import CommentsList from '@/components/shared/CommentsList';
-import GuestBook from '@/components/shared/GuestBook';
 import { Button } from '@/components/ui/button';
 import Image from "next/image";
 import Link from 'next/link';
@@ -30,7 +29,7 @@ export default function Guests() {
         <div className="container mx-auto px-4 py-8">
             <CommentsList/>
             <div className='mt-10'/>
-            <GuestBook />
+            {/* <GuestBook /> */}
             <CommentForm />
             {/* <CommentsSection /> */}
             <section className="fixed bottom-4 right-4 z-20">

@@ -142,7 +142,7 @@ export function RSVPForm() {
             if (response.data.result === 'error') {
                 setModalMessage(response.data.message);
             } else {
-                setModalMessage("Your RSVP has been sent successfully. You should soon receive a confirmation email with your RSVP code. check inbox|junk ");
+                setModalMessage("Your RSVP has been sent successfully. You should soon receive a confirmation email with your RSVP code. Check inbox or spam");
                 form.reset(); // Reset the form after a successful submission
             }
         } catch (error: any) { // Cast error to any

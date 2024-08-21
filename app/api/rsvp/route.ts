@@ -96,26 +96,40 @@ export async function POST(req: NextRequest) {
       // END:VCALENDAR`;
       
       // const icsBuffer = Buffer.from(icsContent);
-      const icsContent = `BEGIN:VCALENDAR
-        VERSION:2.0
-        PRODID:-//Your Company//Your Product//EN
-        BEGIN:VEVENT
-        UID:${rsvpDocId}
-        DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
-        DTSTART:20250322T100000Z
-        DTEND:20250322T180000Z
-        SUMMARY:Tolu & Ope's Wedding
-        DESCRIPTION:Join us to celebrate our special day!
-        LOCATION:Lagos, Nigeria
-        BEGIN:VALARM
-        TRIGGER:-PT15M
-        REPEAT:1
-        DURATION:PT15M
-        ACTION:DISPLAY
-        DESCRIPTION:Reminder
-        END:VALARM
-        END:VEVENT
-        END:VCALENDAR`;
+                  const icsContent = `BEGIN:VCALENDAR
+                                      VERSION:2.0
+                                      PRODID:-//ical.marudot.com//iCal Event Maker
+                                      X-WR-CALNAME:Tolu and Ope's wedding
+                                      NAME:Tolu and Ope's wedding
+                                      CALSCALE:GREGORIAN
+                                      BEGIN:VTIMEZONE
+                                      TZID:Africa/Lagos
+                                      LAST-MODIFIED:20231222T233358Z
+                                      TZURL:https://www.tzurl.org/zoneinfo-outlook/Africa/Lagos
+                                      X-LIC-LOCATION:Africa/Lagos
+                                      BEGIN:STANDARD
+                                      TZNAME:WAT
+                                      TZOFFSETFROM:+0100
+                                      TZOFFSETTO:+0100
+                                      DTSTART:19700101T000000
+                                      END:STANDARD
+                                      END:VTIMEZONE
+                                      BEGIN:VEVENT
+                                      DTSTAMP:20240821T133745Z
+                                      UID:${rsvpDocId}            
+                                      DTSTART;TZID=Africa/Lagos:20250322T100000
+                                      DTEND;TZID=Africa/Lagos:20250322T180000
+                                      SUMMARY:Tolu and Ope's wedding
+                                      URL:toluandope.com
+                                      DESCRIPTION:Thank you for your response to our Invitation! We are thrilled to celebrate this special day with you
+                                      LOCATION:Lagos Nigeria
+                                      BEGIN:VALARM
+                                      ACTION:DISPLAY
+                                      DESCRIPTION:Tolu and Ope's wedding
+                                      TRIGGER:-P12W
+                                      END:VALARM
+                                      END:VEVENT
+                                      END:VCALENDAR`;
 
         const icsBuffer = Buffer.from(icsContent);
 
@@ -161,7 +175,7 @@ export async function POST(req: NextRequest) {
             </p>
     
             <div style="text-align: center; margin-top: 20px;">
-              <a href="cid:addToCalendar" download="Tolu_Ope_Wedding.ics" style="display: inline-block; background-color: #D4AF37; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+              <a href="cid:addToCalendar" download="Tolu_Ope_Wedding_Cal.ics" style="display: inline-block; background-color: #D4AF37; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                 Add to Calendar
               </a>
             </div>
@@ -211,7 +225,7 @@ export async function POST(req: NextRequest) {
           cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
         },
         {
-          filename: 'Tolu_Ope_Wedding.ics',
+          filename: 'Tolu_Ope_Wedding_Cal.ics',
           content: icsBuffer,
           contentType: 'text/calendar',
           cid: 'addToCalendar'

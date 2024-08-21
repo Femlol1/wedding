@@ -76,7 +76,7 @@ export default function Travel() {
                         <li>
                             <div className="flex flex-col items-center gap-4">
                             <Image
-                                src="/assets/images/Travel/lekki-market.jpg"
+                                src="/assets/images/Travel/Market-Lagos-Nigeria.jpg"
                                 alt="Lekki Market"
                                 width={300}
                                 height={200}
@@ -106,7 +106,7 @@ export default function Travel() {
                         <li>
                             <div className="flex flex-col items-center gap-4">
                             <Image
-                                src="/assets/images/Travel/Tarkwa-Bay-Beach.jpg"
+                                src="/assets/images/Travel/Beach-3.jpg"
                                 alt="Tarkwa Bay Beach"
                                 width={300}
                                 height={200}
@@ -121,7 +121,7 @@ export default function Travel() {
                         <li>
                             <div className="flex flex-col items-center gap-4">
                             <Image
-                                src="/assets/images/Travel/Lagos-National-Museum.jpeg"
+                                src="/assets/images/Travel/national-museum-bg.jpg"
                                 alt="Lagos National Museum"
                                 width={300}
                                 height={200}
