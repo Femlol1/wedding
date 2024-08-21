@@ -134,8 +134,8 @@ const AdminPage = () => {
           className="w-full md:w-1/2 p-2 border rounded"
         >
           <option value="">Filter by Staying Place</option>
-          <option value="Hotel">Hotel</option>
-          <option value="Home">Home</option>
+          <option value="Recommended Hotel Vintanio">Recomended Hotel</option>
+          <option value="At home with family">Home</option>
           {/* Add other staying place options */}
         </select>
 
@@ -178,13 +178,13 @@ const AdminPage = () => {
                 <td className="px-4 py-2 email">{rsvp.email}</td>
                 <td className="px-4 py-2 mobile">{rsvp.mobile}</td>
                 <td className="px-4 py-2 stayingPlace">
-                  {rsvp.stayingPlace}, Other: {rsvp.otherStaying}
+                  {rsvp.stayingPlace},{rsvp.otherStaying}
                 </td>
                 <td className="px-4 py-2 allergies">{rsvp.allergies}</td>
                 <td className="px-4 py-2 asoEbi">{rsvp.asoEbi} + {rsvp.asoebiType}</td>
-                <td className="px-4 py-2 church">{rsvp.church ? 'Yes' : 'No'}</td>
-                <td className="px-4 py-2 reception">{rsvp.reception ? 'Yes' : 'No'}</td>
-                <td className="px-4 py-2 afterParty">{rsvp.afterParty ? 'Yes' : 'No'}</td>
+                <td className="px-4 py-2 church">{rsvp.church}</td>
+                <td className="px-4 py-2 reception">{rsvp.reception}</td>
+                <td className="px-4 py-2 afterParty">{rsvp.afterParty}</td>
                 <td className="px-4 py-2 checkedIn">{rsvp.checkedIn ? 'Yes' : 'No'}</td>
                 <td className="px-4 py-2 flex justify-center gap-2 actions">
                   {!rsvp.checkedIn ? (
