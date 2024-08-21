@@ -119,8 +119,7 @@ export const rsvpFormSchema = z.object({
   mobile: z.string().min(10, { message: "Please enter a valid mobile number." }),
   stayingPlace: z.enum([
       "At home with family",
-      "Hotel on the Island",
-      "Hotel on the Mainland",
+      "Recommended Hotel Vintanio",
       "Other",
   ]),
   otherStaying: z.string().optional(),
