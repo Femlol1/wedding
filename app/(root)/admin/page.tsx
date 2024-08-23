@@ -6,8 +6,33 @@ import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firesto
 import { useEffect, useState } from 'react';
 import { CSVLink } from 'react-csv';
 
+interface RSVP {
+  id: string;
+  userType: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  relations: string;
+  stayingPlace: string;
+  otherStaying?: string;
+  allergies?: string;
+  asoEbi?: string;
+  asoebiType?: string;
+  church?: boolean;
+  reception?: boolean;
+  afterParty?: boolean;
+  checkedIn?: boolean;
+  timestamp: {
+    months:number;
+    seconds: number;
+    nanoseconds: number;
+  };
+}
+
+
 const AdminPage = () => {
-  const [rsvps, setRsvps] = useState<any[]>([]);
+  const [rsvps, setRsvps] = useState<RSVP[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
   const [userTypeFilter, setUserTypeFilter] = useState(''); // State for single user type filter
@@ -18,9 +43,20 @@ const AdminPage = () => {
 
   useEffect(() => {
     const fetchRSVPs = async () => {
-      const rsvpCollection = collection(db, 'rsvps');  // Correctly reference the 'rsvps' collection
+      const rsvpCollection = collection(db, 'rsvps');
       const querySnapshot = await getDocs(rsvpCollection);
-      const rsvpList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const rsvpList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as RSVP[]; // Cast the data as RSVP[]
+  
+      // Sort the RSVPs by timestamp (latest first)
+      rsvpList.sort((a, b) => {
+        const dateA = new Date(a.timestamp.seconds * 1000).getTime();
+        const dateB = new Date(b.timestamp.seconds * 1000).getTime();
+        return dateB - dateA; // Sort descending (latest first)
+      });
+  
       setRsvps(rsvpList);
       setLoading(false);
     };
