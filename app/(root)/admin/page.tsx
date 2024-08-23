@@ -172,6 +172,7 @@ const AdminPage = () => {
           <option value="">Filter by Staying Place</option>
           <option value="Recommended Hotel Vintanio">Recomended Hotel</option>
           <option value="At home with family">Home</option>
+          <option value={"Other"}>Other</option>
           {/* Add other staying place options */}
         </select>
 
