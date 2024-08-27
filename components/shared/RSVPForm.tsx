@@ -1,4 +1,3 @@
-"use client";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -72,59 +71,6 @@ export function RSVPForm() {
         return !querySnapshot.empty;
     };
 
-    // const onSubmit = async (values: z.infer<typeof rsvpFormSchema>) => {
-    //     toast({
-    //         variant: "default",
-    //         title: "Thank You for sending Your RSVP.",
-    //         description: "Just a sec! We are saving your details.",
-    //     });
-
-    //     try {
-    //         // Check if email already exists
-    //         const emailExists = await checkEmailExists(values.email);
-    //         if (emailExists) {
-    //             toast({
-    //                 variant: "default",
-    //                 title: "Duplicate Email",
-    //                 description: "This email has already been used to RSVP. Please use a different email.",
-    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
-    //             });
-    //             return;
-    //         }
-
-    //         const response = await axios.post('/api/rsvp', values);
-    //         if (response.data.result === 'error') {
-    //             toast({
-    //                 variant: "default",
-    //                 description: response.data.message,
-    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
-    //             });
-    //         } else {
-    //             toast({
-    //                 variant: "default",
-    //                 title: "Thank You for sending Your RSVP.",
-    //                 description: "Your RSVP has been sent",
-    //             });
-    //             form.reset(); // Reset the form after a successful submission
-    //         }
-    //     } catch (error: any) { // Cast error to any
-    //         if (error.response?.status === 400) {
-    //             toast({
-    //                 variant: "default",
-    //                 title: "Invalid Code",
-    //                 description: "The RSVP code you entered is invalid. Please check your code and try again.",
-    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
-    //             });
-    //         } else {
-    //             toast({
-    //                 variant: "default",
-    //                 title: "Uh oh! Something went wrong.",
-    //                 description: "Sorry! There is some issue with the server.",
-    //                 action: <ToastAction altText="Try again">Try again</ToastAction>,
-    //             });
-    //         }
-    //     }
-    // };
     const onSubmit = async (values: z.infer<typeof rsvpFormSchema>) => {
         setIsLoading(true);
         setShowModal(true);
@@ -167,7 +113,7 @@ export function RSVPForm() {
     return (
         <div className="container mx-auto rsvp">
             <div className="text-center text-sm py-4">
-                We would greatly appreciate if you could RSVP before 1st Nov 2024
+                We would greatly appreciate if you could RSVP before 15th Nov 2024
             </div>
             <Form {...form}>
                 <form

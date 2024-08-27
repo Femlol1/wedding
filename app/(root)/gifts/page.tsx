@@ -68,7 +68,8 @@ const Gifts = () => {
                 width={10}
                 height={10}
                 className="pb-0.4 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"></Image></span> Nigeria</h3>
-            <p>Please contact us directly for details.</p>
+            <p>Name on the account: OSIBEMEKUN OPEOLUWA EFUNYINKA <br />
+            Account number:  0170585078</p>
           </div>
         </div>
 
