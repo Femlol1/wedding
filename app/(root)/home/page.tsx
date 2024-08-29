@@ -43,13 +43,14 @@ const HomePage: React.FC = () => {
 					our big day with us.
 					<br />
 					<br />
-					Please note, our wedding is by <strong>INVITE</strong> only. No extra
+					Please note, our wedding is by <strong>INVITE ONLY</strong>. No extra
 					guests, please, unless approved by us to maintain a safe, intimate
 					celebration.
 					<br />
 					<>
-						Although we love your children, we regretfully cannot accommodate
-						them at the venue due to restricted numbers
+						Although we love your children, we regretfully{" "}
+						<strong>cannot accommodate children</strong> at the venue due to
+						restricted numbers
 					</>
 					<br />
 					<br />
