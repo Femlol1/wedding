@@ -1,27 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export const useMediaStream = (constraints: MediaStreamConstraints) => {
-  const [stream, setStream] = useState<MediaStream | null>(null);
-  const [error, setError] = useState<Error | null>(null);
+	const [stream, setStream] = useState<MediaStream | null>(null);
+	const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const getStream = async () => {
-      try {
-        const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-        setStream(mediaStream);
-      } catch (err) {
-        setError(err as Error);
-      }
-    };
+	useEffect(() => {
+		const getStream = async () => {
+			try {
+				const mediaStream = await navigator.mediaDevices.getUserMedia(
+					constraints
+				);
+				setStream(mediaStream);
+			} catch (err) {
+				setError(err as Error);
+			}
+		};
 
-    getStream();
+		getStream();
 
-    return () => {
-      if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-      }
-    };
-  }, [constraints]);
+		return () => {
+			if (stream) {
+				stream.getTracks().forEach((track) => track.stop());
+			}
+		};
+	}, [constraints, stream]);
 
-  return { stream, error };
+	return { stream, error };
 };
