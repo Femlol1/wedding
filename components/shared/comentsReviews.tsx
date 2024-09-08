@@ -63,8 +63,8 @@ export function MarqueeDemo() {
 	const secondRow = comments.slice(half);
 
 	return (
-		<div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-			<h2 className="text-2xl font-semibold text-center mb-10">
+		<div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
+			<h2 className="text-2xl font-semibold text-center my-10">
 				Messages to the Bride and Groom
 			</h2>
 			<Marquee pauseOnHover className="[--duration:40s]">

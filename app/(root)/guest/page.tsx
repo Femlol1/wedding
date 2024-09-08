@@ -24,8 +24,11 @@ export default function Guests() {
 					<h3 className="text-3xl md:text-5xl font-bold mt-2">Guests</h3>
 				</div>
 			</section>
-			<div className="container mx-auto px-4 py-8">
+			<section>
 				<MarqueeDemo />
+			</section>
+
+			<div className="container mx-auto px-4 py-8">
 				<div className="mt-10" />
 				{/* <GuestBook /> */}
 				<CommentForm />

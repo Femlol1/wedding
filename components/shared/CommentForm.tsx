@@ -32,7 +32,7 @@ export default function CommentForm() {
 	};
 
 	return (
-		<div className="mt-8 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+		<div className="mt-8  mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
 			<h2 className="text-2xl font-semibold text-center mb-4">
 				Leave a Message for the Bride and Groom
 			</h2>
