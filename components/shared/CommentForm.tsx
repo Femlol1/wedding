@@ -8,41 +8,68 @@ import { Textarea } from "../ui/textarea";
 
 export default function CommentForm() {
 	const [newComment, setNewComment] = useState("");
+	const [name, setName] = useState("");
 
 	const handleCommentSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-		if (newComment.trim() === "") return;
+		if (newComment.trim() === "" || name.trim() === "") return;
 
 		const commentData = {
-			comment: newComment,
+			name: name.trim(),
+			comment: newComment.trim(),
 			timestamp: Timestamp.now(),
 		};
 
 		try {
 			// Add a new document with the comment data
 			await addDoc(collection(db, "comments"), commentData);
-			// Clear the input after submission
+			// Clear the input fields after submission
 			setNewComment("");
+			setName("");
 		} catch (error) {
 			console.error("Error adding comment: ", error);
 		}
 	};
 
 	return (
-		<div className="mt-6">
-			<h2 className="text-2xl font-semibold text-center">
+		<div className="mt-8 max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+			<h2 className="text-2xl font-semibold text-center mb-4">
 				Leave a Message for the Bride and Groom
 			</h2>
-			<form onSubmit={handleCommentSubmit} className="my-4">
-				<Textarea
-					value={newComment}
-					onChange={(e) => setNewComment(e.target.value)}
-					className="w-full p-2 border"
-					placeholder="Leave a message..."
-				/>
+			<form onSubmit={handleCommentSubmit} className="space-y-4">
+				<div className="flex flex-col">
+					<label htmlFor="name" className="text-sm font-medium text-gray-700">
+						Your Name
+					</label>
+					<input
+						type="text"
+						id="name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						className="w-full p-2 mt-1 border rounded focus:ring-primary-500 focus:border-primary-500"
+						placeholder="Enter your name"
+						required
+					/>
+				</div>
+				<div className="flex flex-col">
+					<label
+						htmlFor="comment"
+						className="text-sm font-medium text-gray-700"
+					>
+						Your Message
+					</label>
+					<Textarea
+						id="comment"
+						value={newComment}
+						onChange={(e) => setNewComment(e.target.value)}
+						className="w-full p-2 mt-1 border rounded focus:ring-primary-500 focus:border-primary-500"
+						placeholder="Leave a message..."
+						required
+					/>
+				</div>
 				<Button
 					type="submit"
-					className="bg-primary hover:bg-primary-700 font-bold py-2 px-4 rounded block mx-auto mt-2"
+					className="w-full bg-primary hover:bg-primary-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-primary-500"
 				>
 					Send
 				</Button>

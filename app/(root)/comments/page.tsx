@@ -1,132 +1,282 @@
 "use client"; // This is important to ensure this component is client-side
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
-import { collection, deleteDoc, doc, getDocs, Timestamp } from "firebase/firestore";
+import {
+	collection,
+	deleteDoc,
+	doc,
+	getDocs,
+	Timestamp,
+	updateDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 
+// Interface for comments
 interface Comment {
-  id: string;
-  comment: string;
-  timestamp: Timestamp;
-  // Add other properties if needed, like a timestamp or user info
+	id: string;
+	name: string;
+	comment: string;
+	timestamp: Timestamp;
 }
 
+// Modal component for editing comments
+const EditCommentModal = ({
+	show,
+	onClose,
+	onSave,
+	comment,
+}: {
+	show: boolean;
+	onClose: () => void;
+	onSave: (updatedComment: { name: string; comment: string }) => void;
+	comment: Comment | null;
+}) => {
+	const [editName, setEditName] = useState(comment?.name || "");
+	const [editComment, setEditComment] = useState(comment?.comment || "");
+
+	// Update state when the modal opens with the selected comment data
+	useEffect(() => {
+		if (comment) {
+			setEditName(comment.name);
+			setEditComment(comment.comment);
+		}
+	}, [comment]);
+
+	const handleSave = () => {
+		onSave({ name: editName, comment: editComment });
+		onClose();
+	};
+
+	if (!show || !comment) return null;
+
+	return (
+		<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
+			<div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
+				<h2 className="text-xl font-semibold mb-4">Edit Comment</h2>
+				<input
+					type="text"
+					value={editName}
+					onChange={(e) => setEditName(e.target.value)}
+					className="w-full p-2 mb-2 border rounded"
+					placeholder="Edit Name"
+				/>
+				<textarea
+					value={editComment}
+					onChange={(e) => setEditComment(e.target.value)}
+					className="w-full p-2 mb-2 border rounded"
+					placeholder="Edit Comment"
+				/>
+				<div className="flex justify-end mt-4">
+					<button
+						onClick={handleSave}
+						className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+					>
+						Save
+					</button>
+					<button
+						onClick={onClose}
+						className="bg-gray-300 text-black px-4 py-2 rounded"
+					>
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 export default function AdminCommentsPage() {
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [filteredComments, setFilteredComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-   // Add new states for date filtering
-   const [startDate, setStartDate] = useState<Timestamp | null>(null);
-   const [endDate, setEndDate] = useState<Timestamp | null>(null);
- 
+	const [comments, setComments] = useState<Comment[]>([]);
+	const [filteredComments, setFilteredComments] = useState<Comment[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [searchQuery, setSearchQuery] = useState("");
+	const [searchName, setSearchName] = useState("");
+	const [editingComment, setEditingComment] = useState<Comment | null>(null);
+	const [showEditModal, setShowEditModal] = useState(false);
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      const commentsCollection = collection(db, "comments");
-      const commentsSnapshot = await getDocs(commentsCollection);
-      const commentsList = commentsSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Comment[];
-      setComments(commentsList);
-      setFilteredComments(commentsList); // Initially, show all comments
-      setLoading(false);
-    };
+	// States for date filtering
+	const [startDate, setStartDate] = useState<Timestamp | null>(null);
+	const [endDate, setEndDate] = useState<Timestamp | null>(null);
 
-    fetchComments();
-  }, []);
+	useEffect(() => {
+		const fetchComments = async () => {
+			const commentsCollection = collection(db, "comments");
+			const commentsSnapshot = await getDocs(commentsCollection);
+			const commentsList = commentsSnapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			})) as Comment[];
+			setComments(commentsList);
+			setFilteredComments(commentsList);
+			setLoading(false);
+		};
 
-  const handleDelete = async (id: string) => {
-    if (confirm("Are you sure you want to delete this message? This action cannot be undone.")) {
-      await deleteDoc(doc(db, "comments", id));
-      setComments(comments.filter((comment) => comment.id !== id));
-      setFilteredComments(filteredComments.filter((comment) => comment.id !== id));
-    }
-  };
+		fetchComments();
+	}, []);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-    if (query) {
-      setFilteredComments(comments.filter((comment) =>
-        comment.comment.toLowerCase().includes(query)
-      ));
-    } else {
-      setFilteredComments(comments); // Reset to show all comments if search is cleared
-    }
-    if (startDate && endDate) {
-      setFilteredComments(comments.filter((comment) => {
-        const commentDate = comment.timestamp; // Assuming you have a timestamp field
-        return (
-          comment.comment.toLowerCase().includes(query) &&
-          commentDate >= startDate && commentDate <= endDate
-        );
-      }));
-    } else {
-      setFilteredComments(comments.filter((comment) =>
-        comment.comment.toLowerCase().includes(query)
-      ));
-    }
-  };
+	const handleDelete = async (id: string) => {
+		if (
+			confirm(
+				"Are you sure you want to delete this message? This action cannot be undone."
+			)
+		) {
+			await deleteDoc(doc(db, "comments", id));
+			setComments(comments.filter((comment) => comment.id !== id));
+			setFilteredComments(
+				filteredComments.filter((comment) => comment.id !== id)
+			);
+		}
+	};
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+	const handleSearch = () => {
+		const filtered = comments.filter((comment) => {
+			const matchesComment = comment.comment
+				.toLowerCase()
+				.includes(searchQuery.toLowerCase());
+			const matchesName = (comment.name || "")
+				.toLowerCase()
+				.includes(searchName.toLowerCase());
 
-  return (
-    <div className="container mx-auto px-4 py-8 mt-20">
-      <h1 className="text-3xl font-bold mb-6">Admin Panel - Comments</h1>
+			const matchesDateRange =
+				(!startDate || comment.timestamp >= startDate) &&
+				(!endDate || comment.timestamp <= endDate);
 
-      {/* Search Input */}
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search comments..."
-          value={searchQuery}
-          onChange={handleSearch}
-          className="w-full p-2 border rounded"
-        />
-      </div>
-      <div className="mb-6 flex space-x-4">
-        <input
-          type="date"
-          onChange={(e) => setStartDate(Timestamp.fromDate(new Date(e.target.value)))}
-          className="p-2 border rounded"
-        />
-        <input
-          type="date"
-          onChange={(e) => setEndDate(Timestamp.fromDate(new Date(e.target.value)))}
-          className="p-2 border rounded"
-        />
-      </div>
+			return matchesComment && matchesName && matchesDateRange;
+		});
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="px-4 py-2 text-left">Comment</th>
-              <th className="px-4 py-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredComments.map((comment) => (
-              <tr key={comment.id} className="border-b">
-                <td className="px-4 py-2">{comment.comment}</td>
-                <td className="px-4 py-2">
-                  <button
-                    className="bg-red-500 text-white px-4 py-2 rounded"
-                    onClick={() => handleDelete(comment.id)}
-                  >
-                    Delete
-                  </button>
-                  {/* You can add more buttons here for editing or other actions */}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+		setFilteredComments(filtered);
+	};
+
+	useEffect(() => {
+		handleSearch();
+	}, [searchQuery, searchName, startDate, endDate]);
+
+	const handleEdit = (comment: Comment) => {
+		setEditingComment(comment);
+		setShowEditModal(true);
+	};
+
+	const handleSaveEdit = async (updatedComment: {
+		name: string;
+		comment: string;
+	}) => {
+		if (editingComment) {
+			const updatedData = {
+				...editingComment,
+				...updatedComment,
+			};
+
+			await updateDoc(doc(db, "comments", editingComment.id), {
+				name: updatedComment.name,
+				comment: updatedComment.comment,
+			});
+
+			setComments((prevComments) =>
+				prevComments.map((comment) =>
+					comment.id === editingComment.id ? updatedData : comment
+				)
+			);
+			setFilteredComments((prevComments) =>
+				prevComments.map((comment) =>
+					comment.id === editingComment.id ? updatedData : comment
+				)
+			);
+
+			setEditingComment(null);
+			setShowEditModal(false);
+		}
+	};
+
+	if (loading) {
+		return <p>Loading...</p>;
+	}
+
+	return (
+		<div className="container mx-auto px-4 py-8 mt-20">
+			<h1 className="text-3xl font-bold mb-6">Admin Panel - Comments</h1>
+
+			{/* Search Inputs */}
+			<div className="mb-6">
+				<Input
+					type="text"
+					placeholder="Search comments..."
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
+					className="w-full p-2 border rounded mb-4"
+				/>
+				<Input
+					type="text"
+					placeholder="Search by name..."
+					value={searchName}
+					onChange={(e) => setSearchName(e.target.value)}
+					className="w-full p-2 border rounded"
+				/>
+			</div>
+
+			{/* Date Filter Inputs */}
+			<div className="mb-6 flex space-x-4">
+				<Input
+					type="date"
+					onChange={(e) =>
+						setStartDate(Timestamp.fromDate(new Date(e.target.value)))
+					}
+					className="p-2 border rounded"
+				/>
+				<Input
+					type="date"
+					onChange={(e) =>
+						setEndDate(Timestamp.fromDate(new Date(e.target.value)))
+					}
+					className="p-2 border rounded"
+				/>
+			</div>
+
+			<div className="overflow-x-auto">
+				<table className="min-w-full table-auto">
+					<thead>
+						<tr className="bg-gray-100">
+							<th className="px-4 py-2 text-left">Name</th>
+							<th className="px-4 py-2 text-left">Comment</th>
+							<th className="px-4 py-2 text-left">Edit</th>
+							<th className="px-4 py-2 text-left">Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						{filteredComments.map((comment) => (
+							<tr key={comment.id} className="border-b">
+								<td className="px-4 py-2">{comment.name}</td>
+								<td className="px-4 py-2">{comment.comment}</td>
+								<td className="px-4 py-2 space-x-2">
+									<Button
+										className="bg-blue-500 text-white px-4 py-2 rounded"
+										onClick={() => handleEdit(comment)}
+									>
+										Edit
+									</Button>
+								</td>
+								<td className="px-4 py-2 space-x-2">
+									<Button
+										className="bg-red-500 text-white px-4 py-2 rounded"
+										onClick={() => handleDelete(comment.id)}
+									>
+										Delete
+									</Button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+
+			{/* Edit Comment Modal */}
+			<EditCommentModal
+				show={showEditModal}
+				onClose={() => setShowEditModal(false)}
+				onSave={handleSaveEdit}
+				comment={editingComment}
+			/>
+		</div>
+	);
 }
