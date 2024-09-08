@@ -4,11 +4,14 @@ import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase 
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
 export default function CommentForm() {
 	const [newComment, setNewComment] = useState("");
 	const [name, setName] = useState("");
+	const maxCommentLength = 150; // Set the maximum length for the message
+	const maxNameLength = 30;
 
 	const handleCommentSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -32,15 +35,13 @@ export default function CommentForm() {
 	};
 
 	return (
-		<div className="mt-8  mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
+		<div className="mt-8 mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
 			<h2 className="text-2xl font-semibold text-center mb-4">
 				Leave a Message for the Bride and Groom
 			</h2>
 			<form onSubmit={handleCommentSubmit} className="space-y-4">
 				<div className="flex flex-col">
-					<label htmlFor="name" className="text-sm font-medium text-gray-700">
-						Your Name
-					</label>
+					<Label>Your Name</Label>
 					<input
 						type="text"
 						id="name"
@@ -48,24 +49,27 @@ export default function CommentForm() {
 						onChange={(e) => setName(e.target.value)}
 						className="w-full p-2 mt-1 border rounded focus:ring-primary-500 focus:border-primary-500"
 						placeholder="Enter your name"
+						maxLength={maxNameLength}
 						required
 					/>
+					<p className="text-sm text-gray-500 mt-1">
+						{maxNameLength - name.length} characters remaining
+					</p>
 				</div>
 				<div className="flex flex-col">
-					<label
-						htmlFor="comment"
-						className="text-sm font-medium text-gray-700"
-					>
-						Your Message
-					</label>
+					<Label>Your Message</Label>
 					<Textarea
 						id="comment"
 						value={newComment}
 						onChange={(e) => setNewComment(e.target.value)}
 						className="w-full p-2 mt-1 border rounded focus:ring-primary-500 focus:border-primary-500"
 						placeholder="Leave a message..."
+						maxLength={maxCommentLength} // Set the maximum length here
 						required
 					/>
+					<p className="text-sm text-gray-500 mt-1">
+						{maxCommentLength - newComment.length} characters remaining
+					</p>
 				</div>
 				<Button
 					type="submit"
