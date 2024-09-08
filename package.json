@@ -46,6 +46,7 @@
     "firebase-admin": "^12.3.0",
     "framer-motion": "^11.5.4",
     "googleapis": "^140.0.1",
+    "html5-qrcode": "^2.3.8",
     "isomorphic-fetch": "^3.0.0",
     "jquery": "^3.7.1",
     "jsbarcode": "^3.11.6",
