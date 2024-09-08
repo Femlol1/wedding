@@ -1,8 +1,7 @@
 // components/CommentsSection.js
 "use client"; // This is important to ensure this component is client-side
 
-import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
-import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
+import { addDoc, collection, db, getDocs, Timestamp } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";

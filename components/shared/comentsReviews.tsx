@@ -1,7 +1,6 @@
 "use client";
-import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
+import { collection, db, getDocs } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
 import { cn } from "@/lib/utils";
-import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Marquee from "../ui/marquee";

@@ -1,15 +1,18 @@
 "use client";
 
-import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
-import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { useState } from "react";
+import { addDoc, collection, db, Timestamp } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
+import data from "@emoji-mart/data"; // Correct import for emoji data
+import Picker from "@emoji-mart/react"; // Import the new Picker from emoji-mart
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
 export default function CommentForm() {
 	const [newComment, setNewComment] = useState("");
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const [name, setName] = useState("");
+	const pickerRef = useRef<HTMLDivElement>(null); // Ref for the emoji picker modal
 	const maxCommentLength = 150; // Set the maximum length for the message
 	const maxNameLength = 30;
 
@@ -34,6 +37,33 @@ export default function CommentForm() {
 		}
 	};
 
+	const handleEmojiSelect = (emoji: any) => {
+		setNewComment((prev) => prev + emoji.native); // Append selected emoji to the comment
+		setShowEmojiPicker(false); // Close the emoji picker after selection
+	};
+
+	// Handle outside click to close the modal
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				pickerRef.current &&
+				!pickerRef.current.contains(event.target as Node)
+			) {
+				setShowEmojiPicker(false);
+			}
+		};
+
+		if (showEmojiPicker) {
+			document.addEventListener("mousedown", handleClickOutside);
+		} else {
+			document.removeEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [showEmojiPicker]);
+
 	return (
 		<div className="mt-8 mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200">
 			<h2 className="text-2xl font-semibold text-center mb-4">
@@ -56,7 +86,7 @@ export default function CommentForm() {
 						{maxNameLength - name.length} characters remaining
 					</p>
 				</div>
-				<div className="flex flex-col">
+				<div className="flex flex-col relative">
 					<Label>Your Message</Label>
 					<Textarea
 						id="comment"
@@ -70,6 +100,13 @@ export default function CommentForm() {
 					<p className="text-sm text-gray-500 mt-1">
 						{maxCommentLength - newComment.length} characters remaining
 					</p>
+					<button
+						type="button"
+						onClick={() => setShowEmojiPicker(true)}
+						className="absolute right-2 top-10 text-2xl"
+					>
+						😊
+					</button>
 				</div>
 				<Button
 					type="submit"
@@ -78,6 +115,16 @@ export default function CommentForm() {
 					Send
 				</Button>
 			</form>
+
+			{/* Emoji Picker Modal */}
+			{showEmojiPicker && (
+				<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+					<div ref={pickerRef} className="relative p-6 rounded-md">
+						<button onClick={() => setShowEmojiPicker(false)}></button>
+						<Picker data={data} onEmojiSelect={handleEmojiSelect} />
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

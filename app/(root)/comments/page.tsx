@@ -2,16 +2,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { db } from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
+import { Label } from "@/components/ui/label";
 import {
 	collection,
+	db,
 	deleteDoc,
 	doc,
 	getDocs,
 	Timestamp,
 	updateDoc,
-} from "firebase/firestore";
-import { useEffect, useState } from "react";
+} from "@/lib/firebase"; // Adjust the import path to your Firebase configuration
+import { useCallback, useEffect, useState } from "react";
 
 // Interface for comments
 interface Comment {
@@ -130,7 +131,8 @@ export default function AdminCommentsPage() {
 		}
 	};
 
-	const handleSearch = () => {
+	// Wrap handleSearch in useCallback to ensure it doesn't change on every render
+	const handleSearch = useCallback(() => {
 		const filtered = comments.filter((comment) => {
 			const matchesComment = comment.comment
 				.toLowerCase()
@@ -147,11 +149,12 @@ export default function AdminCommentsPage() {
 		});
 
 		setFilteredComments(filtered);
-	};
+	}, [comments, searchQuery, searchName, startDate, endDate]);
 
+	// useEffect dependency includes handleSearch
 	useEffect(() => {
 		handleSearch();
-	}, [searchQuery, searchName, startDate, endDate]);
+	}, [handleSearch]);
 
 	const handleEdit = (comment: Comment) => {
 		setEditingComment(comment);
@@ -198,39 +201,44 @@ export default function AdminCommentsPage() {
 			<h1 className="text-3xl font-bold mb-6">Admin Panel - Comments</h1>
 
 			{/* Search Inputs */}
-			<div className="mb-6">
-				<Input
-					type="text"
-					placeholder="Search comments..."
-					value={searchQuery}
-					onChange={(e) => setSearchQuery(e.target.value)}
-					className="w-full p-2 border rounded mb-4"
-				/>
+			<div className="mb-6 flex space-x-4">
 				<Input
 					type="text"
 					placeholder="Search by name..."
 					value={searchName}
 					onChange={(e) => setSearchName(e.target.value)}
-					className="w-full p-2 border rounded"
+					className="w-full p-2 border rounded my-4"
+				/>
+				<Input
+					type="text"
+					placeholder="Search comments..."
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
+					className="w-full p-2 border rounded my-4"
 				/>
 			</div>
 
 			{/* Date Filter Inputs */}
 			<div className="mb-6 flex space-x-4">
-				<Input
-					type="date"
-					onChange={(e) =>
-						setStartDate(Timestamp.fromDate(new Date(e.target.value)))
-					}
-					className="p-2 border rounded"
-				/>
-				<Input
-					type="date"
-					onChange={(e) =>
-						setEndDate(Timestamp.fromDate(new Date(e.target.value)))
-					}
-					className="p-2 border rounded"
-				/>
+				<div>
+					<Label>start date</Label>
+					<Input
+						type="date"
+						onChange={(e) =>
+							setStartDate(Timestamp.fromDate(new Date(e.target.value)))
+						}
+					/>
+				</div>
+				<div>
+					<Label>End date</Label>
+
+					<Input
+						type="date"
+						onChange={(e) =>
+							setEndDate(Timestamp.fromDate(new Date(e.target.value)))
+						}
+					/>
+				</div>
 			</div>
 
 			<div className="overflow-x-auto">

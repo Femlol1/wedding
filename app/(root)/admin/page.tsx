@@ -2,14 +2,14 @@
 // pages/admin/page.tsx
 import ModalAdmin from "@/components/shared/ModalAdmin"; // Import the ModalAdmin component
 import UpdateRsvpModal from "@/components/shared/UpdateRsvpModal";
-import { db } from "@/lib/firebase"; // Adjust the import according to your setup
 import {
 	collection,
+	db,
 	deleteDoc,
 	doc,
 	getDocs,
 	updateDoc,
-} from "firebase/firestore";
+} from "@/lib/firebase"; // Adjust the import according to your setup
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 

@@ -1,102 +1,102 @@
-import { UserType, validCodes } from '@/constants/codes';
-import { db } from '@/lib/firebaseAdmin';
-import { Timestamp } from 'firebase-admin/firestore';
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import path from 'path';
-import { PDFDocument, rgb } from 'pdf-lib';
-import qrcode from 'qrcode';
+import { UserType, validCodes } from "@/constants/codes";
+import { db, Timestamp } from "@/lib/firebaseAdmin";
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import path from "path";
+import { PDFDocument, rgb } from "pdf-lib";
+import qrcode from "qrcode";
 
-const EXCEL_FILE_NAME = 'rsvps.xlsx';
+const EXCEL_FILE_NAME = "rsvps.xlsx";
 
 export async function POST(req: NextRequest) {
-  try {
-    const data = await req.json();
-    const { code } = data;
+	try {
+		const data = await req.json();
+		const { code } = data;
 
-    
+		// Find the user type based on the provided code
+		let userType: UserType | null = null;
+		for (const type in validCodes) {
+			if (validCodes[type as UserType].includes(code)) {
+				userType = type as UserType;
+				break;
+			}
+		}
 
-    // Find the user type based on the provided code
-    let userType: UserType | null = null;
-    for (const type in validCodes) {
-      if (validCodes[type as UserType].includes(code)) {
-        userType = type as UserType;
-        break;
-      }
-    }
+		if (!userType) {
+			return NextResponse.json(
+				{ message: "Invalid RSVP code." },
+				{ status: 400 }
+			);
+		}
 
-    if (!userType) {
-      return NextResponse.json({ message: 'Invalid RSVP code.' }, { status: 400 });
-    }
+		// Add timestamp to data
+		const timestamp = Timestamp.now();
+		const rsvpData = { ...data, userType, timestamp };
 
-    // Add timestamp to data
-    const timestamp = Timestamp.now();
-    const rsvpData = { ...data, userType, timestamp };
+		// Save RSVP data to Firestore and get document ID
+		const rsvpDocRef = await db.collection("rsvps").add(rsvpData);
+		const rsvpDocId = rsvpDocRef.id;
 
-    // Save RSVP data to Firestore and get document ID
-    const rsvpDocRef = await db.collection('rsvps').add(rsvpData);
-    const rsvpDocId = rsvpDocRef.id;
+		// Generate QR code for the document ID
+		const qrCodeBuffer = await qrcode.toBuffer(rsvpDocId);
 
-    // Generate QR code for the document ID
-    const qrCodeBuffer = await qrcode.toBuffer(rsvpDocId);
+		// Generate a PDF with the QR code
+		const pdfDoc = await PDFDocument.create();
+		const page = pdfDoc.addPage([300, 150]);
+		const pngImage = await pdfDoc.embedPng(qrCodeBuffer);
+		const { width, height } = pngImage.scale(1);
 
-    // Generate a PDF with the QR code
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([300, 150]);
-    const pngImage = await pdfDoc.embedPng(qrCodeBuffer);
-    const { width, height } = pngImage.scale(1);
+		page.drawImage(pngImage, {
+			x: page.getWidth() / 2 - width / 2,
+			y: page.getHeight() / 2 - height / 2,
+			width,
+			height,
+		});
 
-    page.drawImage(pngImage, {
-      x: page.getWidth() / 2 - width / 2,
-      y: page.getHeight() / 2 - height / 2,
-      width,
-      height,
-    });
+		page.drawText(`RSVP Code: ${rsvpDocId}`, {
+			x: 10,
+			y: 10,
+			size: 12,
+			color: rgb(0, 0, 0),
+		});
 
-    page.drawText(`RSVP Code: ${rsvpDocId}`, {
-      x: 10,
-      y: 10,
-      size: 12,
-      color: rgb(0, 0, 0),
-    });
+		const pdfBytes = await pdfDoc.save();
 
-    const pdfBytes = await pdfDoc.save();
+		// Convert pdfBytes (Uint8Array) to Buffer
+		const pdfBuffer = Buffer.from(pdfBytes);
 
-    // Convert pdfBytes (Uint8Array) to Buffer
-    const pdfBuffer = Buffer.from(pdfBytes);
+		// const icsContent = `BEGIN:VCALENDAR
+		// VERSION:2.0
+		// PRODID:-//Your Company//Your Product//EN
+		// CALSCALE:GREGORIAN
+		// METHOD:PUBLISH
+		// BEGIN:VEVENT
+		// UID:${rsvpDocId}
+		// DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+		// DTSTART:20250322T100000Z
+		// DTEND:20250322T180000Z
+		// SUMMARY:Tolu & Ope's Wedding
+		// DESCRIPTION:Join us to celebrate our special day!
+		// LOCATION:Lagos, Nigeria
+		// STATUS:CONFIRMED
+		// SEQUENCE:0
+		// BEGIN:VALARM
+		// TRIGGER:-P3M
+		// ACTION:DISPLAY
+		// DESCRIPTION:Reminder: Tolu & Ope's Wedding is in 3 months
+		// END:VALARM
+		// BEGIN:VALARM
+		// TRIGGER:-PT15M
+		// REPEAT:1
+		// DURATION:PT15M
+		// ACTION:DISPLAY
+		// DESCRIPTION:Reminder: Tolu & Ope's Wedding starts in 15 minutes
+		// END:VALARM
+		// END:VEVENT
+		// END:VCALENDAR`;
 
-      // const icsContent = `BEGIN:VCALENDAR
-      // VERSION:2.0
-      // PRODID:-//Your Company//Your Product//EN
-      // CALSCALE:GREGORIAN
-      // METHOD:PUBLISH
-      // BEGIN:VEVENT
-      // UID:${rsvpDocId}
-      // DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
-      // DTSTART:20250322T100000Z
-      // DTEND:20250322T180000Z
-      // SUMMARY:Tolu & Ope's Wedding
-      // DESCRIPTION:Join us to celebrate our special day!
-      // LOCATION:Lagos, Nigeria
-      // STATUS:CONFIRMED
-      // SEQUENCE:0
-      // BEGIN:VALARM
-      // TRIGGER:-P3M
-      // ACTION:DISPLAY
-      // DESCRIPTION:Reminder: Tolu & Ope's Wedding is in 3 months
-      // END:VALARM
-      // BEGIN:VALARM
-      // TRIGGER:-PT15M
-      // REPEAT:1
-      // DURATION:PT15M
-      // ACTION:DISPLAY
-      // DESCRIPTION:Reminder: Tolu & Ope's Wedding starts in 15 minutes
-      // END:VALARM
-      // END:VEVENT
-      // END:VCALENDAR`;
-      
-      // const icsBuffer = Buffer.from(icsContent);
-                  const icsContent = `BEGIN:VCALENDAR
+		// const icsBuffer = Buffer.from(icsContent);
+		const icsContent = `BEGIN:VCALENDAR
                                       VERSION:2.0
                                       PRODID:-//ical.marudot.com//iCal Event Maker
                                       X-WR-CALNAME:Tolu and Ope's wedding
@@ -131,15 +131,14 @@ export async function POST(req: NextRequest) {
                                       END:VEVENT
                                       END:VCALENDAR`;
 
-        const icsBuffer = Buffer.from(icsContent);
+		const icsBuffer = Buffer.from(icsContent);
 
-
-    // Send confirmation email with PDF attachment and QR code
-    const mailOptions = {
-      from: process.env.OUTLOOK_USER,
-      to: data.email,
-      subject: 'RSVP Confirmation - Tolu & Ope',
-      html: `
+		// Send confirmation email with PDF attachment and QR code
+		const mailOptions = {
+			from: process.env.OUTLOOK_USER,
+			to: data.email,
+			subject: "RSVP Confirmation - Tolu & Ope",
+			html: `
         <div style="font-family: Arial, sans-serif; color: #333;">
           <div style="max-width: 600px; margin: auto; padding: 20px; background-color: #fff; border: 1px solid #e0e0e0; border-radius: 10px;">
             <div style="text-align: center; padding: 10px;">
@@ -203,54 +202,59 @@ export async function POST(req: NextRequest) {
           </div>
         </div>
       `,
-      attachments: [
-        {
-          filename: 'RSVP_Code.pdf',
-          content: pdfBuffer,
-          contentType: 'application/pdf',
-        },
-        {
-          filename: 'weddingLogo.png',
-          path: path.resolve('public/assets/logo.png'), // Replace with actual path to your logo image
-          cid: 'weddingLogo' // This is referenced in the HTML above with <img src="cid:weddingLogo" />
-        },
-        {
-          filename: 'qrCode.png',
-          content: qrCodeBuffer,
-          cid: 'qrCode' // This is referenced in the HTML above with <img src="cid:qrCode" />
-        },
-        {
-          filename: 'weddingCoupleImage.jpg',
-          path: path.resolve('public/assets/hero.jpg'), // Replace with actual path to your couple image
-          cid: 'weddingCoupleImage' // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
-        },
-        {
-          filename: 'Tolu_Ope_Wedding_Cal.ics',
-          content: icsBuffer,
-          contentType: 'text/calendar',
-          cid: 'addToCalendar'
-        }
-      ],
-    };
-    
-    
-    
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.office365.com',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.OUTLOOK_USER, // Your Outlook email address
-        pass: process.env.OUTLOOK_PASS, // Your Outlook email password or app password
-      },
-    });
-    await transporter.sendMail(mailOptions);
+			attachments: [
+				{
+					filename: "RSVP_Code.pdf",
+					content: pdfBuffer,
+					contentType: "application/pdf",
+				},
+				{
+					filename: "weddingLogo.png",
+					path: path.resolve("public/assets/logo.png"), // Replace with actual path to your logo image
+					cid: "weddingLogo", // This is referenced in the HTML above with <img src="cid:weddingLogo" />
+				},
+				{
+					filename: "qrCode.png",
+					content: qrCodeBuffer,
+					cid: "qrCode", // This is referenced in the HTML above with <img src="cid:qrCode" />
+				},
+				{
+					filename: "weddingCoupleImage.jpg",
+					path: path.resolve("public/assets/hero.jpg"), // Replace with actual path to your couple image
+					cid: "weddingCoupleImage", // This is referenced in the HTML above with <img src="cid:weddingCoupleImage" />
+				},
+				{
+					filename: "Tolu_Ope_Wedding_Cal.ics",
+					content: icsBuffer,
+					contentType: "text/calendar",
+					cid: "addToCalendar",
+				},
+			],
+		};
 
+		const transporter = nodemailer.createTransport({
+			host: "smtp.office365.com",
+			port: 587,
+			secure: false, // true for 465, false for other ports
+			auth: {
+				user: process.env.OUTLOOK_USER, // Your Outlook email address
+				pass: process.env.OUTLOOK_PASS, // Your Outlook email password or app password
+			},
+		});
+		await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ result: 'success', message: 'RSVP received and confirmation email sent.' }, { status: 200 });
-  } catch (error) {
-    console.error('Error processing RSVP:', error);
-    return NextResponse.json({ result: 'error', message: 'Error processing RSVP.' }, { status: 500 });
-  }
+		return NextResponse.json(
+			{
+				result: "success",
+				message: "RSVP received and confirmation email sent.",
+			},
+			{ status: 200 }
+		);
+	} catch (error) {
+		console.error("Error processing RSVP:", error);
+		return NextResponse.json(
+			{ result: "error", message: "Error processing RSVP." },
+			{ status: 500 }
+		);
+	}
 }
-

@@ -1,6 +1,5 @@
 "use client";
-import { db } from "@/lib/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db, doc, getDoc, updateDoc } from "@/lib/firebase";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { useEffect, useRef, useState } from "react";
 
