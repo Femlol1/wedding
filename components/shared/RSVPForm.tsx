@@ -36,6 +36,7 @@ export function RSVPForm() {
 	const [showModal, setShowModal] = useState(false);
 	const [modalMessage, setModalMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+	const [messageColor, setMessageColor] = useState("text-gray-700"); // Default color
 
 	const form = useForm<z.infer<typeof rsvpFormSchema>>({
 		resolver: zodResolver(rsvpFormSchema),
@@ -92,6 +93,7 @@ export function RSVPForm() {
 				setModalMessage(
 					"This email has already been used to RSVP. Please use a different email."
 				);
+				setMessageColor("text-red-500"); // Change message color to red for error
 				setIsLoading(false);
 				return;
 			}
@@ -99,22 +101,27 @@ export function RSVPForm() {
 			const response = await axios.post("/api/rsvp", values);
 			if (response.data.result === "error") {
 				setModalMessage(response.data.message);
+				setMessageColor("text-red-500"); // Change message color to red for error
 			} else {
 				setModalMessage(
 					"Your RSVP has been sent successfully. You should soon receive a confirmation email with your RSVP code. Check inbox or spam"
 				);
+				setMessageColor("text-green-500"); // Green for success
+
 				form.reset(); // Reset the form after a successful submission
 			}
 		} catch (error: any) {
 			// Cast error to any
 			if (error.response?.status === 400) {
 				setModalMessage(
-					"The RSVP code you entered is invalid. Please check your code and try again."
+					"The RSVP code you entered is INVALID. Please check your code and try again."
 				);
+				setMessageColor("text-red-500"); // Change message color to red for error
 			} else {
 				setModalMessage(
 					"Sorry! There was an issue with the server. Please try again later."
 				);
+				setMessageColor("text-red-500"); // Change message color to red for error
 			}
 		} finally {
 			setIsLoading(false);
@@ -124,6 +131,7 @@ export function RSVPForm() {
 	const closeModal = () => {
 		setShowModal(false);
 		setModalMessage("");
+		setMessageColor("text-gray-700"); // Reset message color
 	};
 
 	const isFormValid = form.formState.isValid;
@@ -434,6 +442,7 @@ export function RSVPForm() {
 				title={isLoading ? "Sending RSVP..." : "RSVP Submission"}
 				message={modalMessage}
 				isLoading={isLoading}
+				messageColor={messageColor} // Pass dynamic message color
 			/>
 		</div>
 	);

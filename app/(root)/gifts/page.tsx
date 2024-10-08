@@ -9,7 +9,7 @@ const Gifts = () => {
 	return (
 		<div className="flex flex-col md:flex-col md:mt-20">
 			{/* Image Section */}
-			<section className="relative w-full h-64 ">
+			<section className="relative w-full h-64">
 				<Image
 					src="/assets/images/whatsapp/222.jpeg" // Replace with your image path
 					alt="Welcome Image"
@@ -23,93 +23,109 @@ const Gifts = () => {
 					<h3 className="text-3xl md:text-5xl font-bold mt-2">Gifts</h3>
 				</div>
 			</section>
-			<div className="container mx-auto px-4 py-4">
-				<p className="mt-4 text-lg text-center">
+
+			<div className="container mx-auto px-4 py-5">
+				<p className=" text-lg text-center text-gray-700 leading-relaxed">
 					Your presence at our wedding is the greatest gift we could ask for. If
 					you would like to contribute further, a cash gift towards our
-					honeymoon or our new home would be greatly appreciated. Thank you for
-					your love and support.
+					honeymoon or Amazon wishlist for our new home would be greatly
+					appreciated. Thank you for your love and support.
 				</p>
 
 				<div className="mt-10">
-					<h2 className="text-2xl font-semibold">Bank Details</h2>
-					<div className="mt-4 space-y-3">
-						<div>
-							<h3 className="font-semibold">
-								<span className="inline-block">
+					<h2 className="text-2xl font-semibold text-gray-900">Bank Details</h2>
+					<div className="mt-6 space-y-6">
+						<div className="border border-gray-200 p-4 rounded-lg shadow-md">
+							<h3 className="font-semibold flex items-center">
+								<span className="inline-block mr-2">
 									<Image
 										src="/assets/icons/usa.png" // Replace with your image path
-										alt="isa logo"
-										width={10}
-										height={10}
-										className=" pb-0.5 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
-									></Image>
-								</span>{" "}
+										alt="USA logo"
+										width={20}
+										height={20}
+										className="pb-0.5 transition-transform duration-300 transform hover:scale-110"
+									/>
+								</span>
 								United States
 							</h3>
-							<p>
+							<p className="text-gray-700 mt-2">
 								Bank of America
 								<br />
-								Name on the account: Toluwanimi Oyediran <br />
+								Account name: Toluwanimi Oyediran <br />
 								Account number: 446055799865 <br />
-								<br />
 								For Zelle: toluoyed26@gmail.com
 							</p>
 						</div>
-						<div>
-							<h3 className="font-semibold">
-								<span className="inline-block">
+						<div className="border border-gray-200 p-4 rounded-lg shadow-md">
+							<h3 className="font-semibold flex items-center">
+								<span className="inline-block mr-2">
 									<Image
 										src="/assets/icons/united-kingdom.png" // Replace with your image path
-										alt="isa logo"
-										width={10}
-										height={10}
-										className="pb-0.5 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
-									></Image>
-								</span>{" "}
+										alt="UK logo"
+										width={20}
+										height={20}
+										className="pb-0.5 transition-transform duration-300 transform hover:scale-110"
+									/>
+								</span>
 								United Kingdom
 							</h3>
-							<p>
-								Name on the account: Ope Osibemekun <br />
+							<p className="text-gray-700 mt-2">
+								Account name: Ope Osibemekun <br />
 								Sort code: 60-84-07 <br />
 								Account number: 81453566
 							</p>
 						</div>
-						<div>
-							<h3 className="font-semibold">
-								<span className="inline-block">
+						<div className="border border-gray-200 p-4 rounded-lg shadow-md">
+							<h3 className="font-semibold flex items-center">
+								<span className="inline-block mr-2">
 									<Image
 										src="/assets/icons/nigeria.png" // Replace with your image path
-										alt="isa logo"
-										width={10}
-										height={10}
-										className="pb-0.4 flex-shrink-0 transition-transform duration-300 transform hover:scale-110"
-									></Image>
-								</span>{" "}
+										alt="Nigeria logo"
+										width={20}
+										height={20}
+										className="pb-0.5 transition-transform duration-300 transform hover:scale-110"
+									/>
+								</span>
 								Nigeria
 							</h3>
-							<p>
-								Name on the account: OSIBEMEKUN OPEOLUWA EFUNYINKA <br />
+							<p className="text-gray-700 mt-2">
+								Account name: OSIBEMEKUN OPEOLUWA EFUNYINKA <br />
 								Account number: 0170585078
 							</p>
 						</div>
 					</div>
 
-					<h2 className="mt-8 text-2xl font-semibold">PayPal</h2>
-					<p className="mt-4">
+					<h2 className="mt-8 text-2xl font-semibold text-gray-900">PayPal</h2>
+					<p className="mt-4 text-gray-700">
 						For convenience, you can also use{" "}
 						<Link
-							className="text-primary underline "
+							className="text-primary underline hover:text-primary-600"
 							href={"https://www.paypal.me/OpeOsibemekun"}
 						>
 							PayPal
 						</Link>{" "}
-						.
+						to send your gift.
+					</p>
+
+					<h2 className="mt-8 text-2xl font-semibold text-gray-900">
+						Amazon Wishlist
+					</h2>
+					<p className="mt-4 text-gray-700">
+						You can also view our wishlist on Amazon for more personalized
+						gifts:{" "}
+						<Link
+							className="text-primary underline hover:text-primary-600"
+							href="https://www.amazon.co.uk/wedding/registry/33LO6NU0J2CXU"
+							target="_blank"
+						>
+							Amazon Wishlist
+						</Link>
 					</p>
 				</div>
+
 				<section className="fixed bottom-4 right-4 z-20">
 					<Link href="/guest">
-						<Button className="w-12 h-12 text-white btn-fill font-bold py-2 px-3 rounded-full transition duration-200 flex items-center justify-center shadow-lg">
+						<Button className="w-12 h-12 text-white btn-fill font-bold py-2 px-3 rounded-full transition duration-200 flex items-center justify-center shadow-lg hover:bg-primary-600">
 							<FiChevronRight className="text-2xl text-white" />
 						</Button>
 					</Link>
