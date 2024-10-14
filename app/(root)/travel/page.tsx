@@ -43,11 +43,11 @@ export default function Travel() {
 						<div className="md:w-2/3">
 							<h3 className="text-xl font-semibold">Hotel Vintanio</h3>
 							<p>
-								We have reserved Hotel Vintanio in Lekki for those seeking
+								We recommend Hotel Vintanio in Lekki for those seeking
 								accommodation at{" "}
 								<TbCurrencyNaira className="inline-flex mb-1" />
 								80,000 per night. It is approximately 10 minutes to FourSquare
-								and 20 minutes to Monarch. Please contact the hotel manager at{" "}
+								and 20 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
 									<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
 								</span>{" "}
@@ -76,11 +76,11 @@ export default function Travel() {
 						<div className="md:w-2/3">
 							<h3 className="text-xl font-semibold">Albergo Hotel</h3>
 							<p>
-								We have reserved Albergo Hotel in Lekki for those seeking
+								We recommend Albergo Hotel in Lekki for those seeking
 								accommodation at{" "}
 								<TbCurrencyNaira className="inline-flex mb-1" />
 								100,000 per night. It is approximately 10 minutes to FourSquare
-								and 20 minutes to Monarch. Please contact the hotel manager at{" "}
+								and 20 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
 									<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
 								</span>{" "}
@@ -109,11 +109,11 @@ export default function Travel() {
 						<div className="md:w-2/3">
 							<h3 className="text-xl font-semibold">The Corniche Hotel</h3>
 							<p>
-								We have reserved The Corniche Hotel in Lekki for those seeking
+								We recommend The Corniche Hotel in Lekki for those seeking
 								accommodation at{" "}
 								<TbCurrencyNaira className="inline-flex mb-1" />
 								65,000 per night. It is approximately 15 minutes to FourSquare
-								and 22 minutes to Monarch. Please contact the hotel manager at{" "}
+								and 22 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
 									<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
 								</span>{" "}
