@@ -49,7 +49,7 @@ export default function Travel() {
 								80,000 per night. It is approximately 10 minutes to FourSquare
 								and 20 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
-									<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
+									<a href={`tel:${`+2348080918070`}`}>+234(0)8080918070</a>
 								</span>{" "}
 								to book a room at our discounted rate.
 							</p>
@@ -82,7 +82,7 @@ export default function Travel() {
 								100,000 per night. It is approximately 10 minutes to FourSquare
 								and 20 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
-									<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
+									<a href={`tel:${`+2348080918070`}`}>+234(0)8080918070</a>
 								</span>{" "}
 								to book a room at our discounted rate.
 							</p>
@@ -115,7 +115,7 @@ export default function Travel() {
 								65,000 per night. It is approximately 15 minutes to FourSquare
 								and 22 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
-									<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
+									<a href={`tel:${`+2348080918070`}`}>+234(0)8080918070</a>
 								</span>{" "}
 								to book a room at our discounted rate.
 							</p>
@@ -244,7 +244,7 @@ export default function Travel() {
 						For more personalized recommendations and assistance with bookings,
 						feel free to reach out to our wedding planner at{" "}
 						<span className="text-primary-500 hover:text-primary-700">
-							<a href={`tel:${`+234813508382`}`}>+234(0)813508382</a>
+							<a href={`tel:${`+2348080918070`}`}>+234(0)8080918070</a>
 						</span>
 						.
 					</p>
