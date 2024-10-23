@@ -49,11 +49,11 @@ const Gifts = () => {
 								United States
 							</h3>
 							<p className="text-gray-700 mt-2">
-								Bank of America
+								<strong>Bank of America</strong>
 								<br />
-								Account name: Toluwanimi Oyediran <br />
-								Account number: 446055799865 <br />
-								For Zelle: toluoyed26@gmail.com
+								<strong>Account name:</strong> Toluwanimi Oyediran <br />
+								<strong>Account number:</strong> 446055799865 <br />
+								<strong>For Zelle:</strong> toluoyed26@gmail.com
 							</p>
 						</div>
 						<div className="border border-gray-200 p-4 rounded-lg shadow-md">
@@ -70,9 +70,10 @@ const Gifts = () => {
 								United Kingdom
 							</h3>
 							<p className="text-gray-700 mt-2">
-								Account name: Ope Osibemekun <br />
-								Sort code: 60-84-07 <br />
-								Account number: 81453566
+								<strong>Account name:</strong> Ope Osibemekun <br />
+								<strong>Account number:</strong> 81453566
+								<br />
+								<strong>Sort code:</strong> 60-84-07
 							</p>
 						</div>
 						<div className="border border-gray-200 p-4 rounded-lg shadow-md">
@@ -89,8 +90,11 @@ const Gifts = () => {
 								Nigeria
 							</h3>
 							<p className="text-gray-700 mt-2">
-								Account name: OSIBEMEKUN OPEOLUWA EFUNYINKA <br />
-								Account number: 0170585078
+								<strong>GTBank</strong>
+								<br />
+								<strong>Account name:</strong> OSIBEMEKUN OPEOLUWA EFUNYINKA{" "}
+								<br />
+								<strong>Account number:</strong> 0170585078
 							</p>
 						</div>
 					</div>
