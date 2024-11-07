@@ -142,7 +142,7 @@ export default function Travel() {
 						<span>
 							<Link
 								className="text-primary-500 hover:text-primary-700 underline"
-								href="https://www.airbnb.com/s/Lagos--Nigeria/homes"
+								href="https://www.airbnb.co.uk/s/Yaba--Lagos--Nigeria/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=2024-12-01&monthly_length=3&monthly_end_date=2025-03-01&price_filter_input_type=2&channel=EXPLORE&zoom_level=11.54261450728684&search_type=user_map_move&price_filter_num_nights=5&date_picker_type=calendar&source=structured_search_input_header&query=Yaba%2C%20Lagos%2C%20Nigeria&place_id=ChIJSz-LNYyMOxARNITfQ73PUlU&search_mode=regular_search&ne_lat=6.528988197900934&ne_lng=3.6121034529260214&sw_lat=6.296074799515078&sw_lng=3.3942637454658495&zoom=11.54261450728684&search_by_map=true"
 							>
 								Airbnbs near Lagos
 							</Link>
