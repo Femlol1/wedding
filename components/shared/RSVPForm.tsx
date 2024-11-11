@@ -139,7 +139,7 @@ export function RSVPForm() {
 	return (
 		<div className="container mx-auto rsvp">
 			<div className="text-center text-sm py-4">
-				We would greatly appreciate if you could RSVP before 15th Nov 2024
+				We would greatly appreciate if you could RSVP before 15th Dec 2024
 			</div>
 			<Form {...form}>
 				<form
