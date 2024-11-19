@@ -231,9 +231,16 @@ export function RSVPForm() {
 											<SelectItem value="At home with family">
 												At home with family
 											</SelectItem>
-											<SelectItem value="Recommended Hotel Vintanio">
-												Recommended Hotel Vintanio
+											<SelectItem value="Hotel Vintanio">
+												Hotel Vintanio
 											</SelectItem>
+											<SelectItem value="Albergo Hotel">
+												Albergo Hotel
+											</SelectItem>
+											<SelectItem value="Corniche Hotel">
+												Corniche Hotel
+											</SelectItem>
+											<SelectItem value="Airbnb">Airbnb</SelectItem>
 											<SelectItem value="Other">Other</SelectItem>
 										</SelectContent>
 									</Select>
