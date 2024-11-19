@@ -126,9 +126,7 @@ const UpdateRsvpModal: React.FC<UpdateRsvpModalProps> = ({
 						className="w-full p-2 border rounded mb-2"
 					>
 						<option value="">Select Staying Place</option>
-						<option value="Recommended Hotel Vintanio">
-							Recommended Hotel
-						</option>
+						<option value="Hotel">Recommended Hotel</option>
 						<option value="At home with family">Home</option>
 						<option value="Other">Other</option>
 					</select>
