@@ -63,7 +63,7 @@ const Gallery = () => {
 			{/* Modal Overlay */}
 			{isCarouselOpen && (
 				<div
-					className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+					className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 backdrop-blur-md"
 					onClick={handleOverlayClick}
 				>
 					<div className="relative w-full max-w-4xl">
@@ -83,6 +83,7 @@ const Gallery = () => {
 							showThumbnails
 							showPlayButton
 							showFullscreenButton={false}
+							thumbnailPosition="left"
 						/>
 					</div>
 				</div>
