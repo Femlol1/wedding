@@ -82,7 +82,7 @@ const Gallery = () => {
 							onSlide={(index) => setCurrentIndex(index)}
 							showThumbnails
 							showPlayButton
-							showFullscreenButton={false}
+							showFullscreenButton
 							thumbnailPosition="left"
 						/>
 					</div>
