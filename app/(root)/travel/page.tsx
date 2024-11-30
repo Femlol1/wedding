@@ -46,7 +46,7 @@ export default function Travel() {
 								We recommend Hotel Vintanio in Lekki for those seeking
 								accommodation at{" "}
 								<TbCurrencyNaira className="inline-flex mb-1" />
-								80,000 per night. It is approximately 10 minutes to FourSquare
+								100,000 per night. It is approximately 10 minutes to FourSquare
 								and 20 minutes to Monarch. Please contact the wedding planner at{" "}
 								<span className="text-primary-500 hover:text-primary-700">
 									<a href={`tel:${`+2348080918070`}`}>+234(0)8080918070</a>
