@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 		// Generate a PDF with the QR code
 		const pdfDoc = await PDFDocument.create();
 		const page = pdfDoc.addPage([300, 150]);
-		const pngImage = await pdfDoc.embedPng(qrCodeBuffer);
+		const pngImage = await pdfDoc.embedPng(new Uint8Array(qrCodeBuffer));
 		const { width, height } = pngImage.scale(1);
 
 		page.drawImage(pngImage, {
@@ -65,37 +65,6 @@ export async function POST(req: NextRequest) {
 		// Convert pdfBytes (Uint8Array) to Buffer
 		const pdfBuffer = Buffer.from(pdfBytes);
 
-		// const icsContent = `BEGIN:VCALENDAR
-		// VERSION:2.0
-		// PRODID:-//Your Company//Your Product//EN
-		// CALSCALE:GREGORIAN
-		// METHOD:PUBLISH
-		// BEGIN:VEVENT
-		// UID:${rsvpDocId}
-		// DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
-		// DTSTART:20250322T100000Z
-		// DTEND:20250322T180000Z
-		// SUMMARY:Tolu & Ope's Wedding
-		// DESCRIPTION:Join us to celebrate our special day!
-		// LOCATION:Lagos, Nigeria
-		// STATUS:CONFIRMED
-		// SEQUENCE:0
-		// BEGIN:VALARM
-		// TRIGGER:-P3M
-		// ACTION:DISPLAY
-		// DESCRIPTION:Reminder: Tolu & Ope's Wedding is in 3 months
-		// END:VALARM
-		// BEGIN:VALARM
-		// TRIGGER:-PT15M
-		// REPEAT:1
-		// DURATION:PT15M
-		// ACTION:DISPLAY
-		// DESCRIPTION:Reminder: Tolu & Ope's Wedding starts in 15 minutes
-		// END:VALARM
-		// END:VEVENT
-		// END:VCALENDAR`;
-
-		// const icsBuffer = Buffer.from(icsContent);
 		const icsContent = `BEGIN:VCALENDAR
                                       VERSION:2.0
                                       PRODID:-//ical.marudot.com//iCal Event Maker

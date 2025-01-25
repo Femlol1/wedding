@@ -58,6 +58,10 @@ export const adminLinks = [
 		route: "/admin",
 	},
 	{
+		label: "Create Rsvp",
+		route: "/create-rsvp",
+	},
+	{
 		label: "Comments",
 		route: "/comments",
 	},
@@ -74,7 +78,8 @@ export const events = [
 	{
 		time: "11:00am - 1:30pm",
 		title: "Church Ceremony", //ceremoney should be untop
-		location: "Foursquare Gospel Church, Off Freedom way, Lekki",
+		location:
+			"Foursquare Gospel Church, 5/7 Salvation Road, Off Freedom way, Lekki",
 		icon: "/assets/icons/church.png", //church icon
 		heading: " ",
 		description:
