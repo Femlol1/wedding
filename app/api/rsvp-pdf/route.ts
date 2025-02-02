@@ -1,8 +1,8 @@
 import { UserType, validCodes } from "@/constants/codes";
 import { db, Timestamp } from "@/lib/firebaseAdmin";
+import chromium from "chrome-aws-lambda";
 import { NextRequest, NextResponse } from "next/server";
 import { PDFDocument, rgb } from "pdf-lib";
-import puppeteer from "puppeteer";
 import qrcode from "qrcode";
 
 export async function POST(req: NextRequest) {
@@ -112,7 +112,12 @@ export async function POST(req: NextRequest) {
     `;
 
 		// 7. Use Puppeteer to convert that HTML into a PDF
-		const browser = await puppeteer.launch();
+		// const browser = await puppeteer.launch();
+		const browser = await chromium.puppeteer.launch({
+			args: chromium.args,
+			executablePath: await chromium.executablePath,
+			headless: chromium.headless,
+		});
 		const pagePuppeteer = await browser.newPage();
 
 		// Pass the HTML in directly
@@ -122,7 +127,7 @@ export async function POST(req: NextRequest) {
 
 		// Generate PDF
 		const finalPdfBuffer = await pagePuppeteer.pdf({
-			format: "A4",
+			format: "a4",
 			printBackground: true,
 		});
 
