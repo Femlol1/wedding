@@ -57,13 +57,15 @@ const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 					ref={contentRef}
 					className="max-w-xl mx-auto p-8 bg-white border border-gray-200 rounded-lg text-center"
 				>
-					<div className="mb-4">
+					<div className="mb-4 relative">
 						<Image
 							src="/assets/logo.png"
 							alt="Wedding Logo"
 							width={100}
 							height={100}
 							className="mx-auto"
+							sizes="(max-width: 500px) 100vw, (max-width: 600px) 50vw, 33vw"
+							style={{ objectFit: "contain" }}
 						/>
 					</div>
 					<h2 className="text-2xl font-bold text-yellow-600 mb-2">
@@ -97,7 +99,7 @@ const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 					<p className="text-base mb-4">
 						Please keep this code safe as it will be needed for your entry.
 					</p>
-					<div className="mb-4">
+					<div className="mb-4 relative">
 						<Image
 							src="/assets/hero.jpg"
 							alt="Wedding Couple"
