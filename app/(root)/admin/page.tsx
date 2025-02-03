@@ -12,6 +12,8 @@ import {
 } from "@/lib/firebase"; // Adjust the import according to your setup
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
+// At the top of your AdminPage component file:
+import RsvpConfirmation from "@/components/shared/RsvpConfirmation";
 
 interface RSVP {
 	id: string;
@@ -295,6 +297,7 @@ const AdminPage = () => {
 									>
 										Edit
 									</button>
+									<RsvpConfirmation rsvp={rsvp} />
 								</td>
 							</tr>
 						))}

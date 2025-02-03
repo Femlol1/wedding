@@ -105,27 +105,12 @@ export function RSVPForm() {
 					responseType: "blob",
 				});
 
-				// Convert the response (which is a PDF Blob) into a downloadable file:
-				const fileBlob = new Blob([response.data], { type: "application/pdf" });
-				const fileURL = URL.createObjectURL(fileBlob);
-
-				// Option 1: Open in a new browser tab:
-				window.open(fileURL);
-
-				// Option 2: Force direct download:
-				// const link = document.createElement("a");
-				// link.href = fileURL;
-				// link.download = `RSVP_Confirmation.pdf`;
-				// link.click();
-
-				// (Any success message handling here)
-
 				if (response.data.result === "error") {
 					setModalMessage(response.data.message);
 					setMessageColor("text-red-500"); // Change message color to red for error
 				} else {
 					setModalMessage(
-						"Your RSVP has been Created successfully. Please remember to download"
+						"The RSVP has been Created successfully. Please remember to download from the admin list"
 					);
 					setMessageColor("text-green-500"); // Green for success
 
