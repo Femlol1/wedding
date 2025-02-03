@@ -103,7 +103,9 @@ const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 							alt="Wedding Couple"
 							width={500}
 							height={500}
-							className="mx-auto rounded-lg"
+							className="rounded-lg"
+							sizes="(max-width: 500px) 100vw, (max-width: 600px) 50vw, 33vw"
+							style={{ objectFit: "contain" }}
 						/>
 					</div>
 					<p className="text-base">We look forward to celebrating with you!</p>
