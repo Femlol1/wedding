@@ -34,7 +34,7 @@ const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 		const html2pdfModule = (await import("html2pdf.js")).default;
 		const options = {
 			margin: 0.5,
-			filename: `RSVP_Confirmation_${rsvp.id}.pdf`,
+			filename: `RSVP_${rsvp.firstName}_${rsvp.lastName}.pdf`,
 			image: { type: "jpeg", quality: 0.98 },
 			html2canvas: { scale: 2 },
 			jsPDF: { unit: "in", format: "A4", orientation: "portrait" },
