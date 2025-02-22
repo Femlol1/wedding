@@ -44,12 +44,7 @@ const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 
 	return (
 		<div className="flex flex-col items-center">
-			<button
-				onClick={handleDownloadPdf}
-				className="bg-purple-500 text-white px-3 py-1 rounded mb-4"
-			>
-				Download Confirmation
-			</button>
+			<div onClick={handleDownloadPdf}>Download</div>
 
 			{/* Hidden element used for PDF generation */}
 			<div className="hidden">

@@ -14,6 +14,14 @@ import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 // At the top of your AdminPage component file:
 import RsvpConfirmation from "@/components/shared/RsvpConfirmation";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface RSVP {
 	id: string;
@@ -245,7 +253,7 @@ const AdminPage = () => {
 							<th className="px-4 py-2 text-left reception">Reception</th>
 							<th className="px-4 py-2 text-left afterParty">After Party</th>
 							<th className="px-4 py-2 text-left checkedIn">Checked In</th>
-							<th className="px-4 py-2 text-left actions">Actions</th>
+							<th className="px-4 py-2 text-left actions"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -269,35 +277,48 @@ const AdminPage = () => {
 								<td className="px-4 py-2 checkedIn">
 									{rsvp.checkedIn ? "Yes" : "No"}
 								</td>
-								<td className="px-4 py-2 flex justify-center gap-2 actions">
-									{!rsvp.checkedIn ? (
-										<button
-											className="bg-green-500 text-white px-4 py-2 rounded"
-											onClick={() => handleCheckIn(rsvp.id)}
-										>
-											Check In
-										</button>
-									) : (
-										<button
-											className="bg-yellow-500 text-white px-4 py-2 rounded"
-											onClick={() => handleCheckOut(rsvp.id)}
-										>
-											Check Out
-										</button>
-									)}
-									<button
-										className="bg-red-500 text-white px-4 py-2 rounded"
-										onClick={() => confirmDelete(rsvp.id)}
-									>
-										Delete
-									</button>
-									<button
-										className="bg-blue-500 text-white px-4 py-2 rounded"
-										onClick={() => openUpdateModal(rsvp)}
-									>
-										Edit
-									</button>
-									<RsvpConfirmation rsvp={rsvp} />
+								<td className="px-4 py-2">
+									<DropdownMenu>
+										<DropdownMenuTrigger className="bg-green-500 text-white px-4 py-2 rounded">
+											Actions
+										</DropdownMenuTrigger>
+										<DropdownMenuContent>
+											<DropdownMenuLabel>Actions</DropdownMenuLabel>
+											<DropdownMenuSeparator />
+											<DropdownMenuItem>
+												{!rsvp.checkedIn ? (
+													<div
+														className="text-green-500"
+														onClick={() => handleCheckIn(rsvp.id)}
+													>
+														Check In
+													</div>
+												) : (
+													<div
+														className="text-yellow-500"
+														onClick={() => handleCheckOut(rsvp.id)}
+													>
+														Check Out
+													</div>
+												)}
+											</DropdownMenuItem>
+
+											<DropdownMenuItem>
+												<div onClick={() => openUpdateModal(rsvp)}>Edit</div>
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<RsvpConfirmation rsvp={rsvp} />
+											</DropdownMenuItem>
+											<DropdownMenuItem>
+												<div
+													className="text-red-500"
+													onClick={() => confirmDelete(rsvp.id)}
+												>
+													Delete
+												</div>
+											</DropdownMenuItem>
+										</DropdownMenuContent>
+									</DropdownMenu>
 								</td>
 							</tr>
 						))}
