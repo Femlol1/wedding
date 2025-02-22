@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 // At the top of your AdminPage component file:
 import RsvpConfirmation from "@/components/shared/RsvpConfirmation";
+import ScanButton from "@/components/shared/ScanButton";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -254,7 +255,9 @@ const AdminPage = () => {
 							<th className="px-4 py-2 text-left reception">Reception</th>
 							<th className="px-4 py-2 text-left afterParty">After Party</th>
 							<th className="px-4 py-2 text-left checkedIn">Checked In</th>
-							<th className="px-4 py-2 text-left actions"></th>
+							<th className="px-4 py-2 text-left actions">
+								<ScanButton />
+							</th>
 						</tr>
 					</thead>
 					<tbody>
