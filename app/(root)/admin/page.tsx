@@ -23,7 +23,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-interface RSVP {
+export interface RSVP {
 	id: string;
 	userType: string;
 	firstName: string;
@@ -45,6 +45,7 @@ interface RSVP {
 		seconds: number;
 		nanoseconds: number;
 	};
+	tableGroupId?: string; // optional reference to the assigned table group
 }
 
 const AdminPage = () => {

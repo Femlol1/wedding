@@ -73,6 +73,14 @@ export const adminLinks = [
 		label: "All stats",
 		route: "/stats",
 	},
+	{
+		label: "Tables",
+		route: "/table-groups",
+	},
+	{
+		label: "Assign Tables",
+		route: "/assign-table",
+	},
 ];
 export const events = [
 	{

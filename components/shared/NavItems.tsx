@@ -18,7 +18,9 @@ const NavItems: FC<NavItemsProps> = ({ handleClose }) => {
 		pathname.startsWith("/check-in") ||
 		pathname.startsWith("/stats") ||
 		pathname.startsWith("/comments") ||
-		pathname.startsWith("/create-rsvp");
+		pathname.startsWith("/create-rsvp") ||
+		pathname.startsWith("/table-groups") ||
+		pathname.startsWith("/assign-table");
 
 	// Choose the appropriate links based on the current path
 	const links = isAdminPath ? adminLinks : userLinks;
