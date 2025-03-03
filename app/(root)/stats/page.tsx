@@ -33,6 +33,12 @@ const StatsPage = () => {
 		attendingReception: 0,
 		attendingAfterParty: 0,
 		checkedIn: 0,
+		vipUser: 0,
+		opesGuest: 0,
+		tolusGuest: 0,
+		osibemekunFamilyGuest: 0,
+		oyediranFamilyGuest: 0,
+		bridalParty: 0,
 	});
 
 	useEffect(() => {
@@ -49,6 +55,12 @@ const StatsPage = () => {
 			let attendingReception = 0;
 			let attendingAfterParty = 0;
 			let checkedIn = 0;
+			let vipUser = 0;
+			let opesGuest = 0;
+			let tolusGuest = 0;
+			let osibemekunFamilyGuest = 0;
+			let oyediranFamilyGuest = 0;
+			let bridalParty = 0;
 
 			querySnapshot.docs.forEach((doc) => {
 				const data = doc.data();
@@ -62,6 +74,13 @@ const StatsPage = () => {
 				if (data.reception === "Yes") attendingReception += 1;
 				if (data.afterParty === "Yes") attendingAfterParty += 1;
 				if (data.checkedIn) checkedIn += 1;
+				if (data.userType === "vip") vipUser += 1;
+				if (data.userType === "opesGuest") opesGuest += 1;
+				if (data.userType === "tolusGuest") tolusGuest += 1;
+				if (data.userType === "osibemekunFamilyGuest")
+					osibemekunFamilyGuest += 1;
+				if (data.userType === "oyediranFamilyGuest") oyediranFamilyGuest += 1;
+				if (data.userType === "bridalParty") bridalParty += 1;
 			});
 
 			setStats({
@@ -74,6 +93,12 @@ const StatsPage = () => {
 				attendingReception,
 				attendingAfterParty,
 				checkedIn,
+				vipUser,
+				opesGuest,
+				tolusGuest,
+				osibemekunFamilyGuest,
+				oyediranFamilyGuest,
+				bridalParty,
 			});
 		};
 
@@ -185,6 +210,30 @@ const StatsPage = () => {
 				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
 					<h2 className="text-xl font-semibold">Checked In</h2>
 					<p className="text-3xl font-bold">{stats.checkedIn}</p>
+				</div>
+				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
+					<h2 className="text-xl font-semibold">Vip users</h2>
+					<p className="text-3xl font-bold">{stats.vipUser}</p>
+				</div>
+				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
+					<h2 className="text-xl font-semibold">opesGuest</h2>
+					<p className="text-3xl font-bold">{stats.opesGuest}</p>
+				</div>
+				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
+					<h2 className="text-xl font-semibold">tolusGuest</h2>
+					<p className="text-3xl font-bold">{stats.tolusGuest}</p>
+				</div>
+				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
+					<h2 className="text-xl font-semibold">osibemekunFamilyGuest</h2>
+					<p className="text-3xl font-bold">{stats.osibemekunFamilyGuest}</p>
+				</div>
+				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
+					<h2 className="text-xl font-semibold">oyediranFamilyGuest</h2>
+					<p className="text-3xl font-bold">{stats.oyediranFamilyGuest}</p>
+				</div>
+				<div className="bg-gray-100 p-6 rounded-lg shadow-md">
+					<h2 className="text-xl font-semibold">bridalParty</h2>
+					<p className="text-3xl font-bold">{stats.bridalParty}</p>
 				</div>
 			</div>
 
