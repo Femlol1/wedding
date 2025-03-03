@@ -9,10 +9,10 @@ export const userLinks = [
 		label: "Welcome",
 		route: "/home",
 	},
-	{
-		label: "RSVP",
-		route: "/rsvp",
-	},
+	// {
+	// 	label: "RSVP",
+	// 	route: "/rsvp",
+	// },
 	{
 		label: "Our story",
 		route: "/story",

@@ -1,20 +1,8 @@
 "use client";
 import { collection, db, doc, getDocs, updateDoc } from "@/lib/firebase";
+import { RSVP, TableGroup } from "@/types";
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
-import { RSVP } from "../admin/page";
-
-interface TableGroup {
-	id: string;
-	tableNumber: number;
-	groupName?: string;
-}
-
-interface TableGroup {
-	id: string;
-	tableNumber: number;
-	groupName?: string;
-}
 
 const TableAssignmentPage = () => {
 	const [rsvps, setRsvps] = useState<RSVP[]>([]);
@@ -109,14 +97,14 @@ const TableAssignmentPage = () => {
 		<div className="container mx-auto px-4 py-8 mt-20">
 			<div className="flex flex-col md:flex-row justify-between items-center mb-8">
 				<h1 className="text-3xl font-bold">Table Assignment</h1>
-				<div className="flex gap-4 mt-4 md:mt-0">
+				<div className="flex flex-col md:flex-row gap-4 mt-4 md:mt-0">
 					{/* Search Input */}
 					<input
 						type="text"
 						placeholder="Search by name..."
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
-						className="p-2 border rounded"
+						className="p-2 border rounded w-full md:w-auto"
 					/>
 					{/* Print Button */}
 					<button
@@ -138,64 +126,20 @@ const TableAssignmentPage = () => {
 
 			{/* Section for Unassigned RSVPs */}
 			<div className="mb-8">
-				<h2 className="text-2xl font-semibold mb-4">Unassigned RSVPs</h2>
+				<h2 className="text-2xl font-semibold mb-4">
+					Unassigned RSVPs ({groupedRsvps["unassigned"]?.length || 0})
+				</h2>
 				{groupedRsvps["unassigned"] ? (
-					<table className="min-w-full table-auto mb-4">
-						<thead>
-							<tr className="bg-gray-100">
-								<th className="px-4 py-2">Name</th>
-								<th className="px-4 py-2">Assign Table</th>
-							</tr>
-						</thead>
-						<tbody>
-							{groupedRsvps["unassigned"].map((rsvp) => (
-								<tr key={rsvp.id} className="border-b">
-									<td className="px-4 py-2">
-										{rsvp.firstName} {rsvp.lastName}
-									</td>
-									<td className="px-4 py-2">
-										<select
-											value={rsvp.tableGroupId || ""}
-											onChange={(e) =>
-												handleTableAssignmentChange(rsvp.id, e.target.value)
-											}
-											className="p-2 border rounded"
-										>
-											<option value="">Select Table</option>
-											{tableGroups.map((group) => (
-												<option key={group.id} value={group.id}>
-													Table {group.tableNumber}{" "}
-													{group.groupName ? `- ${group.groupName}` : ""}
-												</option>
-											))}
-										</select>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				) : (
-					<p>No unassigned RSVPs.</p>
-				)}
-			</div>
-
-			{/* Sections for Assigned RSVPs */}
-			{tableGroups.map((group) => (
-				<div key={group.id} className="mb-8">
-					<h2 className="text-2xl font-semibold mb-4">
-						Table {group.tableNumber}{" "}
-						{group.groupName ? `- ${group.groupName}` : ""}
-					</h2>
-					{groupedRsvps[group.id] ? (
-						<table className="min-w-full table-auto">
+					<div className="overflow-x-auto">
+						<table className="min-w-full table-auto mb-4 text-sm">
 							<thead>
 								<tr className="bg-gray-100">
 									<th className="px-4 py-2">Name</th>
-									<th className="px-4 py-2">Reassign Table</th>
+									<th className="px-4 py-2">Assign Table</th>
 								</tr>
 							</thead>
 							<tbody>
-								{groupedRsvps[group.id].map((rsvp) => (
+								{groupedRsvps["unassigned"].map((rsvp) => (
 									<tr key={rsvp.id} className="border-b">
 										<td className="px-4 py-2">
 											{rsvp.firstName} {rsvp.lastName}
@@ -206,13 +150,13 @@ const TableAssignmentPage = () => {
 												onChange={(e) =>
 													handleTableAssignmentChange(rsvp.id, e.target.value)
 												}
-												className="p-2 border rounded"
+												className="p-2 border rounded w-full md:w-auto"
 											>
 												<option value="">Select Table</option>
-												{tableGroups.map((g) => (
-													<option key={g.id} value={g.id}>
-														Table {g.tableNumber}{" "}
-														{g.groupName ? `- ${g.groupName}` : ""}
+												{tableGroups.map((group) => (
+													<option key={group.id} value={group.id}>
+														Table {group.tableNumber}{" "}
+														{group.groupName ? `- ${group.groupName}` : ""}
 													</option>
 												))}
 											</select>
@@ -221,6 +165,57 @@ const TableAssignmentPage = () => {
 								))}
 							</tbody>
 						</table>
+					</div>
+				) : (
+					<p>No unassigned RSVPs.</p>
+				)}
+			</div>
+
+			{/* Sections for Assigned RSVPs */}
+			{tableGroups.map((group) => (
+				<div key={group.id} className="mb-8">
+					<h2 className="text-2xl font-semibold mb-4">
+						Table {group.tableNumber}{" "}
+						{group.groupName ? `- ${group.groupName}` : ""} (
+						{groupedRsvps[group.id]?.length || 0} names)
+					</h2>
+					{groupedRsvps[group.id] ? (
+						<div className="overflow-x-auto">
+							<table className="min-w-full table-auto text-sm">
+								<thead>
+									<tr className="bg-gray-100">
+										<th className="px-4 py-2">Name</th>
+										<th className="px-4 py-2">Reassign Table</th>
+									</tr>
+								</thead>
+								<tbody>
+									{groupedRsvps[group.id].map((rsvp) => (
+										<tr key={rsvp.id} className="border-b">
+											<td className="px-4 py-2">
+												{rsvp.firstName} {rsvp.lastName}
+											</td>
+											<td className="px-4 py-2">
+												<select
+													value={rsvp.tableGroupId || ""}
+													onChange={(e) =>
+														handleTableAssignmentChange(rsvp.id, e.target.value)
+													}
+													className="p-2 border rounded w-full md:w-auto"
+												>
+													<option value="">Select Table</option>
+													{tableGroups.map((g) => (
+														<option key={g.id} value={g.id}>
+															Table {g.tableNumber}{" "}
+															{g.groupName ? `- ${g.groupName}` : ""}
+														</option>
+													))}
+												</select>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
 					) : (
 						<p>No RSVPs assigned to this table yet.</p>
 					)}

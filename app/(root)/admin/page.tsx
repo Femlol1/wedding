@@ -23,31 +23,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-export interface RSVP {
-	id: string;
-	userType: string;
-	firstName: string;
-	lastName: string;
-	email: string;
-	mobile: string;
-	relations: string;
-	stayingPlace: string;
-	otherStaying?: string;
-	allergies?: string;
-	asoEbi?: string;
-	asoebiType?: string;
-	church?: string;
-	reception?: string;
-	afterParty?: string;
-	checkedIn?: boolean;
-	timestamp: {
-		months: number;
-		seconds: number;
-		nanoseconds: number;
-	};
-	tableGroupId?: string; // optional reference to the assigned table group
-}
+import { RSVP } from "@/types";
 
 const AdminPage = () => {
 	const [rsvps, setRsvps] = useState<RSVP[]>([]);

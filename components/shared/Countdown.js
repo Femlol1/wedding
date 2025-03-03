@@ -19,11 +19,7 @@ const Countdown = ({ eventDate }) => {
 			const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 			// const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-			setTimeLeft(
-				`${months} months, ${
-					days % 30
-				} days, ${hours} hours, ${minutes} minutes`
-			);
+			setTimeLeft(`${days % 30} days, ${hours} hours, ${minutes} minutes`);
 		}, 1000);
 
 		return () => clearInterval(timer);
