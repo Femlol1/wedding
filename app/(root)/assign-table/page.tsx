@@ -1,4 +1,5 @@
 "use client";
+import RsvpConfirmation from "@/components/shared/RsvpConfirmation";
 import { collection, db, doc, getDocs, updateDoc } from "@/lib/firebase";
 import { RSVP, TableGroup } from "@/types";
 import { useEffect, useState } from "react";
@@ -78,6 +79,9 @@ const TableAssignmentPage = () => {
 		"Group Name": rsvp.tableGroupId
 			? tableGroupMap[rsvp.tableGroupId]?.groupName || ""
 			: "",
+		"User Type": rsvp.userType,
+		Email: rsvp.email,
+		Mobile: rsvp.mobile,
 	}));
 
 	// Group filtered RSVPs by their tableGroupId; unassigned RSVPs are grouped under the key "unassigned"
@@ -136,6 +140,8 @@ const TableAssignmentPage = () => {
 								<tr className="bg-gray-100">
 									<th className="px-4 py-2">Name</th>
 									<th className="px-4 py-2">Assign Table</th>
+									<th className="px-4 py-2">Phone number</th>
+									<th className="px-4 py-2">ticket</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -160,6 +166,12 @@ const TableAssignmentPage = () => {
 													</option>
 												))}
 											</select>
+										</td>
+										<td className="px-4 py-2">{rsvp.mobile}</td>
+										<td className="px-4 py-2">
+											<button className="text-green-500">
+												<RsvpConfirmation rsvp={rsvp} />
+											</button>
 										</td>
 									</tr>
 								))}
@@ -186,6 +198,8 @@ const TableAssignmentPage = () => {
 									<tr className="bg-gray-100">
 										<th className="px-4 py-2">Name</th>
 										<th className="px-4 py-2">Reassign Table</th>
+										<th className="px-4 py-2">Phone number</th>
+										<th className="px-4 py-2">ticket</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -210,6 +224,12 @@ const TableAssignmentPage = () => {
 														</option>
 													))}
 												</select>
+											</td>
+											<td className="px-4 py-2">{rsvp.mobile}</td>
+											<td className="px-4 py-2">
+												<button className="text-green-500">
+													<RsvpConfirmation rsvp={rsvp} />
+												</button>
 											</td>
 										</tr>
 									))}
