@@ -189,7 +189,7 @@ const TableAssignmentPage = () => {
 					<h2 className="text-2xl font-semibold mb-4">
 						Table {group.tableNumber}{" "}
 						{group.groupName ? `- ${group.groupName}` : ""} (
-						{groupedRsvps[group.id]?.length || 0} names)
+						{groupedRsvps[group.id]?.length || 0})
 					</h2>
 					{groupedRsvps[group.id] ? (
 						<div className="overflow-x-auto">
