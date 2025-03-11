@@ -61,6 +61,20 @@ export default function FAQ() {
 							ensure a smooth and enjoyable experience for all guests.
 						</p>
 					</Collapsible>
+					<Collapsible label="Who created the website?">
+						<p>
+							The website was created by Femi with lots of love for his sister.
+							If you are interested in his work or would like a website for
+							yourself, you can visit his website{" "}
+							<Link
+								href={"https://www.osifemi.dev"}
+								className="underline text-primary-500 hover:text-primary-700"
+							>
+								here
+							</Link>
+							.
+						</p>
+					</Collapsible>
 				</section>
 
 				<section className="mb-6">
