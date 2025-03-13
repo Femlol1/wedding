@@ -23,6 +23,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import { RSVP } from "@/types";
 
 const AdminPage = () => {
@@ -168,7 +169,7 @@ const AdminPage = () => {
 
 			{/* Search and Filter Inputs */}
 			<div className="flex flex-col md:flex-row gap-4 mb-8">
-				<input
+				<Input
 					type="text"
 					placeholder="Search by name..."
 					value={searchQuery}

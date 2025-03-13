@@ -1,6 +1,5 @@
 "use client";
 import Countdown from "@/components/shared/Countdown";
-import { RSVPForm } from "@/components/shared/CreateRSVP";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FiChevronRight } from "react-icons/fi";
@@ -17,11 +16,11 @@ const Rsvp: React.FC = () => {
 			<section>
 				<Countdown eventDate={eventDate} />
 			</section>
-			<section>
+			{/* <section>
 				<div className="mb-4 rsvp">
 					<RSVPForm />
 				</div>
-			</section>
+			</section> */}
 			<section className="fixed bottom-4 right-4 z-20">
 				<Link href="/story">
 					<Button className="w-12 h-12 text-white btn-fill font-bold py-2 px-3 rounded-full transition duration-200 flex items-center justify-center shadow-lg">

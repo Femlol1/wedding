@@ -1,5 +1,6 @@
 "use client";
 import RsvpConfirmation from "@/components/shared/RsvpConfirmation";
+import { Input } from "@/components/ui/input";
 import { collection, db, doc, getDocs, updateDoc } from "@/lib/firebase";
 import { RSVP, TableGroup } from "@/types";
 import { useEffect, useMemo, useState } from "react";
@@ -120,7 +121,7 @@ const TableAssignmentPage = () => {
 				<h1 className="text-xl md:text-3xl font-bold">Table Assignment</h1>
 				<div className="flex flex-wrap gap-2">
 					{/* Search Input */}
-					<input
+					<Input
 						type="text"
 						placeholder="Search by name..."
 						value={searchQuery}
