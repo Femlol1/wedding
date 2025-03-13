@@ -58,10 +58,6 @@ export const adminLinks = [
 		route: "/admin",
 	},
 	{
-		label: "Create Rsvp",
-		route: "/create-rsvp",
-	},
-	{
 		label: "Comments",
 		route: "/comments",
 	},
