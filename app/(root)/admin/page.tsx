@@ -33,6 +33,9 @@ const AdminPage = () => {
 	const [userTypeFilter, setUserTypeFilter] = useState(""); // State for single user type filter
 	const [stayingPlaceFilter, setStayingPlaceFilter] = useState(""); // State for staying place filter
 	const [asoEbiFilter, setAsoEbiFilter] = useState(""); // State for Asoebi filter
+	const [churchFilter, setChurchFilter] = useState(""); // State for church filter
+	const [receptionFilter, setReceptionFilter] = useState(""); // State for reception filter
+	const [afterPartyFilter, setAfterPartyFilter] = useState(""); // State for after party filter
 	const [showModalAdmin, setShowModalAdmin] = useState(false); // State for showing the ModalAdmin
 	const [selectedRsvp, setSelectedRsvp] = useState<string | null>(null); // State to store the selected RSVP ID
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -113,9 +116,22 @@ const AdminPage = () => {
 			? rsvp.stayingPlace === stayingPlaceFilter
 			: true;
 		const matchesAsoEbi = asoEbiFilter ? rsvp.asoEbi === asoEbiFilter : true;
+		const matchesChurch = churchFilter ? rsvp.church === churchFilter : true;
+		const matchesReception = receptionFilter
+			? rsvp.reception === receptionFilter
+			: true;
+		const matchesAfterParty = afterPartyFilter
+			? rsvp.afterParty === afterPartyFilter
+			: true;
 
 		return (
-			matchesSearch && matchesUserType && matchesStayingPlace && matchesAsoEbi
+			matchesSearch &&
+			matchesUserType &&
+			matchesStayingPlace &&
+			matchesAsoEbi &&
+			matchesChurch &&
+			matchesReception &&
+			matchesAfterParty
 		);
 	});
 
@@ -209,6 +225,24 @@ const AdminPage = () => {
 					className="w-full md:w-1/2 p-2 border rounded"
 				>
 					<option value="">Filter by AsoEbi</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+				</select>
+				<select
+					value={churchFilter}
+					onChange={(e) => setChurchFilter(e.target.value)}
+					className="w-full md:w-1/2 p-2 border rounded"
+				>
+					<option value="">Filter by Church</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+				</select>
+				<select
+					value={receptionFilter}
+					onChange={(e) => setReceptionFilter(e.target.value)}
+					className="w-full md:w-1/2 p-2 border rounded"
+				>
+					<option value="">Filter by Reception</option>
 					<option value="Yes">Yes</option>
 					<option value="No">No</option>
 				</select>

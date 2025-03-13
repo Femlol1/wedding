@@ -26,7 +26,7 @@ const WelcomePage: React.FC = () => {
 					index = (index + 1) % images.length;
 					setCurrentBackground(images[index]);
 					setCurrentIndex(index);
-				}, 5000); // Change image every 5 seconds
+				}, 5000); // 5 seconds
 			}
 		};
 		fetchImages();
