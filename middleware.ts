@@ -1,13 +1,13 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const authHeader = req.headers.get('authorization');
+	const authHeader = req.headers.get("authorization");
 
-  // If the Authorization header is not present, prompt for login
-  if (!authHeader) {
-    return new Response(
-      `
+	// If the Authorization header is not present, prompt for login
+	if (!authHeader) {
+		return new Response(
+			`
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -60,25 +60,25 @@ export function middleware(req: NextRequest) {
       </body>
       </html>
       `,
-      {
-        status: 401,
-        headers: {
-          'Content-Type': 'text/html',
-          'WWW-Authenticate': 'Basic realm="Secure Area"',
-        },
-      }
-    );
-  }
+			{
+				status: 401,
+				headers: {
+					"Content-Type": "text/html",
+					"WWW-Authenticate": 'Basic realm="Secure Area"',
+				},
+			}
+		);
+	}
 
-  // Decode the authorization header
-  const auth = authHeader.split(' ')[1];
-  const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':');
+	// Decode the authorization header
+	const auth = authHeader.split(" ")[1];
+	const [user, pwd] = Buffer.from(auth, "base64").toString().split(":");
 
-  // Check if username is 'wedding' and password is '14725'
-  if (user !== 'wedding' || pwd !== '14725') {
-    // Redirect to the custom "Access Denied" page if credentials are incorrect
-    return new Response(
-      `
+	// Check if username is 'wedding' and password is '14725'
+	if (user !== "wedding" || pwd !== "14725") {
+		// Redirect to the custom "Access Denied" page if credentials are incorrect
+		return new Response(
+			`
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -131,19 +131,25 @@ export function middleware(req: NextRequest) {
       </body>
       </html>
       `,
-      {
-        status: 403,
-        headers: {
-          'Content-Type': 'text/html',
-        },
-      }
-    );
-  }
+			{
+				status: 403,
+				headers: {
+					"Content-Type": "text/html",
+				},
+			}
+		);
+	}
 
-  // If authorization is successful, continue to the requested page
-  return NextResponse.next();
+	// If authorization is successful, continue to the requested page
+	return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/check-in/:path*',  '/stats/:path*','/comments/:path*'], // Protect only admin and check-in routes
+	matcher: [
+		"/admin/:path*",
+		"/check-in/:path*",
+		"/stats/:path*",
+		"/comments/:path*",
+		"/check-in/:path*",
+	], // Protect only admin and check-in routes
 };

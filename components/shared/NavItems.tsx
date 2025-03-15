@@ -18,6 +18,7 @@ const NavItems: FC<NavItemsProps> = ({ handleClose }) => {
 		pathname.startsWith("/check-in") ||
 		pathname.startsWith("/stats") ||
 		pathname.startsWith("/comments") ||
+		pathname.startsWith("/check-in") ||
 		pathname.startsWith("/create-rsvp") ||
 		pathname.startsWith("/table-groups") ||
 		pathname.startsWith("/assign-table");

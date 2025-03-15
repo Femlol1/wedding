@@ -61,6 +61,10 @@ export const adminLinks = [
 		label: "Comments",
 		route: "/comments",
 	},
+	{
+		label: "Check In",
+		route: "/check-in",
+	},
 
 	{
 		label: "All stats",
