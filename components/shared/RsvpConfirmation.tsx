@@ -1,5 +1,4 @@
 "use client";
-
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import QRCode from "qrcode";
@@ -8,29 +7,46 @@ import React, { useEffect, useRef, useState } from "react";
 // Dynamically import html2pdf.js only on the client side.
 const html2pdf = dynamic(() => import("html2pdf.js"), { ssr: false });
 
+interface TableGroup {
+	id: string;
+	tableNumber: number;
+	groupName?: string;
+}
+
 interface RsvpConfirmationProps {
 	rsvp: {
 		id: string;
 		firstName: string;
 		lastName: string;
-		// Add any additional fields you need
+		tableGroupId?: string; // RSVP now stores a reference to the table group
 	};
 }
 
 const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 	const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string | null>(null);
+	const [tableGroup, setTableGroup] = useState<TableGroup | null>(null);
 	const contentRef = useRef<HTMLDivElement>(null);
 
+	// Generate QR code based on the RSVP id
 	useEffect(() => {
-		// Generate the QR code as a data URL based on the RSVP id
 		QRCode.toDataURL(rsvp.id)
 			.then((url) => setQrCodeDataUrl(url))
 			.catch((err) => console.error("Error generating QR code", err));
 	}, [rsvp.id]);
 
+	// Fetch the table group data if a tableGroupId is provided
+	useEffect(() => {
+		if (rsvp.tableGroupId) {
+			fetch(`/api/tableGroup/${rsvp.tableGroupId}`)
+				.then((response) => response.json())
+				.then((data: TableGroup) => setTableGroup(data))
+				.catch((err) => console.error("Error fetching table group", err));
+		}
+	}, [rsvp.tableGroupId]);
+
 	const handleDownloadPdf = async () => {
 		if (!contentRef.current) return;
-		// Because html2pdf is dynamically imported, ensure it is loaded:
+		// Ensure html2pdf is loaded before using it
 		const html2pdfModule = (await import("html2pdf.js")).default;
 		const options = {
 			margin: 0.5,
@@ -74,7 +90,9 @@ const RsvpConfirmation: React.FC<RsvpConfirmationProps> = ({ rsvp }) => {
 					</p>
 					<div className="bg-gray-100 p-4 rounded-lg mb-4">
 						<p className="text-base">
-							<strong>Your RSVP Code:</strong> {rsvp.id}
+							<strong>Your RSVP Code:</strong> {rsvp.id} <br />
+							<strong>Table Number:</strong>{" "}
+							{tableGroup ? tableGroup.tableNumber : "Loading..."}
 						</p>
 					</div>
 					<p className="text-base mb-4">

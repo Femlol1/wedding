@@ -177,5 +177,6 @@ export type RSVP = {
 		seconds: number;
 		nanoseconds: number;
 	};
-	tableGroupId?: string; // optional reference to the assigned table group
+	tableGroupId?: string;
+	tableNumber?: number;
 };
