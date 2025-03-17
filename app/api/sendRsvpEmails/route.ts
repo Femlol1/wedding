@@ -6,8 +6,13 @@ import path from "path";
 import { PDFDocument, rgb } from "pdf-lib";
 import qrcode from "qrcode";
 
+// ✅ Prevent this API from being pre-rendered at build time
+export const dynamic = "force-dynamic";
+
 export async function GET() {
 	try {
+		console.log("API Called: Sending RSVP Emails...");
+
 		// 1. Fetch all RSVPs from Firestore
 		const rsvpSnapshot = await db.collection("rsvps").get();
 		if (rsvpSnapshot.empty) {
@@ -170,6 +175,7 @@ export async function GET() {
 			// Send the email
 			await transporter.sendMail(mailOptions);
 		}
+		console.log(`Fetched ${rsvpList.length} RSVPs`);
 
 		return NextResponse.json(
 			{ message: "Emails sent successfully!" },

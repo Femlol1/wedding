@@ -15,6 +15,7 @@ import { CSVLink } from "react-csv";
 // At the top of your AdminPage component file:
 import RsvpConfirmation from "@/components/shared/RsvpConfirmation";
 import ScanButton from "@/components/shared/ScanButton";
+import SendEmailsButton from "@/components/shared/SendEmailsButton";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -349,6 +350,7 @@ const AdminPage = () => {
 				>
 					Download Filtered CSV
 				</CSVLink>
+				<SendEmailsButton />
 			</div>
 
 			{/* ModalAdmin Component for Confirming Deletion */}
