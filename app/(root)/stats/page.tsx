@@ -1,4 +1,6 @@
 "use client";
+import SendEmailsButton from "@/components/shared/SendEmailsButton";
+import SendSpecEmailsButton from "@/components/shared/SendSpecEmailsButton";
 import { collection, db, getDocs } from "@/lib/firebase"; // Adjust the import according to your setup
 import {
 	ArcElement,
@@ -240,6 +242,8 @@ const StatsPage = () => {
 			<div className="mt-8">
 				<Bar data={data} options={options} />
 			</div>
+			<SendEmailsButton />
+			<SendSpecEmailsButton />
 		</div>
 	);
 };

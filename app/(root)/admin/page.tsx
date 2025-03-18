@@ -349,8 +349,6 @@ const AdminPage = () => {
 				>
 					Download Filtered CSV
 				</CSVLink>
-				{/* <SendEmailsButton />
-				<SendSpecEmailsButton /> */}
 			</div>
 
 			{/* ModalAdmin Component for Confirming Deletion */}

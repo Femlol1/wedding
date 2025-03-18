@@ -57,7 +57,7 @@ export default function SendSpecEmailsButton() {
 				disabled={loading}
 				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 disabled:opacity-50"
 			>
-				{loading ? "Sending Emails..." : "Send RSVP Emails"}
+				{loading ? "Sending Emails..." : "Send RSVP Emails from above List"}
 			</button>
 			{message && <p className="mt-2 text-gray-700">{message}</p>}
 		</div>
