@@ -75,7 +75,7 @@ export function middleware(req: NextRequest) {
 	const [user, pwd] = Buffer.from(auth, "base64").toString().split(":");
 
 	// Check if username is 'wedding' and password is '14725'
-	if (user !== "wedding" || pwd !== "14725") {
+	if (user !== "wedding" || pwd !== "WOWIlostmyPhone") {
 		// Redirect to the custom "Access Denied" page if credentials are incorrect
 		return new Response(
 			`
