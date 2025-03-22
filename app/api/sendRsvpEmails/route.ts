@@ -41,13 +41,25 @@ export async function GET() {
 				`Table Group Loaded: ${doc.id} -> Table Number: ${data.tableNumber}`
 			);
 		});
+		// const transporter = nodemailer.createTransport({
+		// 	host: "smtp.gmail.com",
+		// 	port: 587,
+		// 	secure: false,
+		// 	auth: {
+		// 		user: process.env.GMAIL_USER,
+		// 		pass: process.env.GMAIL_PASS,
+		// 	},
+		// 	tls: {
+		// 		rejectUnauthorized: false,
+		// 	},
+		// });
 		const transporter = nodemailer.createTransport({
-			host: "smtp.office365.com",
+			service: "Gmail", // Replace with your email service
 			port: 587,
-			secure: false,
+			secure: true, // Use TLS (not SSL) for port 587
 			auth: {
-				user: process.env.OUTLOOK_USER,
-				pass: process.env.OUTLOOK_PASS,
+				user: process.env.SMTP_USER, // Your email (env var)
+				pass: process.env.SMTP_PASS, // Your email password (env var)
 			},
 			tls: {
 				rejectUnauthorized: false,
@@ -101,7 +113,7 @@ export async function GET() {
 
 			// Email Content
 			const mailOptions = {
-				from: process.env.OUTLOOK_USER,
+				from: process.env.GMAIL_USER,
 				to: rsvp.email,
 				subject: "RSVP Confirmation - Tolu & Ope",
 				html: `
@@ -174,6 +186,14 @@ export async function GET() {
 
 			// Send the email
 			await transporter.sendMail(mailOptions);
+			// 	sgMail
+			// 		.send(mailOptions)
+			// 		.then(() => {
+			// 			console.log("Email sent");
+			// 		})
+			// 		.catch((error: any) => {
+			// 			console.error(error);
+			// 		});
 		}
 		console.log(`Fetched ${rsvpList.length} RSVPs`);
 

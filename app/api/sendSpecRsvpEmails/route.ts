@@ -58,12 +58,12 @@ export async function POST(req: Request) {
 			);
 		});
 		const transporter = nodemailer.createTransport({
-			host: "smtp.office365.com",
+			service: "Gmail", // Replace with your email service
 			port: 587,
-			secure: false,
+			secure: true, // Use TLS (not SSL) for port 587
 			auth: {
-				user: process.env.OUTLOOK_USER,
-				pass: process.env.OUTLOOK_PASS,
+				user: process.env.SMTP_USER, // Your email (env var)
+				pass: process.env.SMTP_PASS, // Your email password (env var)
 			},
 			tls: {
 				rejectUnauthorized: false,
