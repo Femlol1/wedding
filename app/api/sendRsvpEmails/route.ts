@@ -139,7 +139,7 @@ export async function GET() {
               <p style="text-align: center;">We can't wait to celebrate with you!</p>
 
               <div style="text-align: center;">
-                <a href="https://toluandope.com/home" style="display: inline-block; background-color: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                <a href="https://www.toluandope.com/home" style="display: inline-block; background-color: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
                   Visit Our Website
                 </a>
               </div>
